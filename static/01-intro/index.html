@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Einführung in die Vorlesung | Verteilte Systeme 2022</title>
+
+        <script src="../_bundle.js"></script>
+        <link rel="stylesheet" href="../_bundle.css" />
+        <link rel="shortcut icon" href="../favicon.png" />
+    </head>
+    <body class="hidden">
+        <!-- Seitenkopf und Inhaltsverzeichnis -->
+        <header>
+            <div id="title">
+                <h1>Einführung in die Vorlesung</h1>
+                <h2 id="page-title"></h2>
+            </div>
+
+            <section id="toc" data-title="Inhaltsverzeichnis"></section>
+        </header>
+
+        <!-- Folien -->
+        <main>
+            <section data-title="Kompetenzziele der Vorlesung" class="markdown limit-width">
+                ## Fachkonpetemz
+
+                Die Studierenden kennen die grundlegenden Kernkonzepte der Nebenläufigkeit und
+                Internetkommunikation sowie die darauf aufbauenden aktuellen Technologien und
+                Werkzeuge für den Entwurf und für die Implementierung von Webanwendungen.
+                Die Studierenden kennen die technischen Grundlagen, Konzepte, Architekturen und
+                Technologien verteilter Systeme und Anwendungen sowie die gängigen Methoden,
+                Werkzeuge, Frameworks und Entwurfsmuster für die Entwicklung verteilter Anwendungen.
+                Die Studierenden können die Konzepte, Werkzeuge und Methoden der Webprogrammierung
+                anwenden und autonom Webanwendungen entwerfen, implementieren und testen.
+
+                ## Methodenkompetenz
+
+                Die Studierenden können die Konzepte, Werkzeuge und Methoden der verteilten Systementwicklung
+                anwenden und unter Einsatz von Frameworks und Entwurfsmustern einfache verteilte Anwendungen
+                entwerfen, implementieren und testen.
+
+                ## Personale und soziale Kompetenz
+
+                Die Studierenden können eigenständig verteilte Anwendungsarchitekturen erarbeiten. Sie können
+                stichhaltig und sachangemessen über Konzepte, eigene Entwürfe und deren Implementierungen sowie
+                die damit verbundenen Probleme argumentieren, eigene Umsetzungen plausibel darstellen und
+                eventuelle Fehler nachvollziehbar gegenüber anderen begründen.
+
+                ## Übergreifende Handlungskompetenz
+
+                Die Studierenden können eigenständig aktuelle Methoden der Analyse, des Entwurfs und der
+                Implementierung verteilter Systeme und Anwendungen für betriebliche Problemstellungen
+                diskutieren, bewerten und anwenden.
+            </section>
+
+            <section data-title="Inhalte der Vorlesung">
+                <div class="container">
+                    <div class="row">
+                        <div class="col card p-3 m-2">
+                            <img src="vorlesungsinhalte.png" alt="" class="img-fluid d-block" style="" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md card p-3 m-2 markdown">
+                            ### 3. Semester: Webprogrammierung
+
+                             * Grundlagen des Webs
+                             * Einführung in HTML und CSS
+                             * Responsive Webdesign
+                             * Clientseitiges JavaScript
+                             * Entwicklung von Single Page Apps
+                        </div>
+                        <div class="col-md card p-3 m-2 markdown">
+                            ### 4. Semester: Verteilte Systeme
+
+                             * Grundlagen verteilter Systeme
+                             * Entwicklung von REST-Webservices
+                             * REST-Webservices im Browser aufrufen
+                             * Cloud-Architekturmuster
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section data-title="Ablauf der Vorlesung">
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <div class="card p-3 markdown">
+                        ## Geplante Inhalte {.mt-0}
+
+                        ### Grundlagen verteilter Systeme
+
+                        1. Begriffsdefinitionen und Anforderungen an verteilte Systeme
+                        1. Grundlagen skalierbarer Cloud-Anwendungen
+                        1. Kurzanleitung zur Gruppenarbeit mit Git und GitHub
+                        1. Verwendung von Docker und Docker Compose für für die Entwicklung mit nodeJS
+
+                        ### Entwicklung von REST-Webservices
+
+                        1. Grundprinzipien verteilter Kommunikation mit REST-Webservices
+                        1. REST-Webservices mit OpenAPI beschreiben, definieren, dokumentieren
+                        1. Kurzvorstellung von MongoDB zum einfachen Speichern persistenter Daten
+                        1. Mit OpenAPI definierte Webservices mit nodeJS und MongoDB implementieren
+                        1. Webservices testen mit Postman
+                        1. REST-Webservices als Backend einer Single Page App verwenden
+
+                        ### Cloud-Architekturmuster
+
+                        1. Integration eines einfachen API-Gateways mit Load Balancing
+                        1. Deployment-Strategien für nodeJS-Anwendungen (Bare Metal vs. Cloud)
+                        1. Microservice-Architekturmuster: Circuit Breaker, Sidecar vs. API-Gateway
+                    </div>
+                    <div class="d-flex flex-column align-items-stretch" style="gap: 1em; max-width: 28em;">
+                        <div class="flex-fill card p-3 markdown">
+                            ## Didaktisches Modell {.mt-0}
+
+                            **Präsenzvorlesung** mit zeitlich flexiblem **Selbststudium** sowie einem
+                            semesterbegleitenden **Programmierprojekt** zur praktischen Anwendung.
+                            <span class="dhbw-darkblue">
+                                Das Programmierprojekt wird gleichzeitig als Prüfungsleistung benotet.
+                            </span>
+                        </div>
+                        <div class="flex-fill card p-3 markdown">
+                            ## Benötigte Software {.mt-0}
+
+                            * Visual Studio Code
+                            * Git
+                            * Docker
+                            * Postman
+
+                            Anstelle von Visual Studio Code kann auch eine andere
+                            IDE verwendet werden, so lange diese ohne ein Projekt
+                            anzulegen Quellcodes bearbeiten kann. {.dhbw-optional}
+
+                            Anstelle von Postman kann auch ein anderes Werkzeug zum
+                            Testen von HTTP-Endpunkten wie Soap UI, CURL, HTTPy, ...
+                            verwendet werden. {.dhbw-optional}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section data-title="Prüfungsaufgabe" class="limit-width">
+                <div class="card p-3 mb-3 markdown dhbw-list-no-margin">
+                    ## Rahmenbedingungen {.mt-0}
+
+                     * Bearbeitung in selbstgewählten Dreiergruppen
+                     * Jede Gruppe implementiert eine eigene Webanwendung
+                     * Die Bearbeitung erfolgt parallel zur Vorlesung
+                     * Abgabe am letzten Sonntag vor Beginn der Praxisphase
+                </div>
+
+                <div class="card p-3 mb-3 dhbw-list-no-margin">
+                    <h2 class="mt-0">Einzureichende Artefakte</h2>
+
+                    <ol class="dhbw-list-spacious">
+                        <li>
+                            Eine Beschreibung der zu erstellenden App
+                        </li>
+                        <li>
+                            Den vollständigen Quellcode der App, bestehend aus:
+
+                            <ul>
+                                <li>
+                                    Link auf das GitHub-Repository
+                                </li>
+                                <li>
+                                    Ordnerstruktur mit allen Build Files
+                                </li>
+                                <li>
+                                    Definition der Backend-API im OpenAPI-Format
+                                </li>
+                                <li>
+                                    Quellcode zur Implementierung der API
+                                </li>
+                                <li>
+                                    Quellcode einer dazu passenden Single Page App*
+                                </li>
+                                <li>
+                                    Konfiguration des Gatewayservers
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Eine zusammenfassende Bewertung der durch die
+                            App umgesetzten Cloud-Prinzipien
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="card p-3 mb-3 dhbw-list-no-margin">
+                    <h2 class="mt-0">Benotung im Rahmen des Portfolios</h2>
+                    <table class="dhbw-table-border" style="width: 100%; margin-bottom: 1em; font-size: 90%;">
+                        <thead>
+                            <tr>
+                                <th>Semester</th>
+                                <th>I/G</th>
+                                <th>Artefakt</th>
+                                <th>Schwierigkeit</th>
+                                <th>Abgabefrist</th>
+                                <th>Gewichtung</th>
+                            </tr>
+                        </thead>
+
+                        <!-- Drittes Semester -->
+                        <tr style="background-color: #eaeaea;">
+                            <td>3</td>
+                            <td>I</td>
+                            <td><b>Lernkontrollen zu „Webprogrammierung”</b></td>
+                            <td>Erinnern, Verstehen</td>
+                            <td>Vor der jeweiligen Vorlesung</td>
+                            <td>2</td>
+                        </tr>
+                        <tr style="background-color: #eaeaea;">
+                            <td>3</td>
+                            <td>I</td>
+                            <td><b>Vertiefende Aufgaben zu den einzelnen Kapiteln</b></td>
+                            <td>Anwenden, Analysieren, Beurteilen</td>
+                            <td>Ende des dritten Semesters</td>
+                            <td>4</td>
+                        </tr>
+
+                        <!-- Viertes Semester -->
+                        <tr>
+                            <td>4</td>
+                            <td>G</td>
+                            <td><b>Programmierprojekt</b></td>
+                            <td>Verstehen, Anwenden, Analysieren, Beurteilen</td>
+                            <td>Ende des vierten Semesters</td>
+                            <td>4</td>
+                        </tr>
+                    </table>
+                    <p>
+                        <b>I/G:</b> Individualleistung oder Gruppenleistung <br />
+                        <b>Schwierigkeit:</b> Erinnern &lt; Verstehen &lt; Anwenden &lt; Analysieren &lt; Beurteilen
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Navigation -->
+        <footer>
+            <nav></nav>
+        </footer>
+    </body>
+</html>
