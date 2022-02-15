@@ -6,7 +6,8 @@ Kurzbeschreibung
 
 Bei diesen Dateien handelt es sich um ergänzende Vorlesungsfolien zur Vorlesung
 "Verteilte Systeme" im Studiengang Wirtschaftsinformatik an der DHBW Karlsruhe.
-Die fertigen Folien befinden sich online auf folgender Seite: https://www.wpvs.de/
+Die fertigen Folien befinden sich online auf folgender Seite:
+www.wpvs.de/repo/vertsys-2022/vorlesungsfolien/
 
 Die Folien basieren auf [mini-tutorial.js](https://github.com/DennisSchulmeister/mini-tutorial.js),
 einem kleinen Skript zur Erzegung einfacher Onlinebücher und Foliensätze und dem
