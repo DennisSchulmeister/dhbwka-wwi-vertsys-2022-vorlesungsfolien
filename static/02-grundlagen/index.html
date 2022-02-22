@@ -22,19 +22,19 @@
 
         <!-- Folien -->
         <main>
-            <section data-title="Was ist ein System? (1)" class="markdown limit-width">
-                <iframe
-                    width="800px" height="510px"
-                    src="https://www.youtube-nocookie.com/embed/UWU14-EK9CE"
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                ></iframe>
+            <!-- ======================= -->
+            <!-- Was ist ein System? (1) -->
+            <!-- ======================= -->
+            <section data-title="Was ist ein System? (1)" class="markdown limited-width">
+                <lsx-youtube video="UWU14-EK9CE" aspect-ratio="16x9" style="width: 50em; max-width: 100%;"></lsx-youtube>
 
                 [Link zum Video](https://youtu.be/UWU14-EK9CE)
             </section>
 
-            <section data-title="Was ist ein System? (2)" class="limit-width">
+            <!-- ======================= -->
+            <!-- Was ist ein System? (2) -->
+            <!-- ======================= -->
+            <section data-title="Was ist ein System? (2)" class="limited-width">
                 <blockquote class="blockquote">
                     <p>
                         Als System (altgriechisch sýstēma „aus mehreren Einzelteilen zusammengesetztes Ganzes“)
@@ -49,6 +49,9 @@
                 </blockquote>
             </section>
 
+            <!-- ================================ -->
+            <!-- Definition nach Andrew Tanenbaum -->
+            <!-- ================================ -->
             <section data-title="Definition nach Andrew Tanenbaum" style="max-width: 55em;">
                 <div class="card p-3 mb-3 markdown">
                     ## Verteiltes System und verteilte Anwendung {.mt-0}
@@ -83,16 +86,22 @@
                 </div>
             </section>
 
+            <!-- ======================================== -->
+            <!-- Verteilte Kommunikation früher und heute -->
+            <!-- ======================================== -->
             <!--
             <section data-title="Verteilte Kommunikation früher und heute">
                 TODO: Schreiben
             </section>
             -->
 
-            <section data-title="Verteilte Systeme im Alltag" data-background-color="rgb(210,190,210)" class="limit-width">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md">
+            <!-- ========================== -->
+            <!-- Verteilte System im Alltag -->
+            <!-- ========================== -->
+            <section data-title="Verteilte Systeme im Alltag" data-background-color="rgb(210,190,210)" class="limited-width">
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="md">
                             <img src="motivation-internet.png" class="img-thumbnail d-block" style="width: 100%" />
                             Sämtliche Internetdienste
                             <p class="dhbw-fontsize-tiny">
@@ -100,8 +109,8 @@
                                     Bildnachweis: <a href="https://pixabay.com/illustrations/email-newsletter-marketing-online-3249062/" target="_blank">Pixabay: ribkhan</a>
                                 </small>
                             </p>
-                        </div>
-                        <div class="col-md">
+                        </lsx-col>
+                        <lsx-col size="md">
                             <img src="motivation-mobile.jpg" class="img-thumbnail d-block" style="width: 100%" />
                             Mobile Kommunikation
                             <p class="dhbw-fontsize-tiny">
@@ -109,10 +118,10 @@
                                     Bildnachweis: <a href="https://pixabay.com/photos/communication-communicate-3095538/" target="_blank">Pixabay: Bru-nO</a>
                                 </small>
                             </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
                             <img src="motivation-forschung.jpg" class="img-thumbnail d-block" style="width: 100%" />
                             Forschung und Wissenschaft
                             <p class="dhbw-fontsize-tiny">
@@ -120,8 +129,8 @@
                                     Bildnachweis: <a href="https://pixabay.com/photos/moon-landing-apollo-11-nasa-60582/" target="_blank">Pixabay: WikiImages</a>
                                 </small>
                             </p>
-                        </div>
-                        <div class="col-md">
+                        </lsx-col>
+                        <lsx-col size="md">
                             <img src="motivation-vod.jpg" class="img-thumbnail d-block" style="width: 100%" />
                             Video-on-Demand
                             <p class="dhbw-fontsize-tiny">
@@ -129,14 +138,14 @@
                                     Bildnachweis: <a href="https://unsplash.com/photos/ngMtsE5r9eI" target="_blank">Unsplash: jenskreuter</a>
                                 </small>
                             </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
                             <img src="motivation-autonomes-fahren.jpg" class="img-thumbnail d-block" style="width: 100%" />
                             Autonomes Fahren
-                        </div>
-                        <div class="col-md">
+                        </lsx-col>
+                        <lsx-col size="md">
                             <img src="motivation-iot.jpg" class="img-thumbnail d-block" style="width: 100%" />
                             Internet of Things
                             <p class="dhbw-fontsize-tiny">
@@ -144,60 +153,63 @@
                                     Bildnachweis: <a href="https://pixabay.com/photos/smarthome-smart-house-smart-4447520/" target="_blank">Pixabay: haus_automation</a>
                                 </small>
                             </p>
-                        </div>
-                    </div>
-                </div>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
             </section>
 
+            <!-- ======================== -->
+            <!-- Allgemeine Anforderungen -->
+            <!-- ======================== -->
             <section data-title="Allgemeine Anforderungen" style="max-width: 65em;">
-                <div>
-                    <div class="row">
-                        <div class="col-md">
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="md">
                             <h3>Optimale Ressourcennutzung</h3>
                             <img src="anforderung-ressourcennutzung.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Das System muss effizient mit den Ressourcen umgehen und möglichst viele Ressourcen
                             für die eigentliche Anwendung zur Verfügung stellen. Die Anwendung muss ebenfalls
                             intelligent damit umgehen und sie gut nutzen.
-                        </div>
-                        <div class="col-md">
+                        </lsx-col>
+                        <lsx-col size="md">
                             <h3>Stabilität und Fehlertoleranz</h3>
                             <img src="anforderung-stabilitaet.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Programmabstürze und unvorhersehbares Verhalten sind unbedingt zu vermeiden.
                             Beim Programmieren muss man daher neben den fachlichen Fehlern auch die Fehler
                             berücksichtigen, die sich aus der Verteilung ergeben.
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
                             <h3>Einfache Skalierbarkeit</h3>
                             <img src="anforderung-skalierbarkeit.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Es muss einfach möglich sein, die Leistung des Systems zu erhöhen oder diese zu reduzieren,
                             wenn sie nicht mehr benötigt wird. Dies kann je nach System automatisch oder manuell erfolgen.
-                        </div>
-                        <div class="col-md">
+                        </lsx-col>
+                        <lsx-col size="md">
                             <h3>Einfache Nutzung (Transparenz)</h3>
                             <img src="anforderung-transparenz.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Zumindest für den Anwender sollte die inheränte Komplexität des Systems verborgen bleiben.
                             Entwickler und Administratoren freuen sich aber auch, wenn sie sich nicht um jede Kleinigkeit
                             kümmern müssen.
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
                             <h3>Einfache Erweiterbarkeit</h3>
                             <img src="anforderung-erweiterbarkeit.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Die Architektur muss flexibel genug sein, um einzelne Teile jederzeit austauschen oder
                             verbessern zu können.
-                        </div>
-                        <div class="col-md">
+                        </lsx-col>
+                        <lsx-col size="md">
                             <h3>Sicherheit</h3>
                             <img src="anforderung-sicherheit.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Die Vertraulichkeit, Integrität und Authentizität des Systems und seiner Daten muss
                             gewährleistet bleiben.
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
                             <small>
                                 <small>
                                     Bildnachweise:
@@ -209,28 +221,31 @@
                                     <a href="https://pixabay.com/en/building-cctv-door-female-ladies-1839464/" target="_blank">Pixabay: Pexels</a>
                                 </small>
                             </small>
-                        </div>
-                    </div>
-                <div>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
             </section>
 
+            <!-- ============================== -->
+            <!-- Die neun Arten der Transparenz -->
+            <!-- ============================== -->
             <section data-title="Die neun Arten der Transparenz" style="max-width: 65em;">
-                <div class="container-fluid">
+                <lsx-grid-fluid>
                     <!-- Vergleich Wirtschaft vs. Informatik -->
-                    <div class="row" style="margin-bottom: 0;">
-                        <div class="col-md">
+                    <lsx-row style="margin-bottom: 0;">
+                        <lsx-col size="md">
                             <h2>Transparenz in der Wirtschaft</h2>
                             <img src="transparenz1.jpg" alt="" class="img-thumbnail" style="width: 100%" />
                             Alle Informationen liegen offen.
-                        </div>
-                        <div class="col-md">
+                        </lsx-col>
+                        <lsx-col size="md">
                             <h2>Transparenz in der Informatik</h2>
                             <img src="transparenz2.jpg" alt="" class="img-thumbnail" style="width: 100%" />
                             Ich muss nichts tun. Es läuft einfach.
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom: 2.5em;">
-                        <div class="col-md">
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row style="margin-bottom: 2.5em;">
+                        <lsx-col size="md">
                             <small>
                                 <small>
                                     Bildnachweise:
@@ -239,741 +254,602 @@
                                     <a href="https://pixabay.com/en/background-christmas-3009949/" target="_blank">Pixabay: monicore</a>
                                 </small>
                             </small>
-                        </div>
-                    </div>
+                        </lsx-col>
+                    </lsx-row>
 
                     <!-- Die neun Arten der Transparenz -->
-                    <div class="row">
-                        <div id="transparenz-arten" class="col accordion">
-                            <!-- Zugriffstransparenz -->
-                            <div class="card accordion-item">
-                                <div
-                                    id            = "transparenz-arten-zugriff-title"
-                                    class         = "card-header"
-                                    type           = "button"
-                                    data-bs-toggle = "collapse"
-                                    data-bs-target = "#transparenz-arten-zugriff-content"
-                                    aria-expanded = "false"
-                                    aria-controls = "transparenz-arten-zugriff-content"
-                                    href          = "#transparenz-arten-zugriff-content"
-                                >
-                                    <h4>Zugriffstransparenz</h4>
-                                </div>
-                                <div
-                                    id              = "transparenz-arten-zugriff-content"
-                                    class           = "collapse container-fluid p-3"
-                                    aria-labelledby = "transparenz-arten-zugriff-title"
-                                    data-parent     = "#transparenz-arten"
-                                >
-                                    <div class="container-fluid p-0">
-                                        <div class="row">
-                                            <div class="col">
-                                                Falls eine Anwendung zwischen lokalen (auf dem eigenen Rechner befindlichen) und
-                                                entfernten Ressourcen unterscheidet, müssen beide auf dieselbe Art und Weise
-                                                nutzbar sein.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-foto.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Eine Fotoverwaltung ermöglicht den Zugriff auf lokal gespeicherte Fotoalben.
-                                                Einzelne Bilder oder ganze Alben können aber auch auf einem entfernten Server
-                                                abgelegt sein, ohne dass sich die Bedienung hierdurch verändert.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-video.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Eine Video-Streaming-App ermöglicht es, einzelne Videos vor dem Anschauen herunterzuladen,
-                                                damit diese auch bei langsamer Internetverbindung ruckelfrei abgespielt werden können.
-                                                Suche und Wiedergabe der Videos verändern sich aus Benutzersicht dadurch aber nicht, da
-                                                die Videos wie gewohnt aufgerufen und abgespielt werden können.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-pwa.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Progressive Web Apps sind Webanwendungen, die nach dem ersten Aufruf im Browser auch lokal installiert
-                                                werden können. Sämtliche Dateien werden hierfür in einen lokalen Anwendungscache geladen, der auch offline
-                                                funktioniert. Die Entscheidung, ob eine Datei vom Server oder aus dem Cache geladen werden kann, erfolgt
-                                                dabei automatisch, ohne dass dies im Quellcode berücksichtigt werden muss.
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <lsx-accordion>
+                                <lsx-accordion-page>
+                                    <lsx-accordion-title>
+                                        <b>Zugriffstransparenz</b>
+                                    </lsx-accordion-title>
+                                    <lsx-accordion-content>
+                                        <lsx-grid-fluid class="p-0">
+                                            <lsx-row>
+                                                <lsx-col size="md">
+                                                    Falls eine Anwendung zwischen lokalen (auf dem eigenen Rechner befindlichen) und
+                                                    entfernten Ressourcen unterscheidet, müssen beide auf dieselbe Art und Weise
+                                                    nutzbar sein.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-foto.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Eine Fotoverwaltung ermöglicht den Zugriff auf lokal gespeicherte Fotoalben.
+                                                    Einzelne Bilder oder ganze Alben können aber auch auf einem entfernten Server
+                                                    abgelegt sein, ohne dass sich die Bedienung hierdurch verändert.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-video.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Eine Video-Streaming-App ermöglicht es, einzelne Videos vor dem Anschauen herunterzuladen,
+                                                    damit diese auch bei langsamer Internetverbindung ruckelfrei abgespielt werden können.
+                                                    Suche und Wiedergabe der Videos verändern sich aus Benutzersicht dadurch aber nicht, da
+                                                    die Videos wie gewohnt aufgerufen und abgespielt werden können.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-pwa.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Progressive Web Apps sind Webanwendungen, die nach dem ersten Aufruf im Browser auch lokal installiert
+                                                    werden können. Sämtliche Dateien werden hierfür in einen lokalen Anwendungscache geladen, der auch offline
+                                                    funktioniert. Die Entscheidung, ob eine Datei vom Server oder aus dem Cache geladen werden kann, erfolgt
+                                                    dabei automatisch, ohne dass dies im Quellcode berücksichtigt werden muss.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row>
+                                                <lsx-col size="md">
                                                     <small>
-                                                        Bildnachweise:
-                                                        <a href="https://pixabay.com/photos/retro-photo-album-memory-family-1483781/" target="_blank">Pixabay: klimkin</a>,
-                                                        <a href="https://pixabay.com/photos/camera-video-tv-video-realization-1598620/" target="_blank">Pixabay: JosepMonter</a>,
-                                                        <a href="https://pixabay.com/photos/laptop-workstation-browsing-tablet-1483974/" target="_blank">Pixabay: Monoar</a>
+                                                        <small>
+                                                            Bildnachweise:
+                                                            <a href="https://pixabay.com/photos/retro-photo-album-memory-family-1483781/" target="_blank">Pixabay: klimkin</a>,
+                                                            <a href="https://pixabay.com/photos/camera-video-tv-video-realization-1598620/" target="_blank">Pixabay: JosepMonter</a>,
+                                                            <a href="https://pixabay.com/photos/laptop-workstation-browsing-tablet-1483974/" target="_blank">Pixabay: Monoar</a>
+                                                        </small>
                                                     </small>
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                </lsx-col>
+                                            </lsx-row>
+                                        </lsx-grid-fluid>
+                                    </lsx-accordion-content>
+                                </lsx-accordion-page>
 
-                            <!-- Ortstransparenz -->
-                            <div class="card">
-                                <div
-                                    id            = "transparenz-arten-ort-title"
-                                    class         = "card-header"
-                                    type           = "button"
-                                    data-bs-toggle = "collapse"
-                                    data-bs-target = "#transparenz-arten-ort-content"
-                                    data-toggle   = "collapse"
-                                    aria-expanded = "false"
-                                    aria-controls = "transparenz-arten-ort-content"
-                                    href          = "#transparenz-arten-ort-content"
-                                >
-                                    <h4>Ortstransparenz</h4>
-                                </div>
-                                <div
-                                    id              = "transparenz-arten-ort-content"
-                                    class           = "collapse container-fluid p-3"
-                                    aria-labelledby = "transparenz-arten-ort-title"
-                                    data-parent     = "#transparenz-arten"
-                                >
-                                    <div class="container-fluid p-0">
-                                        <div class="row">
-                                            <div class="col">
-                                                Dienste und Ressourcen einer Anwendung können aufgerufen werden, ohne wissen zu müssen,
-                                                auf welchem Rechner sie sich befinden.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-cdn.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Um die Ladezeit einer Webseite zu optimieren, werden häufig benötigte Dateien durch
-                                                Content Delivery Networks ausgeliefert. Hierfür betreiben die Content Delivery Networks
-                                                weltweit gespiegelte Rechenzentren, von denen automatisch das mit der kürzesten Zugriffszeit
-                                                ausgewählt wird. Auf dieselbe Weise spielen nebenbei auch Video-Streaming-Portale und andere
-                                                Onlinedienste ihre Inhalte aus.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-dns.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Die Webseite der DHBW Karlsruhe ist immer unter der Domain
-                                                <a href="https://karlsruhe.dhbw.de" target="_blank">karlsruhe.dhbw.de</a> erreichbar.
-                                                Zwar muss die Domain zum Aufruf der Seite bekannt sein, diese enthält jedoch keine Informationen
-                                                darüber, auf welchen Rechner hierfür zugegriffen werden muss. Diese Information besorgt sich der
-                                                Browser stattdessen durch ein DNS-Lookup.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-drucker.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                <a href="https://en.wikipedia.org/wiki/Zero-configuration_networking" target="_blank">Zeroconf</a> ermöglicht die
-                                                automatische Konfiguration von Netzwerkgeräten, wodurch unter anderem auch netzwerkfähige Drucker und Scanner
-                                                vom Betriebssystem erkannt und eingerichtet werden können. Selbst wenn ein Gerät komplett ausgetauscht wird,
-                                                muss die Konfiguration auf dem Anwender-PC nicht angepasst werden.
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>
+                                <lsx-accordion-page>
+                                    <lsx-accordion-title>
+                                        <b>Ortstransparenz</b>
+                                    </lsx-accordion-title>
+                                    <lsx-accordion-content>
+                                        <lsx-grid-fluid class="p-0">
+                                            <lsx-row>
+                                                <lsx-col size="md">
+                                                    Dienste und Ressourcen einer Anwendung können aufgerufen werden, ohne wissen zu müssen,
+                                                    auf welchem Rechner sie sich befinden.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-cdn.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Um die Ladezeit einer Webseite zu optimieren, werden häufig benötigte Dateien durch
+                                                    Content Delivery Networks ausgeliefert. Hierfür betreiben die Content Delivery Networks
+                                                    weltweit gespiegelte Rechenzentren, von denen automatisch das mit der kürzesten Zugriffszeit
+                                                    ausgewählt wird. Auf dieselbe Weise spielen nebenbei auch Video-Streaming-Portale und andere
+                                                    Onlinedienste ihre Inhalte aus.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-dns.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Die Webseite der DHBW Karlsruhe ist immer unter der Domain
+                                                    <a href="https://karlsruhe.dhbw.de" target="_blank">karlsruhe.dhbw.de</a> erreichbar.
+                                                    Zwar muss die Domain zum Aufruf der Seite bekannt sein, diese enthält jedoch keine Informationen
+                                                    darüber, auf welchen Rechner hierfür zugegriffen werden muss. Diese Information besorgt sich der
+                                                    Browser stattdessen durch ein DNS-Lookup.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-drucker.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    <a href="https://en.wikipedia.org/wiki/Zero-configuration_networking" target="_blank">Zeroconf</a> ermöglicht die
+                                                    automatische Konfiguration von Netzwerkgeräten, wodurch unter anderem auch netzwerkfähige Drucker und Scanner
+                                                    vom Betriebssystem erkannt und eingerichtet werden können. Selbst wenn ein Gerät komplett ausgetauscht wird,
+                                                    muss die Konfiguration auf dem Anwender-PC nicht angepasst werden.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row>
+                                                <lsx-col size="md">
                                                     <small>
-                                                        Bildnachweise:
-                                                        <a href="https://pixabay.com/photos/earth-planet-front-side-back-11593/" target="_blank">Pixabay: WikiImages</a>,
-                                                        <a href="https://pixabay.com/illustrations/webdesign-design-web-website-3411373/" target="_blank">Pixabay: kreatikar</a>,
-                                                        <a href="https://pixabay.com/photos/printer-desk-office-fax-scanner-790396/" target="_blank">Pixabay: stevepb</a>
+                                                        <small>
+                                                            Bildnachweise:
+                                                            <a href="https://pixabay.com/photos/earth-planet-front-side-back-11593/" target="_blank">Pixabay: WikiImages</a>,
+                                                            <a href="https://pixabay.com/illustrations/webdesign-design-web-website-3411373/" target="_blank">Pixabay: kreatikar</a>,
+                                                            <a href="https://pixabay.com/photos/printer-desk-office-fax-scanner-790396/" target="_blank">Pixabay: stevepb</a>
+                                                        </small>
                                                     </small>
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                </lsx-col>
+                                            </lsx-row>
+                                        </lsx-grid-fluid>
+                                    </lsx-accordion-content>
+                                </lsx-accordion-page>
 
-                            <!-- Mobilitätstransparenz -->
-                            <div class="card">
-                                <div
-                                    id            = "transparenz-arten-mobilität-title"
-                                    class         = "card-header"
-                                    type           = "button"
-                                    data-bs-toggle = "collapse"
-                                    data-bs-target = "#transparenz-arten-mobilität-content"
-                                    data-toggle   = "collapse"
-                                    aria-expanded = "false"
-                                    aria-controls = "transparenz-arten-mobilität-content"
-                                    href          = "#transparenz-arten-mobilität-content"
-                                >
-                                    <h4>Mobilitätstransparenz</h4>
-                                </div>
-                                <div
-                                    id              = "transparenz-arten-mobilität-content"
-                                    class           = "collapse container-fluid p-3"
-                                    aria-labelledby = "transparenz-arten-mobilität-title"
-                                    data-parent     = "#transparenz-arten"
-                                >
-                                    <div class="container-fluid p-0">
-                                        <div class="row">
-                                            <div class="col">
-                                                Die Ressourcen einer verteilten Anwendung können jederzeit auf andere Maschinen
-                                                umziehen, ohne dass sich dies auf die Anwendung auswirkt.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-namensdienst.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Namensdienste wie das Domain Name System ermöglichen es, die damit verwalteten
-                                                Ressourcen jederzeit umzuziehen, da die exakte Adresse einer Ressource vor jedem
-                                                Zugriff darin nachgeschlagen werden muss. Aus diesem Grund kann sich zum Beispiel
-                                                die IP-Adresse einer Webseite jederzeit ändern, ohne dass die meisten Besucher*innen
-                                                dies merken.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-backend.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Die Datenbank einer Webanwendung wurde bisher auf derselben Maschine wie der Webserver betrieben,
-                                                soll nun aber auf eigene Hardware umziehen. Die Anwendung läuft nach dem Umzug wie gewohnt weiter,
-                                                da lediglich ein Eintrag in einer Konfigurationsdatei geändert werden musste. Die Entscheidung
-                                                der Programmierer, die Adresse des Datenbankservers nicht hart-codiert im Quellcode zu hinterlegen,
-                                                hat sich an diesem Tag als sehr weitsichtig herausgestellt.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-vm.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Der <a href="https://de.wikipedia.org/wiki/Hypervisor" target="_blank">Hypervisor</a> einer
-                                                Virtualisierungslösung entscheidet, eine virtuelle Maschine auf einen leistungsfähigeren
-                                                Rechenknoten umzuziehen. Hierfür wird die VM ohne Unterbrechung des laufenden Betriebs auf
-                                                den neuen Host kopiert und dort weiter ausgeführt.
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>
+                                <lsx-accordion-page>
+                                    <lsx-accordion-title>
+                                        <b>Mobilitätstransparenz</b>
+                                    </lsx-accordion-title>
+                                    <lsx-accordion-content>
+                                        <lsx-grid-fluid class="p-0">
+                                            <lsx-row>
+                                                <lsx-col size="md">
+                                                    Die Ressourcen einer verteilten Anwendung können jederzeit auf andere Maschinen
+                                                    umziehen, ohne dass sich dies auf die Anwendung auswirkt.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-namensdienst.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Namensdienste wie das Domain Name System ermöglichen es, die damit verwalteten
+                                                    Ressourcen jederzeit umzuziehen, da die exakte Adresse einer Ressource vor jedem
+                                                    Zugriff darin nachgeschlagen werden muss. Aus diesem Grund kann sich zum Beispiel
+                                                    die IP-Adresse einer Webseite jederzeit ändern, ohne dass die meisten Besucher*innen
+                                                    dies merken.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-backend.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Die Datenbank einer Webanwendung wurde bisher auf derselben Maschine wie der Webserver betrieben,
+                                                    soll nun aber auf eigene Hardware umziehen. Die Anwendung läuft nach dem Umzug wie gewohnt weiter,
+                                                    da lediglich ein Eintrag in einer Konfigurationsdatei geändert werden musste. Die Entscheidung
+                                                    der Programmierer, die Adresse des Datenbankservers nicht hart-codiert im Quellcode zu hinterlegen,
+                                                    hat sich an diesem Tag als sehr weitsichtig herausgestellt.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-vm.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Der <a href="https://de.wikipedia.org/wiki/Hypervisor" target="_blank">Hypervisor</a> einer
+                                                    Virtualisierungslösung entscheidet, eine virtuelle Maschine auf einen leistungsfähigeren
+                                                    Rechenknoten umzuziehen. Hierfür wird die VM ohne Unterbrechung des laufenden Betriebs auf
+                                                    den neuen Host kopiert und dort weiter ausgeführt.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row>
+                                                <lsx-col size="md">
                                                     <small>
-                                                        Bildnachweise:
-                                                        <a href="https://pixabay.com/photos/diary-appointment-address-pen-2080422/" target="_blank">Pixabay: jackmac34</a>,
-                                                        <a href="https://pixabay.com/photos/server-cloud-development-business-1235959/" target="_blank">Pixabay: ColossusCloud</a>,
-                                                        <a href="https://pixabay.com/illustrations/cloud-computing-network-internet-2001090/" target="_blank">Pixabay: wynpnt</a>
+                                                        <small>
+                                                            Bildnachweise:
+                                                            <a href="https://pixabay.com/photos/diary-appointment-address-pen-2080422/" target="_blank">Pixabay: jackmac34</a>,
+                                                            <a href="https://pixabay.com/photos/server-cloud-development-business-1235959/" target="_blank">Pixabay: ColossusCloud</a>,
+                                                            <a href="https://pixabay.com/illustrations/cloud-computing-network-internet-2001090/" target="_blank">Pixabay: wynpnt</a>
+                                                        </small>
                                                     </small>
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                </lsx-col>
+                                            </lsx-row>
+                                        </lsx-grid-fluid>
+                                    </lsx-accordion-content>
+                                </lsx-accordion-page>
 
-                            <!-- Persistenztransparenz -->
-                            <div class="card">
-                                <div
-                                    id            = "transparenz-arten-persistenz-title"
-                                    class         = "card-header"
-                                    type           = "button"
-                                    data-bs-toggle = "collapse"
-                                    data-bs-target = "#transparenz-arten-persistenz-content"
-                                    data-toggle   = "collapse"
-                                    aria-expanded = "false"
-                                    aria-controls = "transparenz-arten-persistenz-content"
-                                    href          = "#transparenz-arten-persistenz-content"
-                                >
-                                    <h4>Persistenztransparenz</h4>
-                                </div>
-                                <div
-                                    id              = "transparenz-arten-persistenz-content"
-                                    class           = "collapse container-fluid p-3"
-                                    aria-labelledby = "transparenz-arten-persistenz-title"
-                                    data-parent     = "#transparenz-arten"
-                                >
-                                    <div class="container-fluid p-0">
-                                        <div class="row">
-                                            <div class="col">
-                                                Besonders benutzerfreundliche Anwendungen unterscheiden nicht zwischen gespeicherten und
-                                                und nicht gespeicherten Daten. Die Speicherung erfolgt automatisch im Hintergrund.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-google.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Cloudbasierte Officepakete wie Google Docs besitzen keinen Menüeintrag zum Speichern
-                                                eines Dokuments. Jede Änderung wird mit einem kleinen Zeitversatz automatisch gespeichert,
-                                                so dass man nie wieder etwas verlieren kann, wenn man Abends zu schnell aus dem Büro flieht.
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>
+                                <lsx-accordion-page>
+                                    <lsx-accordion-title>
+                                        <b>Persistenztransparenz</b>
+                                    </lsx-accordion-title>
+                                    <lsx-accordion-content>
+                                        <lsx-grid-fluid class="p-0">
+                                            <lsx-row>
+                                                <lsx-col size="md">
+                                                    Besonders benutzerfreundliche Anwendungen unterscheiden nicht zwischen gespeicherten und
+                                                    und nicht gespeicherten Daten. Die Speicherung erfolgt automatisch im Hintergrund.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-google.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Cloudbasierte Officepakete wie Google Docs besitzen keinen Menüeintrag zum Speichern
+                                                    eines Dokuments. Jede Änderung wird mit einem kleinen Zeitversatz automatisch gespeichert,
+                                                    so dass man nie wieder etwas verlieren kann, wenn man Abends zu schnell aus dem Büro flieht.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row>
+                                                <lsx-col size="md">
                                                     <small>
-                                                        Bildnachweis:
-                                                        <a href="https://pixabay.com/illustrations/google-search-engine-browser-search-76517/" target="_blank">Pixabay: Simon</a>
+                                                        <small>
+                                                            Bildnachweis:
+                                                            <a href="https://pixabay.com/illustrations/google-search-engine-browser-search-76517/" target="_blank">Pixabay: Simon</a>
+                                                        </small>
                                                     </small>
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                </lsx-col>
+                                            </lsx-row>
+                                        </lsx-grid-fluid>
+                                    </lsx-accordion-content>
+                                </lsx-accordion-page>
 
-                            <!-- Replikationstransparenz -->
-                            <div class="card">
-                                <div
-                                    id            = "transparenz-arten-replikation-title"
-                                    class         = "card-header"
-                                    type           = "button"
-                                    data-bs-toggle = "collapse"
-                                    data-bs-target = "#transparenz-arten-replikation-content"
-                                    data-toggle   = "collapse"
-                                    aria-expanded = "false"
-                                    aria-controls = "transparenz-arten-replikation-content"
-                                    href          = "#transparenz-arten-replikation-content"
-                                >
-                                    <h4>Replikationstransparenz</h4>
-                                </div>
-                                <div
-                                    id              = "transparenz-arten-replikation-content"
-                                    class           = "collapse container-fluid p-3"
-                                    aria-labelledby = "transparenz-arten-replikation-title"
-                                    data-parent     = "#transparenz-arten"
-                                >
-                                    <div class="container-fluid p-0">
-                                        <div class="row">
-                                            <div class="col">
-                                                Aus Performancegründen oder zur Erhöhung der Ausfallsicherheit werden wichtige Daten auf
-                                                mehrere Rechenknoten repliziert. Die Datenreplikation erfolgt vollautomatisch im Hintergrund,
-                                                wobei das System bei jeder Änderung die Aktualisierung aller Kopien sicherstellt.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-weltkarte.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Weltweit genutzte Anwendungen wie die Googlesuche, Facebook oder Instagram werden in global
-                                                verteilten Rechenzentren betrieben, um die Ladezeiten zu verkürzen. Die innerhalb der Anwendung
-                                                anfallenden Daten werden deshalb automatisch zwischen den Rechenzentren repliziert, damit jede*r
-                                                Anwender*in möglichst dieselben Daten sieht.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-datenbank.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Die meisten Datenbanken erlauben einen automatischen Clusterbetrieb, wodurch alle Daten auf mehrere
-                                                Rechenknoten gespiegelt werden. Lesende Anfragen werden dann von irgend einem gerade verfügbaren Knoten
-                                                beantwortet, während ändernde Anfragen an alle Knoten weitergereicht werden.
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>
+                                <lsx-accordion-page>
+                                    <lsx-accordion-title>
+                                        <b>Replikationstransparenz</b>
+                                    </lsx-accordion-title>
+                                    <lsx-accordion-content>
+                                        <lsx-grid-fluid class="p-0">
+                                            <lsx-row>
+                                                <lsx-col size="md">
+                                                    Aus Performancegründen oder zur Erhöhung der Ausfallsicherheit werden wichtige Daten auf
+                                                    mehrere Rechenknoten repliziert. Die Datenreplikation erfolgt vollautomatisch im Hintergrund,
+                                                    wobei das System bei jeder Änderung die Aktualisierung aller Kopien sicherstellt.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-weltkarte.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Weltweit genutzte Anwendungen wie die Googlesuche, Facebook oder Instagram werden in global
+                                                    verteilten Rechenzentren betrieben, um die Ladezeiten zu verkürzen. Die innerhalb der Anwendung
+                                                    anfallenden Daten werden deshalb automatisch zwischen den Rechenzentren repliziert, damit jede*r
+                                                    Anwender*in möglichst dieselben Daten sieht.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-datenbank.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Die meisten Datenbanken erlauben einen automatischen Clusterbetrieb, wodurch alle Daten auf mehrere
+                                                    Rechenknoten gespiegelt werden. Lesende Anfragen werden dann von irgend einem gerade verfügbaren Knoten
+                                                    beantwortet, während ändernde Anfragen an alle Knoten weitergereicht werden.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row>
+                                                <lsx-col size="md">
                                                     <small>
-                                                        Bildnachweise:
-                                                        <a href="https://www.openstreetmap.org/#map=2/18.1/-20.7&layers=C" target="_blank">OpenStreetMap</a>,
-                                                        <a href="https://pixabay.com/photos/info-data-disk-server-database-1641937/" target="_blank">pixabay: FreePhotosART</a>,
+                                                        <small>
+                                                            Bildnachweise:
+                                                            <a href="https://www.openstreetmap.org/#map=2/18.1/-20.7&layers=C" target="_blank">OpenStreetMap</a>,
+                                                            <a href="https://pixabay.com/photos/info-data-disk-server-database-1641937/" target="_blank">pixabay: FreePhotosART</a>,
+                                                        </small>
                                                     </small>
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                </lsx-col>
+                                            </lsx-row>
+                                        </lsx-grid-fluid>
+                                    </lsx-accordion-content>
+                                </lsx-accordion-page>
 
-                            <!-- Fehlertransparenz -->
-                            <div class="card">
-                                <div
-                                    id            = "transparenz-arten-fehler-title"
-                                    class         = "card-header"
-                                    type           = "button"
-                                    data-bs-toggle = "collapse"
-                                    data-bs-target = "#transparenz-arten-fehler-content"
-                                    data-toggle   = "collapse"
-                                    aria-expanded = "false"
-                                    aria-controls = "transparenz-arten-fehler-content"
-                                    href          = "#transparenz-arten-fehler-content"
-                                >
-                                    <h4>Fehlertransparenz</h4>
-                                </div>
-                                <div
-                                    id              = "transparenz-arten-fehler-content"
-                                    class           = "collapse container-fluid p-3"
-                                    aria-labelledby = "transparenz-arten-fehler-title"
-                                    data-parent     = "#transparenz-arten"
-                                >
-                                    <div class="container-fluid p-0">
-                                        <div class="row">
-                                            <div class="col">
-                                                Fehlersituationen werden nicht als Ausnahme sondern als Normalfall betrachtet.
-                                                Eine Anwendung sollte daher immer so entworfen werden, dass sie möglichst viele
-                                                Fehlersituationen abfangen und automatisch korrigieren kann. Keinesfalls darf
-                                                eine Anwendung einfach abstürzen, wenn ein Weiterbetrieb prinzipiell möglich ist.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-email.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Eine E-Mail kann nicht sofort zugestellt werden, da das Postfach des Empfängers
-                                                voll ist. Der Mailserver des Senders teilt deshalb mit, die Zustellung innerhalb
-                                                der nächsten Tage zu wiederholen. Nur, wenn die Nachricht nach fünf Tagen immer
-                                                noch nicht zugestellt wurde, wird der Absender über das endgültige Scheitern
-                                                informiert.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-wetterstation.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Eine Wetterstation sammelt kontinuierlich Daten und sendet diese via UMTS an einen zentralen
-                                                Server. Bei schlechtem Wetter besteht allerdings nur eine unzuverlässige Internetverbindung,
-                                                so dass die Daten nicht immer sofort verschickt werden können. Sämtliche Daten werden daher
-                                                in einem internen Ringbuffer gesammelt und so lange an den Server geschickt, bis dieser den
-                                                Empfang bestätigt.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-apollo11.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Bereits bei den Apollo-Mondmissionen waren alle Computersysteme mehrfach redundant ausgelegt,
-                                                so dass bei Versagen eines Teilsystems dieses vollautomatisch ersetzt werden konnte. Der
-                                                <a href="https://en.wikipedia.org/wiki/Saturn_Launch_Vehicle_Digital_Computer" target="_blank">Saturn
-                                                Launch Vehicle Digial Computer</a> führte sogar jede Berechnung dreifach redundant aus und
-                                                arbeitete stets mit dem Mehrheitsergebnis weiter, um katastrophale Folgen aufgrund von
-                                                Hardwarefehlern zu vermeiden.
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>
+                                <lsx-accordion-page>
+                                    <lsx-accordion-title>
+                                        <b>Fehlertransparenz</b>
+                                    </lsx-accordion-title>
+                                    <lsx-accordion-content>
+                                        <lsx-grid-fluid class="p-0">
+                                            <lsx-row>
+                                                <lsx-col size="md">
+                                                    Fehlersituationen werden nicht als Ausnahme sondern als Normalfall betrachtet.
+                                                    Eine Anwendung sollte daher immer so entworfen werden, dass sie möglichst viele
+                                                    Fehlersituationen abfangen und automatisch korrigieren kann. Keinesfalls darf
+                                                    eine Anwendung einfach abstürzen, wenn ein Weiterbetrieb prinzipiell möglich ist.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-email.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Eine E-Mail kann nicht sofort zugestellt werden, da das Postfach des Empfängers
+                                                    voll ist. Der Mailserver des Senders teilt deshalb mit, die Zustellung innerhalb
+                                                    der nächsten Tage zu wiederholen. Nur, wenn die Nachricht nach fünf Tagen immer
+                                                    noch nicht zugestellt wurde, wird der Absender über das endgültige Scheitern
+                                                    informiert.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-wetterstation.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Eine Wetterstation sammelt kontinuierlich Daten und sendet diese via UMTS an einen zentralen
+                                                    Server. Bei schlechtem Wetter besteht allerdings nur eine unzuverlässige Internetverbindung,
+                                                    so dass die Daten nicht immer sofort verschickt werden können. Sämtliche Daten werden daher
+                                                    in einem internen Ringbuffer gesammelt und so lange an den Server geschickt, bis dieser den
+                                                    Empfang bestätigt.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-apollo11.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Bereits bei den Apollo-Mondmissionen waren alle Computersysteme mehrfach redundant ausgelegt,
+                                                    so dass bei Versagen eines Teilsystems dieses vollautomatisch ersetzt werden konnte. Der
+                                                    <a href="https://en.wikipedia.org/wiki/Saturn_Launch_Vehicle_Digital_Computer" target="_blank">Saturn
+                                                    Launch Vehicle Digial Computer</a> führte sogar jede Berechnung dreifach redundant aus und
+                                                    arbeitete stets mit dem Mehrheitsergebnis weiter, um katastrophale Folgen aufgrund von
+                                                    Hardwarefehlern zu vermeiden.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row>
+                                                <lsx-col size="md">
                                                     <small>
-                                                        Bildnachweise:
-                                                        <a href="https://unsplash.com/photos/oeDH20DVb2A" target="_blank">Unsplash: Liam Truong</a>,
-                                                        <a href="https://pixabay.com/photos/anemometer-weather-station-3977718/" target="_blank">Pixabay: RitaE</a>,
-                                                        <a href="https://de.wikipedia.org/wiki/Datei:Apollo_11_rollout.jpg" target="_blank">Wikipedia: NASA</a>
+                                                        <small>
+                                                            Bildnachweise:
+                                                            <a href="https://unsplash.com/photos/oeDH20DVb2A" target="_blank">Unsplash: Liam Truong</a>,
+                                                            <a href="https://pixabay.com/photos/anemometer-weather-station-3977718/" target="_blank">Pixabay: RitaE</a>,
+                                                            <a href="https://de.wikipedia.org/wiki/Datei:Apollo_11_rollout.jpg" target="_blank">Wikipedia: NASA</a>
+                                                        </small>
                                                     </small>
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                </lsx-col>
+                                            </lsx-row>
+                                        </lsx-grid-fluid>
+                                    </lsx-accordion-content>
+                                </lsx-accordion-page>
 
-                            <!-- Nebenläufigkeitstransparenz -->
-                            <div class="card">
-                                <div
-                                    id            = "transparenz-arten-nebenläufigkeit-title"
-                                    class         = "card-header"
-                                    type           = "button"
-                                    data-bs-toggle = "collapse"
-                                    data-bs-target = "#transparenz-arten-nebenläufigkeit-content"
-                                    data-toggle   = "collapse"
-                                    aria-expanded = "false"
-                                    aria-controls = "transparenz-arten-nebenläufigkeit-content"
-                                    href          = "#transparenz-arten-nebenläufigkeit-content"
-                                >
-                                    <h4>Nebenläufigkeitstransparenz</h4>
-                                </div>
-                                <div
-                                    id              = "transparenz-arten-nebenläufigkeit-content"
-                                    class           = "collapse container-fluid p-3"
-                                    aria-labelledby = "transparenz-arten-nebenläufigkeit-title"
-                                    data-parent     = "#transparenz-arten"
-                                >
-                                    <div class="container-fluid p-0">
-                                        <div class="row">
-                                            <div class="col">
-                                                Eine verteilte Anwendung sollte immer so entworfen werden, dass sie von vielen Benutzern
-                                                gleichzeitig genutzt werden kann. Hierfür notwendige Sperren und Synchronisationsmechanismen
-                                                sollten dabei vor den Anwender*innen verborgen im Hintergrund ablaufen.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-wikipedia.svg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Wikipedia verarbeitet pro Sekunde zwischen 25.000 und 60.000 Seitenzugriffe. Da die meisten
-                                                Zugriffe nur lesend erfolgen, kann jeder Artikel auch dann gelesen werden, wenn er gerade von
-                                                jemand anderem bearbeitet wird. Bearbeiten zwei Personen gleichzeitig denselben Artikel, wird
-                                                beim Speichern ein Bearbeitungskonflikt angezeigt, der manuell aufgelöst werden muss.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-etherpad.png" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Kollaborative Anwendungen wie Etherpad erlauben es mehreren Personen, gleichzeitig am selben
-                                                Dokument zu arbeiten. Jede Person sieht dabei in Echtzeit die von den anderen vorgenommenen
-                                                Änderungen, weshalb auch niemand ein Dokument exklusiv sperren kann.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-couchdb.svg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                CouchDB kennt keine Datenbanksperren, um gleichzeitige Änderungen an einem Datensatz zu vermeiden.
-                                                Tritt ein Konflikt auf, legt die Datenbank einfach zwei Versionen desselben Datensatzes an. Es obliegt
-                                                dem Anwendungscode die Versionen bei Bedarf wieder zusammenzuführen.
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>
+                                <lsx-accordion-page>
+                                    <lsx-accordion-title>
+                                        <b>Nebenläufigkeitstransparenz</b>
+                                    </lsx-accordion-title>
+                                    <lsx-accordion-content>
+                                        <lsx-grid-fluid class="p-0">
+                                            <lsx-row>
+                                                <lsx-col size="md">
+                                                    Eine verteilte Anwendung sollte immer so entworfen werden, dass sie von vielen Benutzern
+                                                    gleichzeitig genutzt werden kann. Hierfür notwendige Sperren und Synchronisationsmechanismen
+                                                    sollten dabei vor den Anwender*innen verborgen im Hintergrund ablaufen.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-wikipedia.svg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Wikipedia verarbeitet pro Sekunde zwischen 25.000 und 60.000 Seitenzugriffe. Da die meisten
+                                                    Zugriffe nur lesend erfolgen, kann jeder Artikel auch dann gelesen werden, wenn er gerade von
+                                                    jemand anderem bearbeitet wird. Bearbeiten zwei Personen gleichzeitig denselben Artikel, wird
+                                                    beim Speichern ein Bearbeitungskonflikt angezeigt, der manuell aufgelöst werden muss.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-etherpad.png" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Kollaborative Anwendungen wie Etherpad erlauben es mehreren Personen, gleichzeitig am selben
+                                                    Dokument zu arbeiten. Jede Person sieht dabei in Echtzeit die von den anderen vorgenommenen
+                                                    Änderungen, weshalb auch niemand ein Dokument exklusiv sperren kann.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-couchdb.svg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    CouchDB kennt keine Datenbanksperren, um gleichzeitige Änderungen an einem Datensatz zu vermeiden.
+                                                    Tritt ein Konflikt auf, legt die Datenbank einfach zwei Versionen desselben Datensatzes an. Es obliegt
+                                                    dem Anwendungscode die Versionen bei Bedarf wieder zusammenzuführen.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row>
+                                                <lsx-col size="md">
                                                     <small>
-                                                        Bildnachweise:
-                                                        <a href="https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg" target="_blank">Wikimedia: Nohat</a>,
-                                                        <a href="https://etherpad.org/" target="_blank">etherpad.org</a>,
-                                                        <a href="https://commons.wikimedia.org/wiki/File:CouchDB.svg" target="_blank">Wikimedia: Apache Software Foundation</a>
+                                                        <small>
+                                                            Bildnachweise:
+                                                            <a href="https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg" target="_blank">Wikimedia: Nohat</a>,
+                                                            <a href="https://etherpad.org/" target="_blank">etherpad.org</a>,
+                                                            <a href="https://commons.wikimedia.org/wiki/File:CouchDB.svg" target="_blank">Wikimedia: Apache Software Foundation</a>
+                                                        </small>
                                                     </small>
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                </lsx-col>
+                                            </lsx-row>
+                                        </lsx-grid-fluid>
+                                    </lsx-accordion-content>
+                                </lsx-accordion-page>
 
-                            <!-- Skalierbarkeitstransparenz -->
-                            <div class="card">
-                                <div
-                                    id            = "transparenz-arten-skalierbarkeit-title"
-                                    class         = "card-header"
-                                    type           = "button"
-                                    data-bs-toggle = "collapse"
-                                    data-bs-target = "#transparenz-arten-skalierbarkeit-content"
-                                    data-toggle   = "collapse"
-                                    aria-expanded = "false"
-                                    aria-controls = "transparenz-arten-skalierbarkeit-content"
-                                    href          = "#transparenz-arten-skalierbarkeit-content"
-                                >
-                                    <h4>Skalierbarkeitstransparenz</h4>
-                                </div>
-                                <div
-                                    id              = "transparenz-arten-skalierbarkeit-content"
-                                    class           = "collapse container-fluid p-3"
-                                    aria-labelledby = "transparenz-arten-skalierbarkeit-title"
-                                    data-parent     = "#transparenz-arten"
-                                >
-                                    <div class="container-fluid p-0">
-                                        <div class="row">
-                                            <div class="col">
-                                                Verteilte Systeme und Anwendungen sollten immer skalierbar sein. Im Idealfall könnnen im
-                                                laufenden Betrieb Ressourcen hinzugefügt oder entfernt werden, um die Leistung anzupassen.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-linux.svg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Unter Linux bildet der
-                                                <a href="https://de.wikipedia.org/wiki/Logical_Volume_Manager" target="_blank">Logical Volume Manager</a>
-                                                eine Abstraktionsschicht zwsichen den tatsächlich auf einem Datenträger vorhandenen Partitionen und den
-                                                für das Betriebssystem sichtbaren Dateisystemen. Dadurch wird es möglich, ein Dateisystem jederzeit durch
-                                                Hinzufügen weiterer Datenträger zu vergrößern.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-lastverteilung.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Im einfachsten Fall befinden sich die Dateien einer Webseite auf einem zentralen Webserver, von
-                                                dem sie abgerufen werden können. Sollen jedoch sehr viele Anfragen gleichzeitig behandelt werden,
-                                                können diese über eine vorgeschaltete Lastverteilung auf mehrere Server verteilt werden. Die
-                                                Leistungsfähigkeit kann dabei jederzeit durch Starten und Stoppen weiterer Server angepasst werden.
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>
+                                <lsx-accordion-page>
+                                    <lsx-accordion-title>
+                                        <b>Skalierbarkeitstransaprenz</b>
+                                    </lsx-accordion-title>
+                                    <lsx-accordion-content>
+                                        <lsx-grid-fluid class="p-0">
+                                            <lsx-row>
+                                                <lsx-col size="md">
+                                                    Verteilte Systeme und Anwendungen sollten immer skalierbar sein. Im Idealfall könnnen im
+                                                    laufenden Betrieb Ressourcen hinzugefügt oder entfernt werden, um die Leistung anzupassen.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-linux.svg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Unter Linux bildet der
+                                                    <a href="https://de.wikipedia.org/wiki/Logical_Volume_Manager" target="_blank">Logical Volume Manager</a>
+                                                    eine Abstraktionsschicht zwsichen den tatsächlich auf einem Datenträger vorhandenen Partitionen und den
+                                                    für das Betriebssystem sichtbaren Dateisystemen. Dadurch wird es möglich, ein Dateisystem jederzeit durch
+                                                    Hinzufügen weiterer Datenträger zu vergrößern.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-lastverteilung.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Im einfachsten Fall befinden sich die Dateien einer Webseite auf einem zentralen Webserver, von
+                                                    dem sie abgerufen werden können. Sollen jedoch sehr viele Anfragen gleichzeitig behandelt werden,
+                                                    können diese über eine vorgeschaltete Lastverteilung auf mehrere Server verteilt werden. Die
+                                                    Leistungsfähigkeit kann dabei jederzeit durch Starten und Stoppen weiterer Server angepasst werden.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row>
+                                                <lsx-col size="md">
                                                     <small>
-                                                        Bildnachweise:
-                                                        <a href="https://pixabay.com/vectors/avatar-beak-black-cute-emotion-1295404/" target="_blank">Pixabay: OpenClipart-Vectors</a>,
-                                                        <a href="https://pixabay.com/illustrations/vpn-server-router-virtual-firewall-3406770/" target="_blank">Pixabay: kreatikar</a>
+                                                        <small>
+                                                            Bildnachweise:
+                                                            <a href="https://pixabay.com/vectors/avatar-beak-black-cute-emotion-1295404/" target="_blank">Pixabay: OpenClipart-Vectors</a>,
+                                                            <a href="https://pixabay.com/illustrations/vpn-server-router-virtual-firewall-3406770/" target="_blank">Pixabay: kreatikar</a>
+                                                        </small>
                                                     </small>
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                </lsx-col>
+                                            </lsx-row>
+                                        </lsx-grid-fluid>
+                                    </lsx-accordion-content>
+                                </lsx-accordion-page>
 
-                            <!-- Leistungstransparenz -->
-                            <div class="card">
-                                <div
-                                    id            = "transparenz-arten-leistung-title"
-                                    class         = "card-header"
-                                    type           = "button"
-                                    data-bs-toggle = "collapse"
-                                    data-bs-target = "#transparenz-arten-leistung-content"
-                                    data-toggle   = "collapse"
-                                    aria-expanded = "false"
-                                    aria-controls = "transparenz-arten-leistung-content"
-                                    href          = "#transparenz-arten-leistung-content"
-                                >
-                                    <h4>Leistungstransparenz</h4>
-                                </div>
-                                <div
-                                    id              = "transparenz-arten-leistung-content"
-                                    class           = "collapse container-fluid p-3"
-                                    aria-labelledby = "transparenz-arten-leistung-title"
-                                    data-parent     = "#transparenz-arten"
-                                >
-                                    <div class="container-fluid p-0">
-                                        <div class="row">
-                                            <div class="col">
-                                                Die Leistung eines verteilten Systems sollte nur von den verfügbaren Ressourcen begrenzt
-                                                sein. Innerhalb der gegebenen Grenzen sorgt das System dann selbstständig und ohne manuelle
-                                                Eingriffe dafür, die vorhandene Kapazität bedarfsgerecht anzupassen.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-cloud.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Cloudangebote unterscheiden sich vom traditionallen Hosting insbesondere durch die automatische
-                                                Skalierbarkeit und nutzungsabhängige Abrechnung aller Dienste. Die meisten Anbieter erlauben daher,
-                                                Regeln zu definieren, bei welcher Auslastung weitere Kapazitäten hinzugefügt oder wieder entfernt
-                                                werden sollen. Einrichtung, Start und Stopp der notwendigen Rechenknoten laufen hierfür komplett
-                                                automatisiert.
-                                            </div>
-                                        </div>
-                                        <div class="row dhbw-fontsize-small">
-                                            <div class="col-md-2">
-                                                <img src="transparenz-3dfilm.jpg" class="img-thumbnail" style="width: 100%;" />
-                                            </div>
-                                            <div class="col">
-                                                <b>Beispiel:</b>
-                                                Nicht nur in Forschung und Wissenschaft sondern auch in der Filmwirtschaft werden Clustersysteme
-                                                zur Bewerkstelligung der anfallenden Rechenaufgaben eingesetzt. Diese besitzen einen Job Scheduler
-                                                zum Einspiesen abzuarbeitender Aufgaben. Die zur Verfügung stehende Rechenleistung teilt der Scheduler
-                                                automatisch auf alle aktiven Jobs auf. Sind zu einem Zeitpunkt nur wenige Jobs aktiv, laufen diese daher
-                                                schneller durch, als wenn viele Jobs gleichzeitig laufen sollen.
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <small>
+                                <lsx-accordion-page>
+                                    <lsx-accordion-title>
+                                        <b>Leistungstransparenz</b>
+                                    </lsx-accordion-title>
+                                    <lsx-accordion-content>
+                                        <lsx-grid-fluid class="p-0">
+                                            <lsx-row>
+                                                <lsx-col size="md">
+                                                    Die Leistung eines verteilten Systems sollte nur von den verfügbaren Ressourcen begrenzt
+                                                    sein. Innerhalb der gegebenen Grenzen sorgt das System dann selbstständig und ohne manuelle
+                                                    Eingriffe dafür, die vorhandene Kapazität bedarfsgerecht anzupassen.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-cloud.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Cloudangebote unterscheiden sich vom traditionallen Hosting insbesondere durch die automatische
+                                                    Skalierbarkeit und nutzungsabhängige Abrechnung aller Dienste. Die meisten Anbieter erlauben daher,
+                                                    Regeln zu definieren, bei welcher Auslastung weitere Kapazitäten hinzugefügt oder wieder entfernt
+                                                    werden sollen. Einrichtung, Start und Stopp der notwendigen Rechenknoten laufen hierfür komplett
+                                                    automatisiert.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <lsx-row class="dhbw-fontsize-small">
+                                                <lsx-col size="md-2">
+                                                    <img src="transparenz-3dfilm.jpg" class="img-thumbnail" style="width: 100%;" />
+                                                </lsx-col>
+                                                <lsx-col size="md">
+                                                    <b>Beispiel:</b>
+                                                    Nicht nur in Forschung und Wissenschaft sondern auch in der Filmwirtschaft werden Clustersysteme
+                                                    zur Bewerkstelligung der anfallenden Rechenaufgaben eingesetzt. Diese besitzen einen Job Scheduler
+                                                    zum Einspiesen abzuarbeitender Aufgaben. Die zur Verfügung stehende Rechenleistung teilt der Scheduler
+                                                    automatisch auf alle aktiven Jobs auf. Sind zu einem Zeitpunkt nur wenige Jobs aktiv, laufen diese daher
+                                                    schneller durch, als wenn viele Jobs gleichzeitig laufen sollen.
+                                                </lsx-col>
+                                            </lsx-row>
+                                            <div class="row">
+                                                <div class="col">
                                                     <small>
-                                                        Bildnachweise:
-                                                        <a href="https://pixabay.com/photos/field-clouds-sky-agriculture-533541/" target="_blank">Pixabay: pcdazero</a>,
-                                                        <a href="https://pixabay.com/illustrations/super-woman-flying-3d-figure-female-1885016/" target="_blank">Pixabay: perianjs</a>
+                                                        <small>
+                                                            Bildnachweise:
+                                                            <a href="https://pixabay.com/photos/field-clouds-sky-agriculture-533541/" target="_blank">Pixabay: pcdazero</a>,
+                                                            <a href="https://pixabay.com/illustrations/super-woman-flying-3d-figure-female-1885016/" target="_blank">Pixabay: perianjs</a>
+                                                        </small>
                                                     </small>
-                                                </small>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                        </lsx-grid-fluid>
+                                    </lsx-accordion-content>
+                                </lsx-accordion-page>
+                            </lsx-accordion>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
             </section>
 
+            <!-- ============================================= -->
+            <!-- Ausfallsicherheit und Skalierung in der Cloud -->
+            <!-- ============================================= -->
             <section data-title="Ausfallsicherheit und Skalierung in der Cloud">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg">
-                            <img src="cloud-betriebsmodell.png" class="d-block" />
-                        </div>
-                        <div class="col markdown">
-                            ## Cluster-Betrieb
+                <div class="d-flex justify-content-between flex-wrap gap-3">
+                    <img src="cloud-betriebsmodell.png" class="d-block img-fluid" />
+                    <div class="col markdown">
+                        ## Cluster-Betrieb
 
-                             * Vollständie Virtualisierung von Rechenleistung und Speicherkapazität
-                             * Kommunikation über ein abgeschirmte, virtuelle App-Netzwerke
-                             * Automatische Replikation einzelner Komponenten je nach Bedarf
-                             * Lastverteilung zwischen mehreren Instanzen einer Komponente
+                         * Vollständie Virtualisierung von Rechenleistung und Speicherkapazität
+                         * Kommunikation über ein abgeschirmte, virtuelle App-Netzwerke
+                         * Automatische Replikation einzelner Komponenten je nach Bedarf
+                         * Lastverteilung zwischen mehreren Instanzen einer Komponente
 
-                            ## Ausfallsichere Deployment-Strategien
+                        ## Ausfallsichere Deployment-Strategien
 
-                             * Blue/Green-Deployment
-                             * Rolling Deployment
-                             * Canary Releases
-                             * …
-                        </div>
+                         * Blue/Green-Deployment
+                         * Rolling Deployment
+                         * Canary Releases
+                         * …
                     </div>
                 </div>
 
             </section>
 
+            <!-- ============================ -->
+            <!-- Umgang mit Fehlersituationen -->
+            <!-- ============================ -->
             <section data-title="Umgang mit Fehlersituationen">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 class="dhbw-lightblue">Fehler vermeiden</h3>
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="md-4">
+                            <h3>Fehler vermeiden</h3>
                             <img src="fehler-vermeiden.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
-                        </div>
-                        <div class="col-md-4">
-                            <h3 class="dhbw-lightblue">Fehler erkennen</h3>
+                        </lsx-col>
+                        <lsx-col size="md-4">
+                            <h3>Fehler erkennen</h3>
                             <img src="fehler-erkennen.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
-                        </div>
-                        <div class="col-md-4">
-                            <h3 class="dhbw-lightblue">Fehler maskieren</h3>
+                        </lsx-col>
+                        <lsx-col size="md-4">
+                            <h3>Fehler maskieren</h3>
                             <img src="fehler-maskieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Zum Beispiel durch spätere Wiederholung des Vorgangs
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 class="dhbw-lightblue">Fehler tolerieren</h3>
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md-4">
+                            <h3>Fehler tolerieren</h3>
                             <img src="fehler-tolerieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Zum Beispiel durch Speichern beider Versionen bei Schreibkonflikten
-                        </div>
-                        <div class="col-md-4">
-                            <h3 class="dhbw-lightblue">Fehler beheben</h3>
+                        </lsx-col>
+                        <lsx-col size="md-4">
+                            <h3>Fehler beheben</h3>
                             <img src="fehler-beheben.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
                             Zum Beispiel durch automatisches Umschalten auf ein Hot-Standby
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
                             <small>
                                 <small>
                                     Bildnachweise:
@@ -984,38 +860,41 @@
                                     <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay: Alexas_Fotos</a>
                                 </small>
                             </small>
-                        </div>
-                    </div>
-                </div>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
             </section>
 
-            <section data-title="Das CAP-Theorem verteilter Anwendungen" class="limit-width">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-5">
+            <!-- ====================================== -->
+            <!-- Das CAP-Theorem verteilter Anwendungen -->
+            <!-- ====================================== -->
+            <section data-title="Das CAP-Theorem verteilter Anwendungen" class="limited-width">
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="md-5">
                             <img src="cap-theorem.png" alt="Visualisierung des CAP-Theorems" style="width: 100%;" />
-                        </div>
-                        <div class="col-md">
-                            <h4 class="dhbw-lightblue">Consistency (Konsistenz)</h4>
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <h4>Consistency (Konsistenz)</h4>
                             <p>
                                 Alle Knoten sehen immer exakt dieselben, konsistenten Daten. Bei replizierten Datenbeständen
                                 werden die Änderungen daher erst sichtbar, wenn sie in allen Repliken nachgezogen wurden.
                             </p>
 
-                            <h4 class="dhbw-lightblue">Availability (Verfügbarkeit)</h4>
+                            <h4>Availability (Verfügbarkeit)</h4>
                             <p>
                                 Das System ist jederzeit erreichbar und überschreitet niemals die maximal zulässige
                                 Antwortzeit.
                             </p>
 
-                            <h4 class="dhbw-lightblue">Partition Tolerance (Partitionstoleranz)</h4>
+                            <h4>Partition Tolerance (Partitionstoleranz)</h4>
                             <p>
                                 Die Anwendung funktioniert auch dann noch, wenn einzelne Teile ausgefallen sind.
                             </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
                             <p style="color: darkred;">
                                 Eine verteilte Anwendung kann immer nur zwei dieser Anforderungen gänzlich erfüllen!
                             </p>
@@ -1028,35 +907,37 @@
                                 eBay hingegen würde bei der Gebotsabgabe sicher lieber eine etwas längere Antwortzeit in
                                 Kauf nehmen, anstatt sich überschreibende Gebote zu riskieren.
                             </p>
-                        </div>
-                    </div>
-                </div>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
             </section>
 
+            <!-- ==================================== -->
+            <!-- Fallbeispiel zur Zeitsynchronisation -->
+            <!-- ==================================== -->
             <section data-title="Fallbeispiel zur Zeitsynchronisation">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-7 card p-3">
-                            <!-- Inneres Grid -->
+                <lsx-grid>
+                    <lsx-row>
+                        <lsx-col size="lg-7" class="card p-3">
                             <h2 class="mt-0">Beginn der Zeitrechnung</h2>
 
-                            <div class="container-fluid p-0">
-                                <div class="row">
-                                    <div class="col-md">
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
                                         <img src="zeitproblem-beginn-wissenschaft.jpg" class="d-block img-fluid" />
                                         <b>Wissenschaft:</b> Mit dem Urknall
-                                    </div>
-                                    <div class="col-md">
+                                    </lsx-col>
+                                    <lsx-col size="md">
                                         <img src="zeitproblem-beginn-kirche.jpg" class="d-block img-fluid" />
                                         <b>Kirche:</b> Als Gott die Erde erschuf
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md">
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
                                         <img src="zeitproblem-beginn-sport.jpg" class="d-block img-fluid" />
                                         <b>Wettläufer:</b> Ab dem Startschuss
-                                    </div>
-                                    <div class="col-md">
+                                    </lsx-col>
+                                    <lsx-col size="md">
                                         <img src="zeitproblem-beginn-entwickler.jpg" class="d-block img-fluid" />
                                         <b>Softwareentwickler:</b> <a href="https://de.wikipedia.org/wiki/Unixzeit" target="_blank">01.01.1970 0:00 Uhr</a> 🥴
                                         <br />
@@ -1064,10 +945,10 @@
                                             <b>Youtube:</b>
                                             <a href="https://www.youtube.com/watch?v=jNQXAC9IVRw" target="_blank">23.04.2005</a>
                                         </small>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
                                         <p>
                                             <small>
                                                 <small>
@@ -1079,12 +960,11 @@
                                                 </small>
                                             </small>
                                         </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Inneres Grid -->
-                        </div>
-                        <div class="col">
+                                    </lsx-col>
+                                </lsx-row>
+                            </lsx-grid-fluid>
+                        </lsx-col>
+                        <lsx-col size="lg">
                             <div class="card p-3 bg-light h-100 markdown">
                                 ## Aufgabe {.mt-0}
 
@@ -1101,9 +981,9 @@
 
                                  1. Was ist das NTP und welche Probleme löst es?
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid>
             </section>
         </main>
 

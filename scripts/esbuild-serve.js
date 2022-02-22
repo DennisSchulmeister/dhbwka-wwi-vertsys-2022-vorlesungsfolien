@@ -15,16 +15,15 @@ serve({
     entryPoints: [path.join(__dirname, "..", "src", "index.js")],
     bundle: true,
     outfile: path.join(__dirname, "..", "static", "_bundle.js"),
+    sourcemap: true,
     plugins: [lessLoader()],
     loader: {
         ".svg": "text",
-        ".ttf": "binary",
-        ".woff": "binary",
-        ".woff2": "binary",
-        ".eot": "binary",
+        ".ttf": "dataurl",
+        ".woff": "dataurl",
+        ".woff2": "dataurl",
+        ".eot": "dataurl",
     },
 }).then(() => {
-    console.log("Listening on port 8080");    
+    console.log("Listening on port 8080");
 });
-
-// esbuild src/index.js --servedir=static --bundle --outfile=static/_bundle.js --loader:.svg=text --loader:.ttf=binary --loader:.woff=binary --loader:.woff2=binary --loader:.eot=binary
