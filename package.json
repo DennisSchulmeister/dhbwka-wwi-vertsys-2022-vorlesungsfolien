@@ -8,8 +8,6 @@
     "bugs": {
         "url": "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-vorlesungsfolien/issues"
     },
-    "main": "src/index.js",
-    "type": "module",
     "repository": {
         "type": "git",
         "url": "git+ssh://git@github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-vorlesungsfolien.git"
@@ -20,6 +18,8 @@
         "documentation",
         "manual"
     ],
+    "main": "src/index.js",
+    "type": "module",
     "scripts": {
         "clean": "node scripts/clean.js",
         "build": "npm run clean; node scripts/build-static.js; node scripts/esbuild-bundle.js",
