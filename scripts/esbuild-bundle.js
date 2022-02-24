@@ -21,5 +21,8 @@ build({
         ".woff": "dataurl",
         ".woff2": "dataurl",
         ".eot": "dataurl",
+        ".jpg": "dataurl",
+        ".png": "dataurl",
+        ".gif": "dataurl",
     },
 });

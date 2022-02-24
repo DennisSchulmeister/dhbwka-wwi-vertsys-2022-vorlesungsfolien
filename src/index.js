@@ -1,3 +1,6 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 import MiniTutorial from "@dschulmeis/mini-tutorial.js";
 import "@dschulmeis/mini-tutorial.js/themes/slideshow.css";
 // Bug in esbuild-plugin-less and others: Module paths are not recognized!
@@ -12,9 +15,6 @@ import HLJS_Language_CSS from 'highlight.js/lib/languages/css';
 import HLJS_Language_JS from "highlight.js/lib/languages/javascript";
 import HLJS_Language_JSON from "highlight.js/lib/languages/json";
 import "highlight.js/styles/atom-one-light.css";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import "./style.less";
 

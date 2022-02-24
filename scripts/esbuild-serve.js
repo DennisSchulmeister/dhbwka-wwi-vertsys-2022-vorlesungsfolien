@@ -23,6 +23,9 @@ serve({
         ".woff": "dataurl",
         ".woff2": "dataurl",
         ".eot": "dataurl",
+        ".jpg": "dataurl",
+        ".png": "dataurl",
+        ".gif": "dataurl",
     },
 }).then(() => {
     console.log("Listening on port 8080");
