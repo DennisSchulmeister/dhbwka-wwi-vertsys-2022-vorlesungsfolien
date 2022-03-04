@@ -23,7 +23,17 @@ window.addEventListener("load", () => {
         tocStyle: "hamburger",
         sectionTitle: "#page-title",
         plugins: [
-            new LS_Plugin_ExtraTags(),
+            new LS_Plugin_ExtraTags({
+                labelCarouselNext: "Nächstes Bild",
+                labelCarouselPrev: "Vorheriges Bild",
+                labelCarouselReset: "Nochmal von vorne",
+                labelGithubEditOnline: "Online-IDE starten",
+                labelGithubEditDownload: "Quellcode herunterladen",
+                labelQuizPoints: "{1} von {2}",
+                labelQuizEvaluate: "Bewerten",
+                labelQuizNewTry: "Neuer Versuch",
+                githubEditUrlPrefix: "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/",
+            }),
             new LS_Plugin_Markdown(),
             new LS_Plugin_HighlightJS({
                 languages: {

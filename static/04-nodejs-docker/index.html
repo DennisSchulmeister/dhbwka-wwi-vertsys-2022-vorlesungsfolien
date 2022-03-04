@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Programmieren mit Node.js und Docker | Verteilte Systeme 2022</title>
+
+        <script src="../_bundle.js"></script>
+        <link rel="stylesheet" href="../_bundle.css" />
+        <link rel="shortcut icon" href="../favicon.png" />
+    </head>
+    <body class="hidden">
+        <!-- Seitenkopf und Inhaltsverzeichnis -->
+        <header>
+            <div id="title">
+                <h1>Programmieren mit Node.js und Docker</h1>
+                <h2 id="page-title"></h2>
+            </div>
+
+            <section id="toc" data-title="Inhaltsverzeichnis"></section>
+        </header>
+
+        <!-- Folien -->
+        <main>
+            <section data-title="Einleitung" data-chapter></section>
+
+            <section data-title="Inhalt der heutigen Vorlesung" data-background-image="../trennfolie.jpg">
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <div class="card flex-fill">
+                        <div class="card-header fw-bold dhbw-lightblue">
+                            Vorbereitung der Gruppenarbeit
+                        </div>
+                        <div class="card-body p-3 bg-light markdown">
+                            * Gruppeneinteilung vornehmen
+                            * Git-Repositories anlegen
+                            * Vorlagequellcode übernehmen
+                        </div>
+                    </div>
+                    <div class="card flex-fill">
+                        <div class="card-header fw-bold dhbw-lightblue">
+                            Einstieg in die Programmierung
+                        </div>
+                        <div class="card-body p-3 bg-light markdown">
+                            * Vorstellung der Beispielanwendung
+                            * Programmieren mit Node.js
+                            * Grundlagen zu Docker
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-stretch" style="margin-top: 1em; gap: 1em;">
+                    <div class="card flex-fill">
+                        <div class="card-header fw-bold dhbw-lightblue">
+                            Lernziele
+                        </div>
+                        <div class="card-body p-3 markdown">
+                            ### Beispielanwendung
+
+                            * Die Architektur der Beispielanwendung verstehen
+                            * Den Aufbau der Quellcodevorlage kennen
+
+                            ### Node.js
+
+                            * Die Vorteile von Node.js und des Node Package Managers für die Webentwicklung verstehen
+                            * Eigene Node.js-Projekte anlegen und bearbeiten können
+                            * Benötigte Bibliotheken auf npmjs.com suchen und einem Node.js-Projekt hinzufügen können
+                            * Node.js-Projekte mit npm-Skripten lokal starten und bearbeiten können
+
+                            ### Docker
+
+                            * Die Unterschiede zwsichen Hardware-Virtualisierung und Container-Virtualisierung verstehen
+                            * Typische Befehle zum Starten und Stoppen von Containern kennenlernen
+                            * Zusammenhängende Services mit Docker Compose starten und stoppen
+                            * Netzwerkvirtualisierung, Portweiterleitungen und Service Discovery in Docker verstehen
+                            * Skalierung und Load Balancing in Docker kennen
+                            * Die Funktionsweise eines Dockerfiles zum Bauen eigener Images nachvollziehen können
+                            * Hilfreiche Dokumentationen auf der Webseite von Docker kennen
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section data-title="Aufgabe: Vorbereitung der Gruppenarbeit (30 Minuten)" class="limited-width" data-background-color="rgb(231, 221, 141)">
+                    <div class="card w-100 mb-3">
+                        <div class="card-header fw-bold dhbw-lightblue">
+                            Gruppeneinteilung vornehmen
+                        </div>
+                        <div class="card-body p-3 markdown">
+                            Teilen Sie sich untereinander in Dreiergruppen auf und überlegen
+                            Sie, welche Anwendung Sie programmierne wollen. Anschließend erfassen
+                            Sie im Moodleforum einen Eintrag zur Anmeldung der Gruppenarbeit
+                            mit folgenden Inhalten:
+
+                             * Namen der Gruppenmitglieder
+                             * Kurzbeschreibung geplanten App
+                        </div>
+                    </div>
+                    <div class="card w-100">
+                        <div class="card-header fw-bold dhbw-lightblue">
+                            Git-Repositories anlegen
+                        </div>
+                        <div class="card-body p-3 markdown">
+                            Legen Sie wie in der letzten Vorlesung gezeigt in GitHub ein neues
+                            Repository für das Portfolio projekt an und geben Sie allen Gruppenmitgliedern
+                            Änderungsrechte darauf. Anschließend ergänzen Sie den Link auf das Repository
+                            im Moodleforum. Außerdem sollte jeder das Repository bereits auf den eigenen
+                            Rechner klonen.
+                        </div>
+                    </div>
+            </section>
+
+            <section data-title="Vorstellung der Beispielanwendung">
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="beispielapp-screenshot.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="beispielapp-github.png" class="d-block w-100 img-thumbnail"/>
+                </div>
+
+                <p class="mt-3 fw-bold text-center">
+                    <a
+                        href="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Beispielanwendung%20Adressbuch"
+                        target="_blank"
+                    >
+                        Link auf GitHub
+                    </a>
+                </p>
+            </section>
+
+            <section data-title="Herleitung der Architektur – Statische Webseite" class="w-100">
+                <img src="wiederholung_spa-1.svg" class="b-block w-100" />
+            </section>
+
+            <section data-title="Herleitung der Architektur – Serverseitige Webanwendung" class="w-100">
+                <img src="wiederholung_spa-2.svg" class="b-block w-100" />
+            </section>
+
+            <section data-title="Herleitung der Architektur – Single Page App" class="w-100">
+                <img src="wiederholung_spa-3.svg" class="b-block w-100" />
+            </section>
+
+            <section data-title="Herleitung der Architektur – Single Page App mit Backend" class="w-100">
+                <img src="wiederholung_spa-4.svg" class="b-block w-100" />
+            </section>
+
+            <section data-title="Aufgabe: Vorlagequellcode übernehmen (10 Minuten)" class="limited-width" data-background-color="rgb(231, 221, 141)">
+                <div class="markdown">
+                    ### Aufgabe
+
+                    Kopieren Sie nun den Vorlagequellcode in ihr neues Git-Repository,
+                    committen Sie diesen und verteilen Sie ihn über GitHub auf die Rechner aller
+                    Gruppenmitglieder.
+
+                    [Download-Link](https://dennisschulmeister.github.io/DownGit/#/home?url=https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Grundger%C3%BCst%20einer%20Single%20Page%20App%20mit%20REST-Backend) {.fw-bold}
+            </section>
+
+            <!-- ========================= -->
+            <!-- Programmieren mit Node.js -->
+            <!-- ========================= -->
+            <section data-title="Programmieren mit Node.js" data-chapter></section>
+            <section data-title="Programmieren mit Node.js" data-background-image="../trennfolie.jpg"></section>
+
+            <section data-title="Was ist Node.js?">
+                <div class="markdown limited-width">
+                    * JavaScript-Laufzeitumgebung zur Nutzung von JavaScript außerhalb des Browsers.
+                    * Kapselt die „V8 Engine” von Google Chrome als eigenständiges Programm.
+                    * Dient der traditionell der Entwicklung performanter Serveranwendungen.
+                    * Keine direkte Möglichkeit, die grafische Oberfläche des Betriebssystems zu verwenden.
+                    * Dies ist eher die Aufgabe von Spezialframeworks wie Electron oder Cordova.
+                </div>
+
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="nodejs-1.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="nodejs-2.png" class="d-block w-100 img-thumbnail"/>
+                </div>
+            </section>
+
+            <section data-title="Definition eines Node.js-Pakets" >
+                <div class="markdown limited-width">
+                    Ein Quellcodeverzeichnis wird durch die Datei `package.json` zu einem Node.js-Paket.
+                    Als solches kann es …
+
+                    * Auf npmjs.com oder eine anderen Registry veröffentlich werden.
+                    * Abhängige Bibliotheken herunterladen und deren Abhängigkeiten auflösen.
+                    * Mit npm-Skripten einfache Aufgaben wie die Ausführung von Werkzeugen automatisieren.
+
+                    Darüber hinaus gibt es nichts besonderes zu beachten.
+                </div>
+
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="nodejs-3.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="nodejs-4.png" class="d-block w-100 img-thumbnail"/>
+                </div>
+            </section>
+
+            <section data-title="Abhängigkeiten suchen auf npmjs.com">
+                <img src="npmjs.com.png" class="d-block img-thumbnail" style="max-width: 80em;"/>
+
+                <div class="markdown limited-width mt-3">
+                    Installation mit folgenden Befehlen:
+
+                    * `npm add name_des_packets`: Als Laufzeitabhängigkeit (Laufzeitbibliotheken usw.)
+                    * `npm add -D name_des_packets`: Als Entwicklungsabhängigkeit (Build-Werkzeuge usw.)
+                </div>
+            </section>
+
+            <section data-title="Typische Befehle zur Verwendung von Node.js" class="markdown limited-width">
+                * `npm init`: Datei `package.json` im aktuellen Codeverzeichnis neu anlegen
+                * `npm install`: Abhängige Bibliotheken und Werkzeuge installieren
+                * `npm update`: Abhängigkeiten auf ihre erlaubte neuste Version aktualisieren
+                * `npm audit fix`: Abhängigkeiten mit bekannten Sicherheitslücken aktualisieren
+                * `npm start`: Hauptdatei des Quellcodes ausführen, um die Anwendung zu starten
+                * `npm run irgendwas`: Ausführen eines in der `package.json` definierten „Run-Skripts”
+            </section>
+
+            <section data-title="Aufgabe: Wir erkunden Node.js (15 Minuten)" class="markdown limited-width" data-background-color="rgb(231, 221, 141)">
+                Öffnen Sie den folgenden Link auf eine Online IDE zum Bearbeiten eines einfachen Node.js-Projekts.
+                Es öffnet sich eine die GitPod Online IDE, die im Grune genommen einer Browser-Version von Visual
+                Studio Code entspricht mit dem Quellcode eines einfachen Online-Wörterbuchs. Zusätzlich steht Ihnen
+                hier eine cloud-gehostete Linux-Umgebung mit typischen Entwicklungswerkzeugen und vor allem auch
+                Node.js zur Verfügung.
+
+                <a href="https://www.gitpod.io/#https://github.com/DennisSchulmeister/whb-web-mobidict" target="_blank" class="fw-bold">Online IDE: MobiDict Quellcode</a>
+
+                ![Gitpod](gitpod.png){.img-thumbnail img-responsive}
+
+                Am unteren Bildschirmrand finden Sie das Terminal. Führen Sie darin folgende Kommandos aus:
+
+                * `npm install` zum Installieren aller benötigten Bibliotheken
+                * `npm start` zum Starten der Anwendung
+
+                Am unteren Bildschirmrand sollte nun eine Benachrichtigung erscheinen, dass die Serveranwendung
+                einen TCP-Port geöffnet hat und Sie fragen, wie Sie damit verfahren wollen. Klicken Sie hier
+                auf <b>„Open Preview”</b>. Dadurch sollte sich am rechten Bildschirmrand ein Vorschaufenster
+                mit der Benutzeroberfläche der Webanwendung öffnen. Dort finden Sie dann auch die öffentliche
+                URL, mit der Sie die Webanwendung in einem neuen Browser-Tab aufrufen können. Erkunden Sie die
+                Webanwendung ein wenig.
+
+                Anschließend beantworten Sie folgende Fragen:
+
+                1. Woran erkennt man, dass es sich um ein Node.js-Projekt handelt?
+                1. Welche Abhängigkeiten besitzt die Anwendung und wo sind sie definiert?
+                1. Wo befindet sich der **serverseitige** JavaScript-Code der Anwendung?
+                1. Und wo befindet sich der **clientseitige** JavaScript-Code?
+                1. Wie wird sichergestellt, dass der Servercode nicht im Browser ausgeführt wird?
+
+                Nehmen Sie anschließend eine kleine Änderung an der Datei `server.js` vor,
+                indem Sie z.B. die Konsolenausgabe ganz am Ende verändern. Sie sollten im
+                Terminal sehen, dass sich die Anwendung dank `nodemon` dadurch neustartet.
+                Mit <kbd>Strg</kbd>+<kbd>C</kbd> können Sie die Anwendung verlassen.
+            </section>
+
+            <!-- ==================== -->
+            <!-- Grundlagen zu Docker -->
+            <!-- ==================== -->
+            <section data-title="Grundlagen zu Docker" data-chapter></section>
+            <section data-title="Grundlagen zu Docker" data-background-image="../trennfolie.jpg"></section>
+
+            <section data-title="Was ist Docker?">
+                <div class="markdown limited-width">
+                    * Eine (relativ) neuartige Laufzeitumgebung für cloudbasierte Serveranwendungen.
+                    * Eine einfache Möglichkeit, Anwendungen in einer virtuellen Containerumgebung zu starten.
+                    * Nutzt hierzu die Möglichkeiten des Linux-Kernels zur Isolation laufender Betriebssytemprozesse.
+                    * Gaukelt jedem Prozess vor, der einzige Prozess innerhalb des Linux-Betriebssystems zu sein.
+                    * Container Images beinhalten hierfür virtuelles Dateisystem eines minimalistischen Linux-Userlands:
+                        * Ausführbarer Code der Anwendung
+                        * Von der Anwendung benötigte System-Bibliotheken
+                        * Sonstige Hilfsdateien der Anwendung
+                        * Ggf. benötigte Hilfsprogramme und Kommandozeilen-Tools
+                </div>
+
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="docker-1.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="docker-2.png" class="d-block w-100 img-thumbnail"/>
+                </div>
+            </section>
+
+            <section data-title="Unterschied zur Vollvirtualisierung" class="markdown limited-width">
+                ...
+            </section>
+
+            <section data-title="Typische Befehle zur Verwendung von Docker" class="markdown limited-width">
+                ...
+            </section>
+
+            <section data-title="Container Images bauen mit einem Dockerfile" class="markdown limited-width">
+                ...
+            </section>
+
+            <section data-title="Mehrere Container orchestrieren mit Docker Compose" class="markdown limited-width">
+                ...
+            </section>
+
+            <!-- <section data-title="Aufgabe: Wir erkunden Docker" class="limited-width" data-background-color="rgb(231, 221, 141)">
+                ...
+            </section> -->
+        </main>
+
+        <!-- Navigation -->
+        <footer>
+            <nav></nav>
+        </footer>
+    </body>
+</html>
