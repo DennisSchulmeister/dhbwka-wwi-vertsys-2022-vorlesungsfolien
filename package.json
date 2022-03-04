@@ -23,7 +23,8 @@
     "scripts": {
         "clean": "node scripts/clean.js",
         "build": "npm run clean; node scripts/build-static.js; node scripts/esbuild-bundle.js",
-        "start": "node scripts/esbuild-serve.js"
+        "start": "node scripts/esbuild-serve.js",
+        "publish": "scripts/publish.sh"
     },
     "config": {
         "src_dir": "src",
@@ -33,12 +34,12 @@
         "replace_variables_extensions": ".htm; .html"
     },
     "devDependencies": {
-        "@dschulmeis/ls-plugin-extra-tags": "^2.0.0",
+        "@dschulmeis/ls-plugin-extra-tags": "^2.1.0",
         "@dschulmeis/ls-plugin-highlight.js": "^2.0.3",
         "@dschulmeis/ls-plugin-markdown": "^1.0.0",
-        "@dschulmeis/mini-tutorial.js": "^2.1.0",
+        "@dschulmeis/mini-tutorial.js": "^2.2.1",
         "bootstrap": "^5.1.3",
-        "esbuild": "^0.14.23",
+        "esbuild": "^0.14.24",
         "esbuild-plugin-less": "^1.1.6",
         "shelljs": "^0.8.5"
     },
