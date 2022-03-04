@@ -149,7 +149,13 @@
                     committen Sie diesen und verteilen Sie ihn über GitHub auf die Rechner aller
                     Gruppenmitglieder.
 
-                    [Download-Link](https://dennisschulmeister.github.io/DownGit/#/home?url=https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Grundger%C3%BCst%20einer%20Single%20Page%20App%20mit%20REST-Backend) {.fw-bold}
+                    <a
+                        href   = "https://dennisschulmeister.github.io/DownGit/#/home?url=https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Grundger%C3%BCst%20einer%20Single%20Page%20App%20mit%20REST-Backend"
+                        target = "_blank"
+                        class  = "fw-bold"
+                    >
+                        Download-Link
+                    </a>
             </section>
 
             <!-- ========================= -->
@@ -159,7 +165,7 @@
             <section data-title="Programmieren mit Node.js" data-background-image="../trennfolie.jpg"></section>
 
             <section data-title="Was ist Node.js?">
-                <div class="markdown limited-width">
+                <div class="markdown">
                     * JavaScript-Laufzeitumgebung zur Nutzung von JavaScript außerhalb des Browsers.
                     * Kapselt die „V8 Engine” von Google Chrome als eigenständiges Programm.
                     * Dient der traditionell der Entwicklung performanter Serveranwendungen.
@@ -174,13 +180,13 @@
             </section>
 
             <section data-title="Definition eines Node.js-Pakets" >
-                <div class="markdown limited-width">
+                <div class="markdown">
                     Ein Quellcodeverzeichnis wird durch die Datei `package.json` zu einem Node.js-Paket.
                     Als solches kann es …
 
-                    * Auf npmjs.com oder eine anderen Registry veröffentlich werden.
-                    * Abhängige Bibliotheken herunterladen und deren Abhängigkeiten auflösen.
-                    * Mit npm-Skripten einfache Aufgaben wie die Ausführung von Werkzeugen automatisieren.
+                      * Auf npmjs.com oder eine anderen Registry veröffentlich werden.
+                      * Abhängige Bibliotheken herunterladen und deren Abhängigkeiten auflösen.
+                      * Mit npm-Skripten einfache Aufgaben wie die Ausführung von Werkzeugen automatisieren.
 
                     Darüber hinaus gibt es nichts besonderes zu beachten.
                 </div>
@@ -194,21 +200,64 @@
             <section data-title="Abhängigkeiten suchen auf npmjs.com">
                 <img src="npmjs.com.png" class="d-block img-thumbnail" style="max-width: 80em;"/>
 
-                <div class="markdown limited-width mt-3">
+                <div class="markdown mt-3">
                     Installation mit folgenden Befehlen:
 
-                    * `npm add name_des_packets`: Als Laufzeitabhängigkeit (Laufzeitbibliotheken usw.)
-                    * `npm add -D name_des_packets`: Als Entwicklungsabhängigkeit (Build-Werkzeuge usw.)
+                      * <span class="cmd">npm add &lt;paket&gt;</span>: Als Laufzeitabhängigkeit (Laufzeitbibliotheken usw.)
+                      * <span class="cmd">npm add -D &lt;paket&gt;</span>: Als Entwicklungsabhängigkeit (Build-Werkzeuge usw.)
                 </div>
             </section>
 
-            <section data-title="Typische Befehle zur Verwendung von Node.js" class="markdown limited-width">
-                * `npm init`: Datei `package.json` im aktuellen Codeverzeichnis neu anlegen
-                * `npm install`: Abhängige Bibliotheken und Werkzeuge installieren
-                * `npm update`: Abhängigkeiten auf ihre erlaubte neuste Version aktualisieren
-                * `npm audit fix`: Abhängigkeiten mit bekannten Sicherheitslücken aktualisieren
-                * `npm start`: Hauptdatei des Quellcodes ausführen, um die Anwendung zu starten
-                * `npm run irgendwas`: Ausführen eines in der `package.json` definierten „Run-Skripts”
+            <section data-title="Verwendung der Bibliotheken im Quellcode" class="limited-width">
+                <div class="card w-100 mb-3">
+                    <div class="card-body p-3">
+                        <p>
+                            Mit <span class="cmd">npm add</span> hinzugefügte Bibliotheken werden in die
+                            Datei <span class="fn">package.json</span> aufgenommen und anschließend in
+                            das Unterverzeichnis <span class="fn">node_modules</span> installiert. Von
+                            dort können sie mit der ganz normalen <tt>import</tt>-Anweisung von JavaScript
+                            importiert werden:
+                        </p>
+                        <ul class"mb-0">
+                            <li>
+                                <src-code language="javascript">import "./verzeichnis/datei.js"</src-code>: <br />
+                                Import einer Quellcodedatei innerhalb der eigenen Anwendung
+                            </li>
+                            <li>
+                                <src-code language="javascript">import "paket/modul.js"</src-code>: <br />
+                                Import einer externen Quellcodedatei aus dem <span class="fn">node_modules</span>-Verzeichnis
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card w-100 mb-3">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Beispiel aus der Webanwendung für das Folienskript im 3. Semester
+                    </div>
+                    <div class="card-body p-3">
+                        <source-code language="javascript">
+                            // Externe Bibliotheken
+                            import $ from "jquery";
+                            import Hammer from "hammerjs";
+                            import ObservableValue from "@dschulmeis/ls-utils/observable_value.js";
+
+                            // Eigene Quellcodedateien
+                            import plugins from "./plugins/"; // entspricht ./plugins/index.js
+                            import Presentation from "./presentation.js";
+                            import Slide from "./slide.js";
+                        </source-code>
+                    </div>
+                </div>
+            </section>
+
+            <section data-title="Typische Befehle zur Verwendung von Node.js" class="markdown">
+                * <span class="cmd">npm init</span>: Datei `package.json` im aktuellen Codeverzeichnis neu anlegen
+                * <span class="cmd">npm add &lt;paket&gt;</span>: Weitere Bibliothek aus der Registry hinzufügen
+                * <span class="cmd">npm install</span>: Abhängige Bibliotheken und Werkzeuge installieren
+                * <span class="cmd">npm update</span>: Abhängigkeiten auf ihre erlaubte neuste Version aktualisieren
+                * <span class="cmd">npm audit fix</span>: Abhängigkeiten mit bekannten Sicherheitslücken aktualisieren
+                * <span class="cmd">npm start</span>: Hauptdatei des Quellcodes ausführen, um die Anwendung zu starten
+                * <span class="cmd">npm run &lt;skript&gt;</span>: Ausführen eines in der `package.json` definierten „Run-Skripts”
             </section>
 
             <section data-title="Aufgabe: Wir erkunden Node.js (15 Minuten)" class="markdown limited-width" data-background-color="rgb(231, 221, 141)">
@@ -224,8 +273,8 @@
 
                 Am unteren Bildschirmrand finden Sie das Terminal. Führen Sie darin folgende Kommandos aus:
 
-                * `npm install` zum Installieren aller benötigten Bibliotheken
-                * `npm start` zum Starten der Anwendung
+                  * `npm install` zum Installieren aller benötigten Bibliotheken
+                  * `npm start` zum Starten der Anwendung
 
                 Am unteren Bildschirmrand sollte nun eine Benachrichtigung erscheinen, dass die Serveranwendung
                 einen TCP-Port geöffnet hat und Sie fragen, wie Sie damit verfahren wollen. Klicken Sie hier
@@ -236,11 +285,11 @@
 
                 Anschließend beantworten Sie folgende Fragen:
 
-                1. Woran erkennt man, dass es sich um ein Node.js-Projekt handelt?
-                1. Welche Abhängigkeiten besitzt die Anwendung und wo sind sie definiert?
-                1. Wo befindet sich der **serverseitige** JavaScript-Code der Anwendung?
-                1. Und wo befindet sich der **clientseitige** JavaScript-Code?
-                1. Wie wird sichergestellt, dass der Servercode nicht im Browser ausgeführt wird?
+                  1. Woran erkennt man, dass es sich um ein Node.js-Projekt handelt?
+                  1. Welche Abhängigkeiten besitzt die Anwendung und wo sind sie definiert?
+                  1. Wo befindet sich der **serverseitige** JavaScript-Code der Anwendung?
+                  1. Und wo befindet sich der **clientseitige** JavaScript-Code?
+                  1. Wie wird sichergestellt, dass der Servercode nicht im Browser ausgeführt wird?
 
                 Nehmen Sie anschließend eine kleine Änderung an der Datei `server.js` vor,
                 indem Sie z.B. die Konsolenausgabe ganz am Ende verändern. Sie sollten im
@@ -255,12 +304,12 @@
             <section data-title="Grundlagen zu Docker" data-background-image="../trennfolie.jpg"></section>
 
             <section data-title="Was ist Docker?">
-                <div class="markdown limited-width">
+                <div class="markdown">
                     * Eine (relativ) neuartige Laufzeitumgebung für cloudbasierte Serveranwendungen.
-                    * Eine einfache Möglichkeit, Anwendungen in einer virtuellen Containerumgebung zu starten.
+                    * Eine einfache Möglichkeit, Anwendungen in einer virtuellen **Containerumgebung** zu starten.
                     * Nutzt hierzu die Möglichkeiten des Linux-Kernels zur Isolation laufender Betriebssytemprozesse.
                     * Gaukelt jedem Prozess vor, der einzige Prozess innerhalb des Linux-Betriebssystems zu sein.
-                    * Container Images beinhalten hierfür virtuelles Dateisystem eines minimalistischen Linux-Userlands:
+                    * Container Images beinhalten hierfür ein virtuelles Dateisystem mit einem minimalistischen Linux-Userland:
                         * Ausführbarer Code der Anwendung
                         * Von der Anwendung benötigte System-Bibliotheken
                         * Sonstige Hilfsdateien der Anwendung
@@ -273,25 +322,437 @@
                 </div>
             </section>
 
-            <section data-title="Unterschied zur Vollvirtualisierung" class="markdown limited-width">
-                ...
+            <section data-title="Unterschied zur Vollvirtualisierung (1)" class="w-100">
+                <img src="docker-virtualisierung-1.svg" class="d-block w-100" />
+            </section>
+
+            <section data-title="Unterschied zur Vollvirtualisierung (2)" class="w-100">
+                <img src="docker-virtualisierung-2.svg" class="d-block w-100" />
+            </section>
+
+            <section data-title="Container Images bauen mit einem Dockerfile" class="limited-width">
+                <div class="markdown">
+                    Um ein sog. Image zu bauen, das dann von Docker als Container ausgeführt
+                    werden kann, muss im Quellcode-Verzeichnis der Anwendung eine Datei namens
+                    <span class="fn">Dockerfile</span> angelegt werden. Ihre Aufgabe ist zu
+                    beschreiben, aus welchen Inhalten (also aus welchen Dateien) sich das Image
+                    zusammensetzen soll.
+
+                    Hierfür wird in der Regel aus dem „Docker Hub” (oft auch „Registry” genannt,
+                    was aber nicht mit der „Node.js Registry” verwechselt werden darf) ein vorhandenes
+                    Image referenziert und um eigene Dateien erweitert. Als Basis-Image kann dann
+                    entweder ein minimales Betriebssystem-Image (z.B. Debian oder Alpine Linux)
+                    oder eine vorkonfigurierte Laufzeitumgebung wie Node.js, Python, … ausgewählt werden.
+                </div>
+
+                <div class="card p-3 mt-3 mb-3 bg-light">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>
+                                <src-code language="docker">FROM node:17-alpine</src-code>
+                            </td>
+                            <td>
+                                Node.js 17.x als Basis-Image verwenden
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">ENV NODE_ENV=production HOST=::</src-code>
+                            </td>
+                            <td>
+                                Zur Ausführung benötigte Umgebungsvariablen definieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">WORKDIR /app</src-code>
+                            </td>
+                            <td>
+                                Aktuelles Arbeitsverzeichnis innerhalb des Images ändern
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">COPY package.json package-lock.json ./</src-code>
+                            </td>
+                            <td>
+                                Quellcode-Dateien in das aktuelle Arbeitsverzeichnis im Image hinein kopieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">RUN npm install</src-code>
+                            </td>
+                            <td>
+                                Ausführen eines Befehls während das Image gebaut wird
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">COPY src ./src</src-code>
+                            </td>
+                            <td>
+                                Weitere Quellcode-Dateien in das aktuelle Arbeitsverzeichnis im Image hinein kopieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">EXPOSE 3000/tcp</src-code>
+                            </td>
+                            <td>
+                                Dokumentieren, dass der Container auf TCP-Port 3000 einen Serverdienst bereitstellt
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">ENTRYPOINT ["node", "src/index.js"]</src-code>
+                            </td>
+                            <td>
+                                Das auszuführende Programm innerhalb des Containers benennen
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+                    Die Reihenfolge der Anweisungen ist wichtig, da die meisten Anweisungen ein neues,
+                    sog. „Filesystem Layer” erzeugen, in dem die durch die Anweisung verursachten
+                    Änderungen an der Dateistruktur festgehalten werden. Indem sich weniger oft ändernde
+                    Dateien an den Anfang gestellt werden, kann die Zeit zum Neubauen eines Containers
+                    und die damit verbrauchte Bandbreite reduziert werden.
+                </p>
+            </section>
+
+            <section data-title="Netzwerkvirtualisierung mit Docker" class="w-100">
+                <div class="markdown">
+                    * Standardmäßig werden Docker Container vollständig isoliert ausgeführt.
+                    * Sie können zwar auf das Internet zugreifen, selbst aber keine Verbindungen annehmen werden.
+                    * Hierfür muss entweder eine Portweiterleitung oder ein virtuelles Netzwerk eingerichtet werden.
+                    * Eine Portweiterleitung leitet an den Host gerichtete TCP-Anfragen an einen Container weiter.
+                    * Ein virtuelles Netzwerk hingegen ermöglicht es mehreren Containern, untereinander zu kommunizieren.
+                </div>
+
+                <div class="d-flex align-items-stretch w-100" style="gap: 1em;">
+
+                <div class="card w-100">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Start eines Containers mit Portweiterleitung
+                    </div>
+                    <div class="card-body bg-light p-3">
+                        <p>
+                            <span class="cmd">docker run -d --name mongodb -p 27777:27017 mongo</span>
+                        </p>
+                        <table class="table table-striped">
+                            <tr>
+                                <td>
+                                    <tt>docker run</tt>
+                                </td>
+                                <td>
+                                    Subkommando zum Starten eines Containers
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <tt>-d</tt>
+                                </td>
+                                <td>
+                                    Container im Hintergrund ausführen
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <tt>--name mongodb</tt>
+                                </td>
+                                <td>
+                                    Festen Namen für den Container verwenden
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <tt>-p 27777:27017</tt>
+                                </td>
+                                <td>
+                                    Anfragen an den TCP-Port 27777 des Hosts an Port 27017 des Containers weiterleiten
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <tt>mongo</tt>
+                                </td>
+                                <td>
+                                    Name des auszuführenden Images
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card w-100">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Verbinden mehrerer Container über ein virtuelles Netzwerk
+                    </div>
+                    <div class="card-body bg-light p-3">
+                        <p>
+                            <span class="cmd">docker net create beispiel</span> <br />
+                            Virtuelles Netzwerk mit dem Namen <span class="cmd">beispiel</span> erzeugen
+                        </p>
+                        <p>
+                            <span class="cmd">docker run -d --name mongodb --net beispiel mongo</span> <br />
+                            Container im Hintergrund starten und diesen mit dem Beispiel-Netzwerk verbinden
+                            Verbindungen zum Container können nur von anderen Containern über das virtuelle
+                            Netzwerk hergestellt werden. Von Außen ist der Container nicht erreichbar.
+                        </p>
+                        <p>
+                            <span class="cmd">docker run -d --name backend --net beispiel -p 3000:3000 adressbuch-backend</span> <br />
+                            Weiteren Container starten und sowohl mit dem Beispiel-Netzwerk verbinden als
+                            auch eine Portweiterleitung definieren. Warum? Weil das Backend unserer Anwendung
+                            vom Browser aus aufrufbar sein muss, über das virtuelle Netzwerk jedoch auch mit der
+                            Datenbank kommunizieren können muss.
+                        </p>
+
+                        <h3>Service Discovery</h3>
+                        <p>
+                            Über den Domainnamen <span class="fn">mongo</span> kann der
+                            Backend-Service die interne IP-Adresse des Datenbank-Containers ermitteln.
+                        </p>
+
+                        <h3>Load Balancing</h3>
+                        <p>
+                            Wurden mehrere Instanzen des Datenbank-Containers gestartet, verteilt
+                            Docker die Anfragen automatisch auf die unterschiedlichen Instanzen,
+                            indem es bei jedem DNS Lookup die IP-Adresse einer anderen Instanz
+                            zurück liefert.
+                        </p>
+                    </div>
+                </div>
+
+                </div>
+            </section>
+
+            <section data-title="Mehrere Container orchestrieren mit Docker Compose" style="width: 70em;">
+                <div class="markdown">
+                    Da die Befehlsketten zur Ausführung und Verknüpfung mehrerer Docker-Container
+                    mitunter sehr komplex werden können, lässt sich ein Setup aus zusammehängenden
+                    Containern auch deklarativ in einer Datei namens <span class="fn">docker-compose.yml</span>
+                    beschreiben. Das Werkzeug **Docker Compose** übernimmt dann den Start und auch die
+                    Beendigung aller Container in der richtigen Reihenfolge. Außerdem kann damit eine
+                    einfache Skalierung durch Starten mehrere, paralleler Containerinstanzen erreicht
+                    werden. Mit **Docker Swarm** kann eine so definierte Anwendung auch ganz einfach
+                    in einem Cluster produktiv deployed werden.
+                </div>
+
+                <div class="card p-3 mt-3 mb-3 bg-light">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>
+                                <source-code language="yaml">
+                                    version: "3.9"
+                                </source-code>
+                            </td>
+                            <td>
+                                Definition der Version des Docker-Compose-Dateiformats
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <source-code language="yaml">
+                                    volumes:
+                                        dbdata:
+                                        dbconfig:
+                                </source-code>
+                            </td>
+                            <td>
+                                Aufzählung von sog. Volumes zur Ablage persistenter Daten
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <source-code language="yaml">
+                                    services:
+                                </source-code>
+                            </td>
+                            <td>
+                                Beginn der Service-Definitionen mit den zu startenden Containern
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 3em;">
+                                <source-code language="yaml">
+                                        # MongoDB-Datenbank
+                                        mongodb:
+                                            image: mongo
+                                            restart: always
+                                            environment:
+                                                MONGO_INITDB_ROOT_USERNAME: dbuser
+                                                MONGO_INITDB_ROOT_PASSWORD: dbpass
+                                            volumes:
+                                                - dbdata:/data/db
+                                                - dbconfig:/data/configdb
+                                </source-code>
+                            </td>
+                            <td>
+                                <p>
+                                    Definition des Containers <span class="scr">mongodb</span> zur Ausführung
+                                    des Images <span class="scr">mongo</span> aus dem Docker Hub.
+                                </p>
+                                <p>
+                                    Bei einem Absturz wird der Container automatisch neugestartet (Resilienz).
+                                </p>
+                                <p>
+                                    Im Container werden zwei Umgebungsvariablen mit Konfigurationswerten für
+                                    einen beim ersten Start anzulegenden Admin-Benutzer definiert.
+                                </p>
+                                <p>
+                                    Durch die oben benannten Volumes werden die Inhalte der beiden Verzeichnisse
+                                    <span class="fn">/data/db</span> und <span class="fn">/data/configdb</span>
+                                    mit dem Host geteilt und bleiben somit nach einem Neustart des Containers
+                                    erhalten.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 3em;">
+                                <source-code language="yaml">
+                                    # Adressbuch-Backend (Produktivmodus)
+                                    backend:
+                                        build:
+                                            context: ./Backend
+                                        depends_on:
+                                            - mongodb
+                                        restart: always
+                                        environment:
+                                            HOST: "::"
+                                            PORT: 3000
+                                            MONGODB: mongodb://dbuser:dbpass@mongodb:27017/
+                                        deploy:
+                                            replicas: 3
+                                </source-code>
+                            </td>
+                            <td>
+                                <p>
+                                    Definition des Containers <span class="scr">backend</span>, der aus dem
+                                    <span class="fn">Dockerfile</span> im Unterverzeichnis <span class="fn">Backend</span>
+                                    gebaut wird.
+                                </p>
+                                <p>
+                                    Der Container kann erst gestartet werden, wenn der Container mit dem Namen
+                                    <span class="scr">mongodb</span> läuft.
+                                </p>
+                                <p>
+                                    Bei einem Absturz wird der Container automatisch neugestartet (Resilienz).
+                                </p>
+                                <p>
+                                    Im Container werden drei Umgebungsvariablen mit den Verbindungsdaten zur
+                                    Mongo-Datenbank definiert.
+                                </p>
+                                <p>
+                                    Standardmäßig werden drei Instanzen des Containers gestartet.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </section>
 
             <section data-title="Typische Befehle zur Verwendung von Docker" class="markdown limited-width">
-                ...
-            </section>
+                ### Docker CLI
 
-            <section data-title="Container Images bauen mit einem Dockerfile" class="markdown limited-width">
-                ...
-            </section>
+                * <span class="cmd">docker help</span>: <br />
+                  Hilfe! 🤕
 
-            <section data-title="Mehrere Container orchestrieren mit Docker Compose" class="markdown limited-width">
-                ...
+                * <span class="cmd">docker &lt;kommando&gt; help</span>: <br />
+                  Hilfe zu einem Docker-Subkommando
+
+                * <span class="cmd">docker run -d &lt;container&gt;</span>: <br />
+                  Start eines Containers im Hintergrund
+
+                * <span class="cmd">docker run -it &lt;container&gt; &lt;befehl&gt;</span>: <br />
+                  Ausführen eines interaktiven Befehls in einem neuen Container
+
+                * <span class="cmd">docker container ls</span>: <br />
+                  Alle laufenden Container anzeigen
+
+                * <span class="cmd">docker container stop &lt;name&gt;</span> <br />
+                  Beenden eines laufenden Containers
+
+                * <span class="cmd">docker logs &lt;name&gt;</span> <br />
+                  Konsolen- und Log-Ausgaben eines Containers zeigen
+
+                * <span class="cmd">docker net create &lt;netwerk&gt;</span> <br />
+                  Neues, virtuelles Netzwerk zur Kommunikation mehrerer Container untereinander erstellen
+
+                * <span class="cmd">docker system prune</span> <br />
+                  Nicht mehr benötigte Ressourcen freigeben (wichti!)
+
+                ### Docker Compose {.mt-5}
+
+                * <span class="cmd">docker compose up</span>:  <br />
+                  Start mehrerer zusammengehöriger Docker Container **im Vordergrund**
+
+                * <span class="cmd">docker compose up -d</span>: <br />
+                  Start mehrerer zusammengehöriger Docker Container **im Hintergrund**
+
+                * <span class="cmd">docker compose down</span>:  <br />
+                  Stoppen der mit Docker Compose gestarteten Container
+
+                * <span class="cmd">docker compose build</span>:  <br />
+                  Neubauen aller Container Images anhand ihres <span class="fn">Dockerfile</span>
             </section>
 
             <!-- <section data-title="Aufgabe: Wir erkunden Docker" class="limited-width" data-background-color="rgb(231, 221, 141)">
                 ...
             </section> -->
+
+            <!-- ==================== -->
+            <!-- Hinweise zum Schluss -->
+            <!-- ==================== -->
+            <section data-title="Hinweise zum Schluss" data-chapter></section>
+            <section data-title="Hinweise zum Schluss" data-background-image="../trennfolie.jpg"></section>
+
+            <section data-title="Rechtshinweise" class="markdown" data-background-color="rgb(158, 203, 231)">
+                #### Kontaktdaten
+
+                Dennis Schulmeister-Zimolong<br/>
+                E-Mail: <a data-email-address>dhbw windows3.de</a><br/>
+
+                #### Urheberrecht und Lizenzvereinbarung
+
+                © 2022 Dennis Schulmeister-Zimolong<br/>
+                <a href="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2020-folien" target="_blank">https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2020-folien</a>
+
+                ![Creative Commons Lizenzvertrag](https://i.creativecommons.org/l/by/4.0/88x31.png)
+
+                Das Werk __Vorlesung "Verteilte Systeme" im Studiengang Wirtschaftsinformatik an der DHBW Karlsruhe (ab 2022)__
+                von <a href="http://www.wpvs.de" target="_blank">Dennis Schulmeister-Zimolong</a> ist lizenziert unter
+                <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank"><i>Creative Commons Namensnennung 4.0 International</i></a>.
+
+                Sie dürfen
+
+                  * **Teilen** — das Material in jedwedem Format oder Medium vervielfältigen
+                    und weiterverbreiten
+
+                  * **Bearbeiten** — das Material remixen, verändern und darauf aufbauen
+                    und zwar für beliebige Zwecke, sogar kommerziell.
+
+                Unter folgenden Bedingungen:
+
+                 * **Namensnennung** — Sie müssen angemessene Urheber- und Rechteangaben
+                    machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen
+                    vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art
+                    und Weise gemacht werden, allerdings nicht so, dass der Eindruck
+                    entsteht, der Lizenzgeber unterstütze gerade dich oder deine Nutzung
+                    besonders.
+
+                  * **Keine weiteren Einschränkungen** — Sie dürfen keine zusätzlichen Klauseln
+                    oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas
+                    untersagen, was die Lizenz erlaubt.
+
+                Es werden keine Garantien gegeben und auch keine Gewähr geleistet.
+                Die Lizenz verschafft dir möglicherweise nicht alle Erlaubnisse,
+                die du für die jeweilige Nutzung brauchst. Es können beispielsweise
+                andere Rechte wie Persönlichkeits- und Datenschutzrechte zu beachten
+                sein, die deine Nutzung des Materials entsprechend beschränken.
+            </section>
         </main>
 
         <!-- Navigation -->

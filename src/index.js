@@ -14,6 +14,8 @@ import HLJS_Language_XML from 'highlight.js/lib/languages/xml';
 import HLJS_Language_CSS from 'highlight.js/lib/languages/css';
 import HLJS_Language_JS from "highlight.js/lib/languages/javascript";
 import HLJS_Language_JSON from "highlight.js/lib/languages/json";
+import HLJS_Language_Docker from "highlight.js/lib/languages/dockerfile";
+import HLJS_Language_YAML from "highlight.js/lib/languages/yaml";
 import "highlight.js/styles/atom-one-light.css";
 
 import "./style.less";
@@ -41,6 +43,9 @@ window.addEventListener("load", () => {
                     css: HLJS_Language_CSS,
                     javascript: HLJS_Language_JS,
                     json: HLJS_Language_JSON,
+                    docker: HLJS_Language_Docker,
+                    yaml: HLJS_Language_YAML,
+                    yml: HLJS_Language_YAML,
                 },
                 highlightAll: true,
             }),
