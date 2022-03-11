@@ -262,14 +262,14 @@
 
             <section data-title="Aufgabe: Wir erkunden Node.js (15 Minuten)" class="markdown limited-width" data-background-color="rgb(231, 221, 141)">
                 Öffnen Sie den folgenden Link auf eine Online IDE zum Bearbeiten eines einfachen Node.js-Projekts.
-                Es öffnet sich eine die GitPod Online IDE, die im Grune genommen einer Browser-Version von Visual
+                Es öffnet sich eine die GitPod Online IDE, die im Grunde genommen einer Browser-Version von Visual
                 Studio Code entspricht mit dem Quellcode eines einfachen Online-Wörterbuchs. Zusätzlich steht Ihnen
                 hier eine cloud-gehostete Linux-Umgebung mit typischen Entwicklungswerkzeugen und vor allem auch
                 Node.js zur Verfügung.
 
                 <a href="https://www.gitpod.io/#https://github.com/DennisSchulmeister/whb-web-mobidict" target="_blank" class="fw-bold">Online IDE: MobiDict Quellcode</a>
 
-                ![Gitpod](gitpod.png){.img-thumbnail img-responsive}
+                ![Gitpod](gitpod-1.png){.img-thumbnail img-responsive}
 
                 Am unteren Bildschirmrand finden Sie das Terminal. Führen Sie darin folgende Kommandos aus:
 
@@ -304,16 +304,32 @@
             <section data-title="Grundlagen zu Docker" data-background-image="../trennfolie.jpg"></section>
 
             <section data-title="Was ist Docker?">
-                <div class="markdown">
-                    * Eine (relativ) neuartige Laufzeitumgebung für cloudbasierte Serveranwendungen.
-                    * Eine einfache Möglichkeit, Anwendungen in einer virtuellen **Containerumgebung** zu starten.
-                    * Nutzt hierzu die Möglichkeiten des Linux-Kernels zur Isolation laufender Betriebssytemprozesse.
-                    * Gaukelt jedem Prozess vor, der einzige Prozess innerhalb des Linux-Betriebssystems zu sein.
-                    * Container Images beinhalten hierfür ein virtuelles Dateisystem mit einem minimalistischen Linux-Userland:
-                        * Ausführbarer Code der Anwendung
-                        * Von der Anwendung benötigte System-Bibliotheken
-                        * Sonstige Hilfsdateien der Anwendung
-                        * Ggf. benötigte Hilfsprogramme und Kommandozeilen-Tools
+                <div class="markdown dhbw-limited-width m-auto mb-4">
+                    Docker ist eine **Laufzeitumgebung zur Isolation laufender Prozesse**
+                    unter Linux. (Aktuelle Versionen von Microsoft Windows unterstützen diese
+                    Funktion inzwischen auch). Die Programme werden hierfür mit allen für ihre
+                    Ausführung benötigten Systembibliotheken und Hilfsdateien in binäre Filesystem
+                    Images (hier **Container Image** genannt) verpackt und dann durch den
+                    Docker Daemon also sog. **Container** ausgeführt, wobei das Wort
+                    Container hier die Isolation der Prozesse verdeutlichen soll.
+
+                    Intern werden hierfür verschiedene Mechanismen des Linux-Kernels genutzt,
+                    um den Programmen vorzugaukeln, dass sie die einzigen laufenden Programme
+                    innerhalb des Betriebssystems wären. Gute Container Images starten daher
+                    tatsächlich nur einen Prozess, der automatisch die **Prozess-ID 1**
+                    bekommt.
+
+                    Darüber hinaus virtualisiert Docker das Netzwerk sowie den Massenspeicher,
+                    um die Container noch weiter voneinander zu isolieren. Zusammengehörige
+                    Container können über ein **virtuelles Netzwerk** untereinander
+                    kommunizieren und einzelne Ports können vom Host an die Container
+                    weitergeleitet werden.
+
+                    Wichtig zu verstehen ist, dass Container ,,immutabel'' sind, was bedeutet,
+                    dass sie zwar Dateien in ihrem virtuellen Dateisystem erzeugen können,
+                    diese bei einem Neustart des Containers aber verloren gehen. Über sog.
+                    **Volumes** können stattdessen externe Massenspeicher angebunden
+                    werden, um persistente Daten abzulegen.
                 </div>
 
                 <div class="d-flex align-items-stretch" style="gap: 1em;">
@@ -323,7 +339,17 @@
             </section>
 
             <section data-title="Unterschied zur Vollvirtualisierung (1)" class="w-100">
-                <img src="docker-virtualisierung-1.svg" class="d-block w-100" />
+                <img src="docker-virtualisierung-1.svg" class="d-block w-100 mb-3" />
+
+                <p>
+                    Docker realisiert eine Quasi-Virtualisierung, indem den in den Containern
+                    laufenden Programmen vorgegaukelt wird, dass sie die einzigen Programme
+                    des Host-Betriebssystems seien. Dadurch entsteht im Vergleich zu richtiger
+                    Hardwarevirtualisierung ein kaum merkbarer Verwaltungsoverhead. Jedoch
+                    belegen Docker Container unter Umständen mehr Speicher als es die Programme
+                    ohne Docker tun würden, jedoch weit weniger Speicher als bei der klassischen
+                    Virtualisierung (da nur ein Rumpf-Betriebssystem mitgeliefert werden muss).
+                </p>
             </section>
 
             <section data-title="Unterschied zur Vollvirtualisierung (2)" class="w-100">
@@ -332,8 +358,8 @@
 
             <section data-title="Container Images bauen mit einem Dockerfile" class="limited-width">
                 <div class="markdown">
-                    Um ein sog. Image zu bauen, das dann von Docker als Container ausgeführt
-                    werden kann, muss im Quellcode-Verzeichnis der Anwendung eine Datei namens
+                    Um ein sog. Image zu bauen, das von Docker als Container ausgeführt werden
+                    kann, muss im Quellcode-Verzeichnis der Anwendung eine Datei namens
                     <span class="fn">Dockerfile</span> angelegt werden. Ihre Aufgabe ist zu
                     beschreiben, aus welchen Inhalten (also aus welchen Dateien) sich das Image
                     zusammensetzen soll.
@@ -342,7 +368,8 @@
                     was aber nicht mit der „Node.js Registry” verwechselt werden darf) ein vorhandenes
                     Image referenziert und um eigene Dateien erweitert. Als Basis-Image kann dann
                     entweder ein minimales Betriebssystem-Image (z.B. Debian oder Alpine Linux)
-                    oder eine vorkonfigurierte Laufzeitumgebung wie Node.js, Python, … ausgewählt werden.
+                    oder eine vorkonfigurierte Laufzeitumgebung wie Node.js, Python, … (die selbst
+                    auf einem der genannten Betriebssystem-Images basiert) ausgewählt werden.
                 </div>
 
                 <div class="card p-3 mt-3 mb-3 bg-light">
@@ -368,7 +395,7 @@
                                 <src-code language="docker">WORKDIR /app</src-code>
                             </td>
                             <td>
-                                Aktuelles Arbeitsverzeichnis innerhalb des Images ändern
+                                Wechseln des für die folgenden Befehle verwendeten Arbeitsverzeichnisses im Image
                             </td>
                         </tr>
                         <tr>
@@ -376,7 +403,7 @@
                                 <src-code language="docker">COPY package.json package-lock.json ./</src-code>
                             </td>
                             <td>
-                                Quellcode-Dateien in das aktuelle Arbeitsverzeichnis im Image hinein kopieren
+                                Quellcode-Dateien in das eben ausgewählte Arbeitsverzeichnis kopieren
                             </td>
                         </tr>
                         <tr>
@@ -384,7 +411,7 @@
                                 <src-code language="docker">RUN npm install</src-code>
                             </td>
                             <td>
-                                Ausführen eines Befehls während das Image gebaut wird
+                                Ausführen eines Befehls, um die benötigten Node.js-Module zu installieren
                             </td>
                         </tr>
                         <tr>
@@ -392,7 +419,7 @@
                                 <src-code language="docker">COPY src ./src</src-code>
                             </td>
                             <td>
-                                Weitere Quellcode-Dateien in das aktuelle Arbeitsverzeichnis im Image hinein kopieren
+                                um Schluss den eigentlichen Quellcode in das Filesystem Image kopieren
                             </td>
                         </tr>
                         <tr>
@@ -408,7 +435,7 @@
                                 <src-code language="docker">ENTRYPOINT ["node", "src/index.js"]</src-code>
                             </td>
                             <td>
-                                Das auszuführende Programm innerhalb des Containers benennen
+                                Definition des zur Ausführung des Containers zu startenden Programms
                             </td>
                         </tr>
                     </table>
@@ -419,14 +446,14 @@
                     sog. „Filesystem Layer” erzeugen, in dem die durch die Anweisung verursachten
                     Änderungen an der Dateistruktur festgehalten werden. Indem sich weniger oft ändernde
                     Dateien an den Anfang gestellt werden, kann die Zeit zum Neubauen eines Containers
-                    und die damit verbrauchte Bandbreite reduziert werden.
+                    und die damit verbrauchte Bandbreite deutlich reduziert werden.
                 </p>
             </section>
 
             <section data-title="Netzwerkvirtualisierung mit Docker" class="w-100">
                 <div class="markdown">
                     * Standardmäßig werden Docker Container vollständig isoliert ausgeführt.
-                    * Sie können zwar auf das Internet zugreifen, selbst aber keine Verbindungen annehmen werden.
+                    * Sie können zwar auf das Internet zugreifen, selbst aber keine Verbindungen entgegennehmen.
                     * Hierfür muss entweder eine Portweiterleitung oder ein virtuelles Netzwerk eingerichtet werden.
                     * Eine Portweiterleitung leitet an den Host gerichtete TCP-Anfragen an einen Container weiter.
                     * Ein virtuelles Netzwerk hingegen ermöglicht es mehreren Containern, untereinander zu kommunizieren.
@@ -498,16 +525,16 @@
                         </p>
                         <p>
                             <span class="cmd">docker run -d --name mongodb --net beispiel mongo</span> <br />
-                            Container im Hintergrund starten und diesen mit dem Beispiel-Netzwerk verbinden
-                            Verbindungen zum Container können nur von anderen Containern über das virtuelle
-                            Netzwerk hergestellt werden. Von Außen ist der Container nicht erreichbar.
+                            Container im Hintergrund starten und diesen mit dem Beispiel-Netzwerk verbinden.
+                            Über das virtuelle Netzwerk können die im Container laufenden Serverdienste
+                            aufgerufen werden. Von Außen ist der Container allerdings nicht erreichbar.
                         </p>
                         <p>
                             <span class="cmd">docker run -d --name backend --net beispiel -p 3000:3000 adressbuch-backend</span> <br />
                             Weiteren Container starten und sowohl mit dem Beispiel-Netzwerk verbinden als
                             auch eine Portweiterleitung definieren. Warum? Weil das Backend unserer Anwendung
                             vom Browser aus aufrufbar sein muss, über das virtuelle Netzwerk jedoch auch mit der
-                            Datenbank kommunizieren können muss.
+                            Datenbank kommunizieren soll.
                         </p>
 
                         <h3>Service Discovery</h3>
@@ -536,7 +563,7 @@
                     Containern auch deklarativ in einer Datei namens <span class="fn">docker-compose.yml</span>
                     beschreiben. Das Werkzeug **Docker Compose** übernimmt dann den Start und auch die
                     Beendigung aller Container in der richtigen Reihenfolge. Außerdem kann damit eine
-                    einfache Skalierung durch Starten mehrere, paralleler Containerinstanzen erreicht
+                    einfache Skalierung durch Starten mehrerer, paralleler Containerinstanzen erreicht
                     werden. Mit **Docker Swarm** kann eine so definierte Anwendung auch ganz einfach
                     in einem Cluster produktiv deployed werden.
                 </div>
@@ -682,7 +709,16 @@
                   Neues, virtuelles Netzwerk zur Kommunikation mehrerer Container untereinander erstellen
 
                 * <span class="cmd">docker system prune</span> <br />
-                  Nicht mehr benötigte Ressourcen freigeben (wichti!)
+                  Nicht mehr benötigte Ressourcen freigeben (wichtig!)
+
+                * <span class="cmd">docker volume prune</span> <br />
+                  Nicht mehr verwendete Volumes löschen, da diese sehr viel Speicher belegen können.
+
+                  <lsx-info-box type="warning" title="Achtung, Datenverlust!">
+                      Es werden alle Volumes gelöscht, die aktuell von keinem laufenden Container
+                      genutzt werden. Dadurch sind ggf. dann auch die persistenten Daten der MongoDB
+                      weg, wenn diese bei Ausführung des Befehls gerade nicht läuft.
+                  </lsx-info-box>
 
                 ### Docker Compose {.mt-5}
 
@@ -699,9 +735,75 @@
                   Neubauen aller Container Images anhand ihres <span class="fn">Dockerfile</span>
             </section>
 
-            <!-- <section data-title="Aufgabe: Wir erkunden Docker" class="limited-width" data-background-color="rgb(231, 221, 141)">
-                ...
-            </section> -->
+            <section data-title="Aufgabe: Wir erkunden Docker (30 Minuten)" class="markdown limited-width" data-background-color="rgb(231, 221, 141)">
+                Öffnen Sie den folgenden Link zum Starten der GitPod Online IDE mit den Quellcodes
+                zur Vorlesung. Neben einem an Visual Studio Code angelehnten Code-Editor und einer
+                Linux-Umgebung mit Node.js und anderen Werkzeugen, stellt diese Ihnen auch Docker
+                und Docker Compose zur Verfügung. Sie können somit Docker ausprobieren oder gar am
+                Portfolioprojekt der Vorlesung arbeiten, ohne etwas auf Ihrem Rechner installieren
+                zu müssen. Im Gegenzug benötigen Sie allerdings eine dauerhafte Internetverbindung,
+                um programmieren zu können.
+
+                <a href="https://www.gitpod.io/#https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes" target="_blank" class="fw-bold">Online IDE: Quellcodes zur Vorlesung</a>
+
+                ![Gitpod](gitpod-2.png){.img-thumbnail img-responsive}
+
+                Falls noch nicht geschehen, öffnen Sie über das Hamburger-Menü oben links ein
+                neues Terminal. In diesem Wechseln Sie mit dem <span class="cmd">cd</span>-Befehl
+                in das Adressbuch-Beispiel:
+
+                <span class="cmd">cd Beispielanwendung\ Adressbuch</span>
+
+                Um nicht den gesamten Befehl eintippen zu müssen, genügt es, wenn Sie nur die
+                ersten paar Buchstaben tippen und dann die <kbd>Tab</kbd>-Taste drücken, um
+                die sog. „Command Completion” der Konsole auszuführen. Da es mehrere Verzeichnisse
+                mit dem Wort „Beispielanwendung” am Anfang gibt, drücken Sie anschließend
+                <kbd>A</kbd> und dann wieder <kbd>Tab</kbd>, damit sich der Befehl vervollständigt.
+
+                Das Tolle an GitPod ist, dass innerhalb des Terminals ausgeführte Serverdienste
+                wie z.B. der Backend-Service der Anwendung über eine öffentliche URL testbar
+                gemacht werden. Dies benötigen wir, damit die Frontend-Anwendung (die ja innerhalb
+                des Browsers und somit nicht in der Linux-Umgebung der IDE läuft) auf das Backend
+                zugreifen kann. Im ersten Schritt geht es daher darum, die URL des Backend-Services
+                zu ermitteln und in der Umgebungsvariable `API_KEY` abzulegen. Gehen Sie hierfür
+                wie folgt vor:
+
+                 1. Starten Sie alle Container mit dem Befehl <br />
+                   <span class="cmd">docker-compose -f docker-compose.dev.yml up -d</span>
+
+                 1. Öffnen Sie links in der Sidebar den „Remote Explorer”.
+
+                 1. Schalten Sie alle Ports frei, um eine öffentliche URL zu erzeugen.
+
+                 1. Öffnen Sie die Vorschau für den Port 3000.
+
+                 1. Kopieren Sie sich die URL des Services aus dem Vorschaufenster.
+
+                 1. Erzeugen Sie die Umgebungsvariable im Terminal mit folgendem Befehl: <br />
+                    <span class="cmd">export API_URL=https://3000-….gitpod.io</span>
+
+                 1. Starten Sie anschließend mit folgenden Befehlen alle Container neu: <br />
+                    <span class="cmd">docker-compose -f docker-compose.dev.yml down</span> <br />
+                    <span class="cmd">docker-compose -f docker-compose.dev.yml up -d</span> <br />
+
+                 1. Öffnen Sie anschließend die Vorschau für den Remote Port 8080.
+                    Wenn Sie wollen können Sie die URL aus dem Vorschaufenster in
+                    einen neuen Browser-Tab einfügen. Auf jeden Fall testen Sie, ob
+                    sich die App fehlerfrei bedienen lässt.
+
+                Nehmen Sie nun eine Änderung am Backend-Quellcode vor und laden
+                Sie die Vorschauseite neu. Beobachten Sie dabei, dass die
+                Änderung sofort aktiv wurde. Anschließend nehmen Sie eine
+                Änderung am Frontend-Quellcode vor und laden Sie Vorschseite
+                wieder neu. Beobachten Sie auch hier, dass die Änderung ohne
+                manuelles Eingreifen sofort aktiv wurde.
+
+                Versuchen Sie abschließend, mit der Datei <span class="fn">docker-compose.prod.yml</span>
+                die Produktivversion der Anwendung zu starten. Verschen Sie dann,
+                die in der Entwicklungsversion definierte Mongo-Admin-Oberfläche
+                in die Produktiversion aufzunehmen. Welche Schritte sind hierür
+                notwendig?
+            </section>
 
             <!-- ==================== -->
             <!-- Hinweise zum Schluss -->
