@@ -190,7 +190,15 @@
                         <img src="api-wikipedia.png" class="d-block w-100 img-thumbnail"/>
                     </div>
                 </div>
+            </section>
 
+            <section data-title="Beispiele für öffentliche Webservices" class="limited-width">
+                <p>
+                    <a href="https://github.com/public-apis/public-apis" target="_blank">https://github.com/public-apis/public-apis</a> <br />
+                    Eine kuratierte Liste mit öffentlich zugänglichen Webservices
+                </p>
+
+                <img src="public-apis.png" class="img-thumbnail w-100" />
             </section>
 
             <!-- =============================== -->
@@ -1463,17 +1471,11 @@
                 </lsx-tab-pages>
             </section>
 
-            <section data-title="Praktisches Fallbeispiel">
-                <div class="d-flex justify-content-center" style="margin-bottom: 1em;">
-                    <img src="postman.png" class="img-thumbnail img-fluid"/>
-                </div>
-            </section>
-
-            <!-- <section data-title="Aufgabe: Hey, Mister Postman!" class="limited-width" data-background-color="rgb(231, 221, 141)">
+            <section data-title="Aufgabe: Hey, Mr. Postman!" class="limited-width" data-background-color="rgb(231, 221, 141)">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md">
-                            <lsx-github-edit url="2-restapi/Beispiel_MusicDB" download="2-restapi/Beispiel_MusicDB"></lsx-github-edit>
+                            <lsx-github-edit url="Aufgabe%20Mr.%20Postman" download="Aufgabe%20Mr.%20Postman"></lsx-github-edit>
                         </div>
                     </div>
 
@@ -1482,20 +1484,20 @@
                             <p>
                                 Nun, welche Musik hören Sie gerne? 🎼 Hier kommt die einmalige Gelegenheit, sie über einen REST-Webservice
                                 in eine Datenbank einzutragen. Hierfür muss lediglich der oben verlinkte Beispielservice zum Laufen gebracht
-                                werden. Anfangs für den Test die Adresse <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a>
+                                werden. Anfangs kann zum Test die Adresse <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a>
                                 im Browser aufgerufen werden. Da auf diese Weise aber nur GET-Anfragen ausgelöst werden können, muss der
                                 Webservice eigentlich mit einem Werkzeug wie Postman analysiert werden. Führen Sie hierzu die folgenden
                                 Schritte in Postman aus:
                             </p>
                             <ol>
                                 <li>
-                                    Senden Sue eine <tt>GET</tt>-Anfrage an die Startadresse des Webservices.
+                                    Senden Sie eine <tt>GET</tt>-Anfrage an die Startadresse des Webservices.
                                 </li>
                                 <li>
-                                    Navigieren Sie von der Antwort zur Songliste und von dort zum Song mit der ID 3 vor.
+                                    Navigieren Sie von der Antwort zur Songliste und von dort zum ersten Song.
                                 </li>
                                 <li>
-                                    Gehen Sie zurück zur Songliste und finden heraus, welcher Link für Suchanfragen benutzt wird.
+                                    Gehen Sie zurück zur Startseite und finden heraus, welcher Link für Suchanfragen benutzt wird.
                                 </li>
                                 <li>
                                     Suchen Sie anschließend alle Songs von den Dire Straits.
@@ -1506,10 +1508,10 @@
                                     </p>
                                     <source-code language="json">
                                         {
-                                            "name": "Circle of Life",
                                             "artist": "Elton John",
-                                            "songwriters": "Tim Rice",
+                                            "name": "Circle of Life",
                                             "releaseYear": 1994
+                                            "songwriters": "Tim Rice",
                                         }
                                     </source-code>
                                 </li>
@@ -1531,7 +1533,35 @@
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>
+
+            <section data-title="Aufgabe: Art Institute of Chicago" class="limited-width" data-background-color="rgb(231, 221, 141)">
+                <div class="markdown">
+                    Nach ein wenig Stöbern in der zuvor gezeigten Liste öffentlicher Webservices
+                    finden wir die API des „Art Institute of Chicago”, einem 1879 gegründeten,
+                    international bekannten Kunstmuseum. In der Liste wird auf die Schnittstellenbeschreibung
+                    unter <a href="https://api.artic.edu/" target="_blank">api.artic.edu</a> verwiesen.
+                    Stöbern Sie ein wenig in der Dokumentation und beantworten Sie anschließend
+                    folgende Fragen:
+
+                    1. Warum kann man hier tatsächlich von einer API und nicht einfach nur von
+                    einem Webservice sprechen?
+
+                    1. Welche Collections (in der Dokumentation „Endpoints” genannt) unterstützt die API?
+
+                    1. Unterstützt der Webservice das HATEOAS-Prinzip?
+
+                    1. Werden tatsächlich alle für REST-Webservices typischen HTTP-Verben unterstützt?
+
+                    1. Fall nicht alle HTTP-Verben unterstützt werden: Was könnte der Grund hierfür sein?
+
+                    1. Welche Informationen liefert die API zu einem einzelnen Bild?
+
+                    1. Wie kann man die URL zur Verwendung des Bilds in einer Webseite oder App erzeugen?
+                </div>
+
+                <img src="artic-api.png" class="img-thumbnail w-100" />
+            </section>
 
             <section data-title="Aufgabe: Ein kleines HTTP- und REST-Quiz" class="limited-width" data-background-color="rgb(231, 221, 141)">
                 <lsx-quiz>
@@ -1805,6 +1835,327 @@
             <!-- ======================== -->
             <section data-title="Beschreibung mit OpenAPI" data-chapter></section>
             <section data-title="Beschreibung mit OpenAPI" data-background-image="../trennfolie.jpg"></section>
+
+            <section data-title="Wie beschreibt man einen Webservice?">
+                <div class="markdown dhbw-limited-width m-auto mb-5">
+                    Während SOAP-Webservices von Anfang an mit der **Webservice Definition Language**
+                    (meist einfach nur WSDL abegkürzt) in einem maschinenlesbaren formal beschrieben wurden,
+                    gab es für REST-Webservices lange Zeit keinen vergleichbaren Standard. Dabei bietet
+                    eine formale Beschreibung oftmals folgende Möglichkeiten:
+
+                    * Generieren von Client-Code zum Aufruf des Webservices
+                    * Generieren von Server-Code zur Implementierung des Webservices
+                    * Automatische Validierung von Anfragen und Antworten
+                    * Generieren statische Dokumentationsseiten
+                    * …
+
+                    Als möglichst leichtgewichtiger Ansatz kamen REST-Webservices lange ohne eine
+                    formale Beschreibung und entsprechende Werkzeuge aus. Meistens wurden sie einfach
+                    nur in Prosatext auf einer Begleitwebseite beschrieben, sofern es sich um öffentliche
+                    APIs handelt (vgl. z.B. die Wikipedia API). Inzwischen hat sich jedoch das
+                    **OpenAPI-Format** (vormals Swagger genannt) durchgesetzt.
+                </div>
+
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="openapi-beispiel.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                    <img src="api-creditsafe.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                    <img src="api-wikipedia.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                </div>
+            </section>
+
+            <section data-title="Vorgehen bei der Programmierung">
+                <div class="markdown dhbw-limited-width m-auto">
+                    Generell sind zwei Vorgehensweisen bei der Programmierung denkbar:
+
+                    * **Code First:** Die API-Spezifikation wird anhand der Webservice-Implementierung
+                    automatisch generiert (z.B. mit dem Node.js-Paket
+                    <a href="https://www.npmjs.com/package/express-oas-generator" target="_blank">express-oas-generator</a>).
+
+                    * **Contract First:** Die Spezifikation wird unabhängig von der konkreten
+                    Implementierung erstellt und der Servercode anschließend entweder daraus
+                    generiert oder von Hand implementiert.
+
+                    REST-Webservices werden allerdings fast immer **Contract First** erstellt.
+                    Die hierfür notwendigen OpenAPI-Dokumente werdem im JSON- oder YAML-Format
+                    erstellt, wobei YAML meist bevorzugt wird. Gute Anleitungen finden sich u.a.
+                    hier:
+
+                    * <a href="https://swagger.io/docs/specification/about/" target="_blank">Swagger OpenAPI Guide</a>
+                    * <a href="https://support.smartbear.com/swaggerhub/docs/tutorials/openapi-3-tutorial.html" target="_blank">Smartbear OpenAPI Tutorial</a>
+                </div>
+
+                <div class="d-flex flex-row gap-3">
+                    <div class="fw-bold">
+                        <a href="https://editor.swagger.io" target="_blank">Swagger Editor</a> (Nur Quellcode)
+                        <img src="openapi-beispiel.png" class="img-thumbnail w-100" />
+                    </div>
+                    <div class="fw-bold">
+                        <a href="https://stoplight.io" target="_blank">Stoplight</a> (grafischer Editor)
+                        <img src="stoplight.png" class="img-thumbnail w-100" />
+                    </div>
+                </div>
+            </section>
+
+            <section data-title="Bestandteile einer OpenAPI-Spezifikation" class="limited-width">
+                <p>
+                    OpenAPI-Spezifikationen bestehen in der Regel aus drei Teilen
+                    innerhalb derselben Datei:
+                </p>
+
+                <lsx-accordion>
+                    <lsx-accordion-page title="Allgemeine Angaben" bold>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Beschreibung">
+                                <div class="markdown">
+                                    * Name des Webservices
+                                    * Prosatext zur Beschreibung
+                                    * Kontaktdaten der Entwickler*innen
+                                    * Lizenzhinweise
+                                    * Webservice-URL
+                                    * Tags (Kategorien für die URL-Endpunkte)
+                                </div>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Syntaxbeispiel">
+                                <source-code language="yaml">
+                                    openapi: 3.0.0
+                                    info:
+                                      title: "Aufgabe: Hey, Mr. Postman"
+                                      description: "Dieser Webservice dient dazu, die typischen HTTP-Aufrufe bei \
+                                        \ Verwendung eines REST-Webservices mit einem Werkzeug wie Postman (https://www.postman.com/) \
+                                        \ auszuprobieren. Hierfür wird eine simple API zur Verwaltung von Songs angeboten."
+                                      contact:
+                                        name: Dennis Schulmeister-Zimolong
+                                        url: https://www.wpvs.de
+                                        email: dhbw@windows3.de
+                                      license:
+                                        name: CC-BY-4.0
+                                        url: https://creativecommons.org/licenses/by/4.0/deed.de
+                                      version: "1.0"
+                                    servers:
+                                    - url: http://localhost:3000
+                                    tags:
+                                    - name: Index
+                                    - name: Song
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="URL-Endpunkte" bold>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Beschreibung">
+                                <div class="markdown">
+                                    Tief geschachtelte Struktur mit folgenden Inhalten:
+
+                                    * **URL-Pfade** (ggf. mit Platzhaltern)
+                                      * **HTTP-Verben**
+                                        * Tag (Kategorie)
+                                        * Name und Beschreibung
+                                        * URL-Parameter (optional)
+                                        * Query-Parameter (optional)
+                                        * Erwartete Anfragedaten
+                                        * **HTTP-Statuscodes**
+                                          * Erzeugte Antwortdaten
+
+                                    Für die Definition der Anfrage- und Antwortdaten wird meistens auf
+                                    ein weiter unten definiertes Schema verwiesen, da sie oft an mehreren
+                                    Stellen benötigt werden.
+                                </div>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Syntaxbeispiel">
+                                <source-code language="yaml">
+                                    paths:
+                                      /:
+                                        get:
+                                          tags:
+                                          - Index
+                                          summary: Wurzeladresse des Webservices
+                                          description: Liefert eine HATEOAS-Übersicht aller collections
+                                          responses:
+                                            "200":
+                                              description: OK
+                                              content:
+                                                application/json:
+                                                  schema:
+                                                    type: array
+                                                    items:
+                                                      $ref: '#/components/schemas/HATEOAS_Collection'
+                                                    x-content-type: application/json
+
+                                      /song:
+                                      …
+                                      /song/{id}:
+                                        get:
+                                          tags:
+                                          - Song
+                                          summary: Song lesen
+                                          description: Liest einen einzelnen Song vom Server.
+                                          parameters:
+                                          - name: id
+                                            in: path
+                                            required: true
+                                            style: simple
+                                            explode: false
+                                            schema:
+                                              type: string
+                                          responses:
+                                            "200":
+                                              description: OK
+                                              content:
+                                                application/json:
+                                                  schema:
+                                                    $ref: '#/components/schemas/Song'
+                                            "404":
+                                              description: Not Found
+                                        delete:
+                                          tags:
+                                          - Song
+                                          summary: Song löschen
+                                          description: Löscht einen Song auf dem Server.
+                                          parameters:
+                                          - name: id
+                                            in: path
+                                            required: true
+                                            style: simple
+                                            explode: false
+                                            schema:
+                                              type: string
+                                          responses:
+                                            "200":
+                                              description: OK
+                                            "404":
+                                              description: Not Found
+                                        …
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Schema-Definitionen" bold>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Beschreibung">
+                                <div class="markdown">
+                                    In der Regel je Ressource eine Schema-Beschreibung ihrer zulässigen
+                                    Felder und Datentypen. Zusätzlich ggf. weitere Schema-Beschreibungen
+                                    für geschachtelte Strukturfelder oder einzelne HTTP-Anfragen bzw.
+                                    HTTP-Antworten.
+                                </div>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Syntaxbeispiel">
+                                <source-code language="yaml">
+                                    components:
+                                      schemas:
+                                        Song:
+                                          title: Song
+                                          type: object
+                                          properties:
+                                            _id:
+                                              type: string
+                                            artist:
+                                              type: string
+                                            name:
+                                              type: string
+                                            releaseYear:
+                                              type: integer
+                                            songwriters:
+                                              type: string
+                                          required:
+                                            - name
+                                          example:
+                                            _id: "621ff9a936997df5baba746e"
+                                            artist: "Elton John"
+                                            name: "Circle of Life"
+                                            releaseYear: 1994
+                                            songwriters: "Tim Rice"
+
+                                        Artist:
+                                            …
+
+                                        Playlist:
+                                            …
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+                </lsx-accordion>
+            </section>
+
+            <section data-title="Aufgabe: HTTP Statuscodes" class="limited-width" data-background-color="rgb(231, 221, 141)">
+                <div class="markdown mb-4">
+                    Besuchen Sie die Seite <a href="https://http.dog/" target="_blank">http.dog</a>.
+                    Dort finden Sie „für jeden HTTP-Statuscode einen Hund”. Schauen Sie sich die Liste
+                    an und beantworten Sie dann folgende Fragen:
+
+                    1. Welche Statuscodes könnten in einer typischen OpenAPI-Spezifikation
+                    dokumentiert sein?
+
+                    1. Welche Statuscodes könnten vom Webserver darüber hinaus gelegentlich
+                    geliefert werden?
+
+                    1. In welchen Fällen könnte der
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418" target="_blank">Statuscode 418</a>
+                    geliefert werden?
+
+                    Wenn Sie wollen, können Sie die Seite
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank">HTTP response status codes</a>
+                    im Mozilla Developer Network zu Rate ziehen, um einzelne Statuscodes nachzuschlagen.
+                </div>
+
+                <div class="d-flex align-items-stretch" style="gap: 1em; margin-bottom: 1em;">
+                    <img src="status-100.avif" class="d-block w-100"/>
+                    <img src="status-101.avif" class="d-block w-100"/>
+                </div>
+            </section>
+
+            <section data-title="Aufgabe: Eine OpenAPI-Spezifikation lesen" class="limited-width" data-background-color="rgb(231, 221, 141)">
+                <div class="markdown mb-4">
+                    Laden Sie sich von GitHub die
+                    <a href="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/blob/main/Beispielanwendung%20Adressbuch/Backend/src/api/openapi.yaml" target=_blank>OpenAPI-Beschreibung des Adressbuch-Beispiels</a>
+                    herunter und öffnen Sie diese im <a href="https://editor.swagger.io" target="_blank">Swagger Online-Editor</a>.
+                    Lesen Sie sich die Beschreibung durch und beantworten Sie folgende Fragen dazu:
+
+                    1. Was ist der Sinn und Zweck der API?
+                    1. Welche URL-Endpunkte werden von ihr unterstützt?
+                    1. Wie wird das HATEOAS-Prinzip von der API umgesetzt?
+                    1. Welchen Aufbau haben die verwalteten Daten der API?
+                </div>
+
+                <img src="openapi-beispiel.png" class="img-thumbnail w-100" />
+            </section>
+
+            <section data-title="Aufgabe: Definition einer eigenen API" class="limited-width" data-background-color="rgb(231, 221, 141)">
+                <div class="markdown mb-4">
+                    Überlegen Sie sich einen einfachen Anwendungsfall für eine öffentliche
+                    REST API und arbeiten Sie diese als OpenAPI-Spezifikation aus. Skizzieren
+                    Sie hierfür zunächst auf einem Blatt Papier oder einem Schreib- bzw.
+                    Malprogramm die grobe Struktur der API:
+
+                    * Welche Collections soll die API besitzen?
+                    * Welche Felder sollen die einzelnen Resourcen besitzen?
+                    * Wie sollen die URLs der API strukturiert sein?
+
+                    Nachdem Sie diese grundlegenden Dinge festgelegt haben, versuchen Sie, die
+                    API im OpenAPI-Format zu beschreiben. Hierfür bietet es sich an, die OpenAPI-Datei
+                    aus dem Vorlageprojekt als Grundalge zu verwenden. Diese können Sie entwder im
+                    <a href="https://editor.swagger.io/" target="_blank">Swagger Online-Editor</a>
+                    (wenn Sie sich sicher genug im Umgang mit YAML und OpenAPI fühlen) oder in der
+                    <a href="https://stoplight.io" target="_blank">Stoplight App</a> öffnen. Letztere
+                    erfordert eine Anmeldung mit Ihrer E-Mailadresse und ist für kommerzielle Projekte
+                    ggf. nicht kostenlos nutzbar. Sie bietet jedoch eine intuitive, grafische Oberfläche
+                    für alle OpenAPI-Elemente anstelle dem Nur-Codeeditor von Swagger.
+
+                    Weitere Fragen, die Sie sich beim Erstellen der Beschreibung überlegen müssen sind:
+
+                    * Welche HTTP-Verben sollen je URL-Endpunkt unterstützt werden?
+                    * Welcher Aufruf soll welchen HTTP-Statuscode liefern?
+                    * Werden optionale Query-Parameter z.B. für die Suche benötigt?
+                    * Wie sieht die exakte JSON-Struktur der einzelnen Anfragen und Antworten aus?
+                    * Soll der Webservice das HATEOAS-Prinzip unterstützen?
+                    * Falls ja, in welcher Form sollen die Links zurückgeliefert werden?
+                </div>
+
+                <img src="stoplight.png" class="img-thumbnail w-100" />
+            </section>
 
             <!-- ==================== -->
             <!-- Hinweise zum Schluss -->
