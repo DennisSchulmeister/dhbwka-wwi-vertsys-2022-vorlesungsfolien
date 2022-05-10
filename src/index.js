@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import Bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import MiniTutorial from "@dschulmeis/mini-tutorial.js";
 import "@dschulmeis/mini-tutorial.js/themes/slideshow.css";
@@ -16,7 +16,11 @@ import HLJS_Language_JS from "highlight.js/lib/languages/javascript";
 import HLJS_Language_JSON from "highlight.js/lib/languages/json";
 import HLJS_Language_Docker from "highlight.js/lib/languages/dockerfile";
 import HLJS_Language_YAML from "highlight.js/lib/languages/yaml";
+import HLJS_Language_HTTP from "highlight.js/lib/languages/http";
 import "highlight.js/styles/atom-one-light.css";
+
+import * as AsciinemaPlayer from "asciinema-player";
+import "asciinema-player/dist/bundle/asciinema-player.css";
 
 import "./style.less";
 
@@ -25,6 +29,18 @@ window.addEventListener("load", () => {
         tocStyle: "hamburger",
         sectionTitle: "#page-title",
         plugins: [
+            // TODO: Auslagern in eigene Bibliothek
+            {
+                preprocessHtml(html) {
+                    html.querySelectorAll("terminal-cast").forEach(element => {
+                        let url = element.getAttribute("url") || "";
+                        let divElement = document.createElement("div");
+                        divElement.style.height = "30em";
+                        AsciinemaPlayer.create(url, divElement, {fit: "both", theme: "solarized-dark"});
+                        element.replaceWith(divElement);
+                    });
+                }
+            },
             new LS_Plugin_ExtraTags({
                 labelCarouselNext: "Nächstes Bild",
                 labelCarouselPrev: "Vorheriges Bild",
@@ -46,6 +62,7 @@ window.addEventListener("load", () => {
                     docker: HLJS_Language_Docker,
                     yaml: HLJS_Language_YAML,
                     yml: HLJS_Language_YAML,
+                    http: HLJS_Language_HTTP,
                 },
                 highlightAll: true,
             }),

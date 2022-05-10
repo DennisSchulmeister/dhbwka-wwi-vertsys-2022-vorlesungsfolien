@@ -755,12 +755,12 @@
             <section data-title="Grundprinzipien moderner REST-Webservices" class="dhbw-limited-width">
                 <div class="markdown">
                     Im Gegensatz zu SOAP orientiert sich REST vollständig an den Möglichkeiten von
-                    HTTP und überträge diese konzeptionell vom einfachen Abruf einer Webseite zur
+                    HTTP und überträgt diese konzeptionell vom einfachen Abruf einer Webseite zur
                     Verwaltung beliebiger „Ressourcen”. Ressourcen können in diesem Zusammenhang
                     nahezu alle Dinge sein, sofern ihren Inhalt in einer geeigneten Form zwischen
                     Client und Server ausgetauscht werden kann. Oft handelt es sich deshalb einfach
                     um die Einträge innerhalb einer Datenbank. Aber auch IoT-Anwendungsfälle, bei
-                    denen jede Ressource für ein dingliches Objekt der realen Welt steht, sind denkbar,
+                    denen jede Ressource für ein dingliches Objekt der realen Welt steht, sind denkbar.
 
                     Die aufrufbaren Grundfunktionen entsprechen den unterschiedlichen HTTP-Verben,
                     wodurch Ressourcen in REST angelegt, gelesen, überschrieben, verändert und
@@ -773,10 +773,10 @@
 
                      * **State Transfer:** Die Serverseite ist bei einem echten REST-Webservice komplett zustandslos
                        und kann sich daher keine Informationen „temporär zwischenmerken”, ohne diese beispielsweise
-                       in einer Datenbank dauerhaft zu speichern. Bis auf wenige Ausnahmen beinhalten deshalb alle
-                       Anfragen und Antworten den kompletten Inhalt der angesprochenen Ressource.
+                       in einer Datenbank zu speichern. Bis auf wenige Ausnahmen beinhalten deshalb alle Anfragen und
+                       Antworten den kompletten Inhalt der angesprochenen Ressource.
 
-                    Innerhalb der URLs wird zwischen Ressourcen, Collections, Stores und Actions unterschieden
+                    Innerhalb der URLs wird zwischen Ressourcen, Collections, Stores und Actions unterschieden.
                 </div>
 
                 <lsx-tab-pages>
@@ -860,7 +860,7 @@
                     <lsx-tab-page title="Stores">
                         <p>
                             Im Gegensatz zu Collections speichern <b>Stores</b> zwar ebenfalls mehrere Datensätze, die URL
-                            wird jedoch vom Client festgelegt.
+                            wird jedoch vom Client festgelegt bzw. ist fest vorgegeben und daher vorab bekannt.
                         </p>
                         <p class="tt">
                             https://example.com/api/<span style="font-weight: bold; color: darkmagenta;">{collection}</span>/<span style="font-weight: bold; color: darkred;">{id}</span>/<span style="font-weight: bold; color: darkblue;">{store}</span> <br />
@@ -983,7 +983,7 @@
                             <lsx-accordion-page>
                                 <lsx-accordion-title>
                                     <b><tt>GET</tt></b>
-                                    <span class="float-right">Liste abrufen</span>
+                                    <span class="float-end">Liste abrufen</span>
                                 </lsx-accordion-title>
                                 <lsx-accordion-content>
                                     <p>
@@ -1023,14 +1023,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                <lsx-accordion-content>
+                                </lsx-accordion-content>
                             </lsx-accordion-page>
 
                             <!-- GET – Ressource abrufen -->
                             <lsx-accordion-page>
                                 <lsx-accordion-title>
                                     <b><tt>GET</tt></b>
-                                    <span class="float-right">Ressource abrufen</span>
+                                    <span class="float-end">Ressource abrufen</span>
                                 </lsx-accordion-title>
                                 <lsx-accordion-content>
                                     <p class="mb-4">
@@ -1082,7 +1082,7 @@
                             <lsx-accordion-page>
                                 <lsx-accordion-title>
                                     <b><tt>POST</tt></b>
-                                    <span class="float-right">Ressource anlegen</span>
+                                    <span class="float-end">Ressource anlegen</span>
                                 </lsx-accordion-title>
                                 <lsx-accordion-content>
                                     <p class="mb-4">
@@ -1136,7 +1136,7 @@
                             <lsx-accordion-page>
                                 <lsx-accordion-title>
                                     <b><tt>PUT</tt></b>
-                                    <span class="float-right">Ressource aktualisieren</span>
+                                    <span class="float-end">Ressource aktualisieren</span>
                                 </lsx-accordion-title>
                                 <lsx-accordion-content>
                                     <p class="mb-4">
@@ -1191,7 +1191,7 @@
                             <lsx-accordion-page>
                                 <lsx-accordion-title>
                                     <b><tt>PATCH</tt></b>
-                                    <span class="float-right">Einzelne Felder aktualisieren</span>
+                                    <span class="float-end">Einzelne Felder aktualisieren</span>
                                 </lsx-accordion-title>
                                 <lsx-accordion-content>
                                     <p class="mb-4">
@@ -1251,7 +1251,7 @@
                             <lsx-accordion-page>
                                 <lsx-accordion-title>
                                     <b><tt>DELETE</tt></b>
-                                    <span class="float-right">Ressource löschen</span>
+                                    <span class="float-end">Ressource löschen</span>
                                 </lsx-accordion-title>
                                 <lsx-accordion-content>
                                     <p class="mb-4">
@@ -1286,7 +1286,7 @@
                             <lsx-accordion-page>
                                 <lsx-accordion-title>
                                     <b><tt>PUT</tt></b>
-                                    <span class="float-right">Aktion ausführen</span>
+                                    <span class="float-end">Aktion ausführen</span>
                                 </lsx-accordion-title>
                                 <lsx-accordion-content>
                                     <p class="mb-4">

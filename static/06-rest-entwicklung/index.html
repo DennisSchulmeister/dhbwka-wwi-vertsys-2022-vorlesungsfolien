@@ -28,6 +28,20 @@
             <section data-title="Einleitung" data-chapter></section>
 
             <section data-title="Inhalt der heutigen Vorlesung" data-background-image="../trennfolie.jpg">
+                <div class="d-flex align-items-stretch" style="margin-bottom: 1em; gap: 1em;">
+                    <div class="card flex-fill">
+                        <div class="card-header fw-bold dhbw-lightblue">
+                            Entwurf und Dokumentation mit OpenAPI
+                        </div>
+                        <div class="card-body p-3 markdown">
+                            * Definition des Datenmodells
+                            * Definition der URL-Endpunkte
+                            * Definition der HTTP-Nachrichten
+                            * Erstellen der OpenAPI-Spezifikation mit Stoplight
+                        </div>
+                    </div>
+                </div>
+
                 <div class="d-flex align-items-stretch" style="gap: 1em;">
                     <div class="card flex-fill">
                         <div class="card-header fw-bold dhbw-lightblue">
@@ -50,30 +64,2014 @@
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="d-flex align-items-stretch" style="margin-top: 1em; gap: 1em;">
-                    <div class="card flex-fill">
-                        <div class="card-header fw-bold dhbw-lightblue">
-                            Lernziele
-                        </div>
-                        <div class="card-body p-3 markdown">
-                            ### REST-Entwicklung mit Node.js
+            <!-- ===================================== -->
+            <!-- Entwurf und Dokumentation mit OpenAPI -->
+            <!-- ===================================== -->
+            <section data-title="Entwurf und Dokumentation mit OpenAPI" data-chapter></section>
+            <section data-title="Entwurf und Dokumentation mit OpenAPI" data-background-image="../trennfolie.jpg"></section>
 
-                            * TODO
+            <section data-title="Definition des Datenmodells" class="limited-width">
+                <div class="markdown">
+                    In diesem Foliensatz soll die Entwicklung des Adressbuch-Beispiels
+                    aus den Quellcodes zur Vorlesung vorgestellt werden. Da das Beispiel
+                    dem **Contract First** Ansatz folgt, muss deshalb zunächst das
+                    Datenmodell des Webservices, bestehend aus den fachlichen Daten
+                    sowie zusätzlichen Schemas zur Umsetzung des HATEOAS-Prinzips,
+                    definiert werden.
+                </div>
 
-                            ### REST-Webservices im Browser verwenden
+                <lsx-accordion>
+                    <lsx-accordion-page title="Adressbucheinträge">
+                        <p class="mb-0">
+                            Der Webservice verwaltet als einzige Ressource Adressen, welche
+                            die Einträge des Adressbuchs darstellen. Jede Adresse besteht aus
+                            einem Vornamen, Nachnamen, einer E-Mailadresse und Telefonnummer.
+                            Darüber hinaus besitzt sie eine eindeutige ID sowie Verlinkgen
+                            gemäß dem HATEOAS-Prinzip.
+                        </p>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schema">
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <tt>Address</tt>
+                                        <span class="float-end">Adressbucheintrag</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><tt>_links</tt></td>
+                                            <td>HATEOAS_Resource</td>
+                                            <td>HATEOAS-Verlinkungen</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>_id</tt></td>
+                                            <td>String</td>
+                                            <td>Eindeutiger Schlüsselwert</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>first_name</tt></td>
+                                            <td>String</td>
+                                            <td>Vorname</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>last_name</tt></td>
+                                            <td>String</td>
+                                            <td>Nachname</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>phone</tt></td>
+                                            <td>String</td>
+                                            <td>Telefonnummer</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>email</tt></td>
+                                            <td>String</td>
+                                            <td>E-Mailadresse</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Beispiel">
+                                <source-code language="json">
+                                    {
+                                        "_links": {
+                                            …
+                                        }
+                                        "_id": "621ff9a936997df5baba746e",
+                                        "first_name": "Fox",
+                                        "last_name": "Mulder",
+                                        "email": "mulder@xfiles.com",
+                                        "phone": "+49 721 553181"
+                                    }
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
 
-                            * TODO
-                        </div>
-                    </div>
+                    <lsx-accordion-page title="HATEOAS-Verlinkungen">
+                        <p class="mb-0">
+                            Die Startadresse des Webservices soll eine Übersicht mit allen
+                            Collections liefern, wobei zu jeder Collection die URLs, HTTP-Verben
+                            und URL-Parameter zum Durchsuchen der Collections und zur Anlage neuer
+                            Einträge mitgeteilt werden sollen.
+                        </p>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schema">
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <tt>HATEOAS_Collection</tt>
+                                        <span class="float-end">Beschreibung einer einzelnen Collection</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><tt>_name</tt></td>
+                                            <td>String</td>
+                                            <td>Name der Collection</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>query</tt></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Durchsuchen der Collection</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>create</tt></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zur Anlage neuer Einträge</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <tt>HATEOAS_Link</tt>
+                                        <span class="float-end">Details zu einem Link</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><tt>url</tt></td>
+                                            <td>String</td>
+                                            <td>URL-Pfad relativ zur Startadresse des Webservices</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>method</tt></td>
+                                            <td>String</td>
+                                            <td>Zu verwendende HTTP-Methode (z.B. GET oder POST)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>query_params</tt></td>
+                                            <td>Array[String]</td>
+                                            <td>
+                                                <p class="mb-0">
+                                                    Namen aller erlaubten URL-Parameter
+                                                </p>
+                                                <p class="text-secondary">
+                                                    <small>
+                                                        Der Einfachheit halber ohne weitere Details,
+                                                        wie z.B. dem Datentyp der Parameter oder welche Parameter optional sind. Es wird
+                                                        davon ausgeganen, dass es keine Pflichtparameter gibt und der Aufrufer weiß, in
+                                                        welchem Format die Werte übergeben werden müssen.
+                                                    </small>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Beispiel">
+                                <source-code language="json">
+                                    [
+                                        {
+                                            "_name": "address",
+                                            "query": {
+                                                "url": "/address",
+                                                "method": "GET",
+                                                "query_params": ["search", "first_name", "last_name", "phone", "email"]
+                                            },
+                                            "create": {
+                                                "url": "/address",
+                                                "method": "POST",
+                                            }
+                                        }
+                                    ]
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+
+                        <p class="mb-0">
+                            Jede Ressource des Webserivces (hier also jeder Adressbucheintrag) soll
+                            darüber hinaus alle notwendigen Informationen liefern, damit ein Client
+                            weiß, wie er die Ressource lesen, ändern und löschen kann.
+                        </p>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schema">
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <tt>HATEOAS_Resource</tt>
+                                        <span class="float-end">Links zu einer einzelnen Ressource</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><tt>read</tt></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Lesen der Ressource</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>update</tt></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Überschreiben der Ressource</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>patch</tt></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Ändern einzelner Felder der Ressource</td>
+                                        </tr>
+                                        <tr>
+                                            <td><tt>delete</tt></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Löschen der Ressource</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Beispiel">
+                                <source-code language="json">
+                                    {
+                                        "_id": "621ff9a936997df5baba746e",
+                                        "first_name": "Fox",
+                                        "last_name": "Mulder",
+                                        …
+
+                                        "_links": {
+                                            "read": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "GET",
+                                            },
+                                            "update": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "PUT",
+                                            },
+                                            "patch": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "PATCH",
+                                            },
+                                            "delete": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "DELETE",
+                                            },
+                                        },
+                                    }
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+                </lsx-accordion>
+            </section>
+
+            <section data-title="Definition der URL-Endpunkte und HTTP-Nachrichten" class="limited-width">
+                <div class="markdown">
+                    Anhand der Schemadefinitionen des Datenmodells können nun die URLs des
+                    Webservices definiert werden. Zu jeder URL müssen dann die erlaubten
+                    HTTP-Verben und zu jedem Verb der Aufbau der HTTP-Anfrage und der
+                    HTTP-Antwort definiert werden.
+                </div>
+
+                <lsx-tab-pages>
+                    <lsx-tab-page title="/">
+                        <p>
+                            Die Wurzeladresse des Webservices liefert lediglich eine Übersicht
+                            aller Collections mit ihren wichtigsten URLs als Einstieg für
+                            HATEOAS-fähige Clients.
+                        </p>
+
+                        <lsx-accordion>
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><tt>GET</tt></b>
+                                    <span class="float-end">HATEOAS-Übersicht abrufen</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Array[HATEOAS_Collection]</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Beispiel">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                GET / HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                [
+                                                    {
+                                                        "_name": "address",
+                                                        "query": {
+                                                            "url": "/address",
+                                                            "method": "GET",
+                                                            "query_params": ["search", "first_name", "last_name", "phone", "email"]
+                                                        },
+                                                        "create": {
+                                                            "url": "/address",
+                                                            "method": "POST",
+                                                        }
+                                                    }
+                                                ]
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                <lsx-accordion-content>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="/address">
+                        <p>
+                            Da es sich hierbei um eine Collection handelt, kann diese mit einer
+                            <tt>GET</tt>-Anfrage durchsucht oder mit <tt>POST</tt> zur Anlage
+                            neuer Einträge verwendet werden.
+                        </p>
+
+                        <lsx-accordion>
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><tt>GET</tt></b>
+                                    <span class="float-end">Adressen suchen</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Query-Parameter">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Parameter</th>
+                                                        <th>Datentyp</th>
+                                                        <th>Beschreibung</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td><tt>first_name</tt></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchter Vorname</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><tt>last_name</tt></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchter Nachname</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><tt>phone</tt></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchte Telefonnummer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><tt>email</tt></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchte E-Mailadresse</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Array[Address]</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Beispiel">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                GET /address?first_name=Fox HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                [
+                                                    {
+                                                        "_links": {
+                                                            …
+                                                        }
+                                                        "_id": "621ff9a936997df5baba746e",
+                                                        "first_name": "Fox",
+                                                        "last_name": "Mulder",
+                                                        "email": "mulder@xfiles.com",
+                                                        "phone": "+49 721 553181"
+                                                    }
+                                                ]
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                <lsx-accordion-content>
+                            </lsx-accordion-page>
+
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><tt>POST</tt></b>
+                                    <span class="float-end">Neue Adresse anlegen</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Request Body">
+                                            <tt>Address</tt>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>201 Created</td>
+                                                    <td>Array[Address]</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Beispiel">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                POST /address HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 201 Created
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                <lsx-accordion-content>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="/address/{id}">
+                        <p>
+                            Gemäß den REST-Prinzipien besitzt jeder Adressbucheintrag besitzt eine eindeutige
+                            URL. Über diese kann er gelesen, überschrieben, geändert und gelöscht werden.
+                        </p>
+
+                        <lsx-accordion>
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><tt>GET</tt></b>
+                                    <span class="float-end">Adresse lesen</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Beispiel">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                GET /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><tt>PUT</tt></b>
+                                    <span class="float-end">Adresse überschreiben</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Request Body">
+                                            <tt>Address</tt>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Beispiel">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                PUT /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "fox.mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "fox.mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><tt>PATCH</tt></b>
+                                    <span class="float-end">Einzelne Felder ändern</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Request Body">
+                                            <tt>Address</tt>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Beispiel">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                PATCH /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "email": "fox.mulder@xfiles.com",
+                                                }
+                                            </source-code>
+
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "fox.mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><tt>DELETE</tt></b>
+                                    <span class="float-end">Adresse löschen</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>–</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+
+                                        <lsx-tab-page title="Beispiel">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                DELETE /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </section>
+
+            <section data-title="Erstellen der OpenAPI-Spezifikation mit Stoplight Studio">
+                <div id="openapi_thumbnails" class="d-flex justify-content-center align-items-center flex-wrap gap-3"></div>
+
+                <script>
+                    function create_thumbnails(items) {
+                        let container = document.getElementById("openapi_thumbnails");
+                        let html = "";
+
+                        for (let item of items) {
+                            html += `
+                                <div class="dhbw-thumbnail" onclick="open_modal_image('${item[0]}');">
+                                    <img src="${item[0]}" class="img-thumbnail w-100" />
+                                    ${item[1]}
+                                </div>
+                            `;
+                        }
+
+                        container.innerHTML = html;
+                    }
+
+                    function open_modal_image(url) {
+                        let divElement = document.createElement("div");
+                        divElement.classList.add("dhbw-modal");
+
+                        let imgElement = document.createElement("img");
+                        imgElement.src = url;
+                        imgElement.classList.add("img-responsive");
+                        imgElement.classList.add("img-thumbnail");
+                        divElement.appendChild(imgElement);
+
+                        divElement.addEventListener("click", () => {
+                            divElement.remove();
+                        });
+
+                        document.querySelector("body").appendChild(divElement);
+                    }
+
+                    create_thumbnails([
+                        ["stoplight01.png", "1. Neue API anlegen"],
+                        ["stoplight02.png", "2. OpenAPI-Version 3.0 auswählen!"],
+                        ["stoplight03.png", "3. Allgemeine Informationen eintragen"],
+                        ["stoplight04.png", "4. Vordefinierte Pfade und Modelle löschen (Rechtsklick)"],
+                        ["stoplight05.png", "5. Neues Datenmodellschema anlegen"],
+                        ["stoplight06.png", "6. Name <tt>Address</tt> eingeben und weitere anlegen"],
+                        ["stoplight07.png", "7. Name <tt>HATEOAS_Collection</tt> eingeben und weitere anlegen"],
+                        ["stoplight08.png", "8. Name <tt>HATEOAS_Resource</tt> eingeben und weitere anlegen"],
+                        ["stoplight09.png", "9. Name <tt>HATEOAS_Link</tt> eingeben und schließen"],
+                        ["stoplight10.png", "10. Schemadefinition <tt>Address</tt> (mit <tt>$ref</tt>-Verweis)"],
+                        ["stoplight11.png", "11. Schemadefinition <tt>HATEOAS_Collection</tt>"],
+                        ["stoplight12.png", "12. Schemadefinition <tt>HATEOAS_Resource</tt>"],
+                        ["stoplight13.png", "13. Schemadefinition <tt>HATEOAS_Link</tt> (mit String-Array)"],
+                        ["stoplight14.png", "14. Tags für Zwischenüberschriften anlegen"],
+                        ["stoplight15.png", "15. Neuen URL-Endpunkt anlegen"],
+                        ["stoplight16.png", "16. URL <tt>/</tt> definieren und weitere anlegen"],
+                        ["stoplight17.png", "17. URL <tt>/address</tt> definieren und weitere anlegen"],
+                        ["stoplight18.png", "18. URL <tt>/address/{id}</tt> definieren und schließen"],
+                        ["stoplight19.png", "19. Beschreibung zur URL <tt>/</tt> eingeben und Response anlegen"],
+                        ["stoplight20.png", "20. Response Body hinzufügen"],
+                        ["stoplight21.png", "21. <tt>$ref</tt>-Verweis auf <tt>HATEOAS_Collection</tt>"],
+                        ["stoplight22.png", "22. Beschreibung und Query-Parameter zu <tt>GET</tt> <tt>/address</tt> anlegen"],
+                        ["stoplight23.png", "23. Alle Query-Parameter zu <tt>GET</tt> <tt>/address</tt>"],
+                        ["stoplight24.png", "24. Response Body zu Statuscode 200: Array mit Adressen"],
+                        ["stoplight25.png", "25. Request Body zu <tt>POST</tt> <tt>/address</tt> anlegen"],
+                        ["stoplight26.png", "26. <tt>$ref</tt>-Verweise auf <tt>Address</tt> für Anfrage und Antwort"],
+                        ["stoplight27.png", "27. HTTP-Response für <tt>GET</tt> <tt>/address/{id}</tt>, Statuscode 200"],
+                        ["stoplight28.png", "28. HTTP-Response für <tt>GET</tt> <tt>/address/{id}</tt>, Statuscode 404"],
+                        ["stoplight29.png", "29. Anfrage- und Antwortdaten für <tt>PUT</tt> <tt>/address/{id}</tt>"],
+                        ["stoplight30.png", "30. Anfrage- und Antwortdaten für <tt>PATCH</tt> <tt>/address/{id}</tt>"],
+                        ["stoplight31.png", "31. Keine HTTP-Bodies für <tt>DELETE</tt> <tt>/address/{id}</tt>"],
+                        ["stoplight32.png", "32. OpenAPI-Spezifikation als Datei herunterladen (Rechtsklick)"],
+                        ["stoplight33.png", "33. Optionen für den Export der OpenAPI-Datei"],
+                    ]);
+                </script>
+            </section>
+
+            <section data-title="Ergebnis">
+                <a
+                    href="https://editor.swagger.io/?url=https://raw.githubusercontent.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/main/Beispielanwendung%20Adressbuch/Backend/src/api/openapi.yaml"
+                    target="_blank"
+                >
+                    Link zum Swagger Editor
+                </a>
+                <img src="swagger-editor.png" class="img-responsive img-thumbnail" />
+            </section>
+
+            <!-- ============================== -->
+            <!-- Programmierung der Serverseite -->
+            <!-- ============================== -->
+            <section data-title="Programmierung der Serverseite" data-chapter></section>
+            <section data-title="Programmierung der Serverseite" data-background-image="../trennfolie.jpg"></section>
+
+            <section data-title="Vorbereitungen zur Entwicklung">
+                <div class="markdown dhbw-limited-width m-auto mb-5">
+                    Für die Backend-Entwicklung benötigen wir eine **Mongo-Datenbank** zum Speichern
+                    der Webservice-Daten sowie eine **Node.js**-Laufzeitumgebung zur Ausführung
+                    des Backend-Quellcodes. Am einfachsten lassen sich diese mit den Docker
+                    Compose Files im Hauptverzeichnis starten. Für die Entwicklung verwenden
+                    wir dabei dei Datei <span class="fn">docker-compose.dev.yml</span>, da sie
+                    es uns ermöglicht, unsere Änderungen am Quellcode in Echtzeit auszuprobieren.
+
+                    * <span class="cmd">docker-compose -f docker-compose.dev.yml up -d</span>: Starten der Docker-Container
+                    * <span class="cmd">docker logs adressbuch_backend_1 -f</span>: Konsolenausgaben des Backendservices anzeigen
+                </div>
+
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="docker1.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="docker2.png" class="d-block w-100 img-thumbnail"/>
+                </div>
+                <!-- <terminal-cast url="demo.cast"></terminal-cast> -->
+            </section>
+
+            <section data-title="Benötigte Dokumentationen" class="limited-width">
+                <div class="markdown">
+                    Serverseitige Webanwendungen und Webservices werden in Node.js/JavaScript
+                    traditionell mit dem Framework [Express](https://expressjs.com/) geschrieben.
+                    Die Programmierung damit ist besonders einfach, allerdings nicht in allen
+                    Punkten optimal auf REST-Webservices abgestimmt. In Anlehnung an Express
+                    haben sich daher eine Vielzahl alternativer Frameworks mit ähnlichem Aufbau
+                    etabliert, von denen wir [Restify](http://restify.com) verwenden.
+
+                    Zusätzlich benötigten wir natürlich die Online-Dokumentation des MongoDB Node.js-Konnektors
+                    griffbereit.
+
+                    * [Restify Dokumentation](http://restify.com/docs/home/)
+                    * [MongoDB Node.js-Konnektor](https://www.mongodb.com/docs/drivers/node/current/)
+                </div>
+
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="restify.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="mongodb.png" class="d-block w-100 img-thumbnail"/>
                 </div>
             </section>
 
-            <!-- ==== -->
-            <!-- TODO -->
-            <!-- ==== -->
-            <section data-title="TODO" class="markdown limited-width">
-                Inhalte hier ...
+            <section data-title="Inhalt des Quellcodeverzeichnises" class="limited-width" id="section-codeverzeichnis">
+                <p>
+                    Das Vorlageprojekt teilit sich in drei Hauptbereiche auf: Frontend,
+                    Backend und Gateway-Server. Die Verzeichnisse und Dateien haben dabei
+                    folgende Bedeutung. Bei Klick auf ein Verzeichnis wird unten sein
+                    Inhalt mit einer kurzen Erklärung dargestellt. Die für das Projekt
+                    anzupassenden Verzeichnisse und Dateien sind in der rechten Spalte
+                    hervorgehoben.
+                </p>
+
+                <table class="dhbw-filetable"></table>
+
+                <!-- <table class="dhbw-filetable">
+
+                    <tr>
+                        <td>
+                            📂
+                        </td>
+                        <td>
+                            <a href="">Frontend</a>
+                        </td>
+                        <td>
+                            Quellcode der Weboberfläche
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            📂
+                        </td>
+                        <td>
+                            <a href="">Backend</a>
+                        </td>
+                        <td>
+                            Quellcode des Backend-Webservices
+                        </td>
+                        <td class="red">
+                            (anpassen)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            📝
+                        </td>
+                        <td>
+                            README.md
+                        </td>
+                        <td>
+                            Beschreibung
+                        </td>
+                        <td></td>
+                    </tr>
+                </table> -->
+            </section>
+
+            <script>
+                const DIRECTORY = 1, FILE = 2;
+
+                let files = {
+                    name: "Hauptverzeichnis",
+                    type: DIRECTORY,
+                    tree: [{
+                        name: "Backend",
+                        type: DIRECTORY,
+                        desc: "Quellcode des Backend-Services",
+                        edit: true,
+                        tree: [{
+                            name: "node_modules",
+                            type: DIRECTORY,
+                            desc: "Installationsverzeichnis für Node.js-Module",
+                            edit: false,
+                            tree: [],
+                        },{
+                            name: "src",
+                            type: DIRECTORY,
+                            desc: "JavaScript-Quellcodes des Servers",
+                            edit: true,
+                            tree: [{
+                                name: "api",
+                                type: DIRECTORY,
+                                desc: "",
+                                edit: true,
+                                tree: [{
+                                    name: "openapi.yaml",
+                                    type: FILE,
+                                    desc: "Formale Spezifikation des Webservices im OpenAPI-Format",
+                                    edit: true,
+                                }],
+                            },{
+                                name: "controller",
+                                type: DIRECTORY,
+                                desc: "Klassen zur technischen Behandlung der HTTP-Anfragen",
+                                edit: true,
+                                tree: [{
+                                    name: "root.controller.js",
+                                    type: FILE,
+                                    desc: "HTTP-Handlerklasse für die Wurzeladresse des Webservices",
+                                    edit: true,
+                                }],
+                            },{
+                                name: "service",
+                                type: DIRECTORY,
+                                desc: "Klassen für die fachliche, nicht-technische Anwendungslogik",
+                                edit: true,
+                                tree: [{
+                                    name: ".gitkeep",
+                                    type: FILE,
+                                    desc: "Dummy-Datei, damit Git das zunächst noch leere Verzeichnis nicht löscht",
+                                    edit: false,
+                                }],
+                            },{
+                                name: "database.js",
+                                type: FILE,
+                                desc: "Singleton-Klasse zum Zugriff auf die Mongo-Datenbank",
+                                edit: true,
+                            },{
+                                name: "index.js",
+                                type: FILE,
+                                desc: "Hauptdatei zum Starten des Backend-Services",
+                                edit: true,
+                            },{
+                                name: "utils.js",
+                                type: FILE,
+                                desc: "Sonstige Hilfsfunktionen",
+                                edit: false,
+                            }],
+                        },{
+                            name: "Dockerfile",
+                            type: FILE,
+                            desc: "Docker File zum Bauen eines produktiven Docker Images",
+                            edit: false,
+                        },{
+                            name: "package.json",
+                            type: FILE,
+                            desc: "Beschreibung des Node.js-Modules und seiner Abhängigkeiten",
+                            edit: false,
+                        },{
+                            name: "package-lock.json",
+                            type: FILE,
+                            desc: "Von Node.js erzeugte Datei mit der exakten Version aller Abhängigkeiten",
+                            edit: false,
+                        },{
+                            name: "README.md",
+                            type: FILE,
+                            desc: "Dokumentation und wichtige Hinweise zum Backend",
+                            edit: true,
+                        }],
+                    },{
+                        name: "Frontend",
+                        type: DIRECTORY,
+                        desc: "Quellcode der SPA-Benutzeroberfläche",
+                        edit: true,
+                        tree: [{
+                            name: "build",
+                            type: DIRECTORY,
+                            desc: "Gebauter Quellcode für das Deployment auf einem Webserver",
+                            edit: false,
+                            tree: [],
+                        },{
+                            name: "node_modules",
+                            type: DIRECTORY,
+                            desc: "Installationsverzeichnis für Node.js-Module",
+                            edit: false,
+                            tree: [],
+                        },{
+                            name: "scripts",
+                            type: DIRECTORY,
+                            desc: "Hilfsskripte zum Bauen der Webanwendung",
+                            edit: false,
+                            tree: [{
+                                name: "build-static.sh",
+                                type: FILE,
+                                desc: "Kopiert die statischen Webdateien in das Build-Verzeichnis",
+                                edit: false,
+                            },{
+                                name: "clean.sh",
+                                type: FILE,
+                                desc: "Löscht alle Inhalte des Build-Verzeichnisses",
+                                edit: false,
+                            },{
+                                name: "esbuild-bundle.js",
+                                type: FILE,
+                                desc: "Baut die JavaScript-Dateien und übernimmt sie ins Build-Verzeichnis",
+                                edit: false,
+                            },{
+                                name: "esbuild-serve.js",
+                                type: FILE,
+                                desc: "Startet einen lokalen Entwicklungswebserver zum Testen der App",
+                                edit: false,
+                            }],
+                        },{
+                            name: "src",
+                            type: DIRECTORY,
+                            desc: "JavaScript-Quellcodes des Backends (Input für den Bundler)",
+                            edit: true,
+                            tree: [{
+                                name: "img",
+                                type: DIRECTORY,
+                                desc: "In den Stylesheets verwendete Bilder",
+                                edit: false,
+                                tree: [{
+                                    name: "background.png",
+                                    type: FILE,
+                                    desc: "Hintergrundbild der Seite",
+                                    edit: false,
+                                }]
+                            },{
+                                name: "page-list",
+                                type: DIRECTORY,
+                                desc: "Beispielhafte Unterseite zur Darstellung einer Übersichtsliste",
+                                edit: true,
+                                tree: [{
+                                    name: "page-list.html",
+                                    type: FILE,
+                                    desc: "HTML/CSS-Template der Unterseite",
+                                    edit: true,
+                                },{
+                                    name: "page-list.js",
+                                    type: FILE,
+                                    desc: "JavaScript-Klasse mit der Anwendungslogik der Seite",
+                                    edit: true,
+                                }]
+                            },{
+                                name: "app.css",
+                                type: FILE,
+                                desc: "Globales Stylesheet der Webanwendung",
+                                edit: false,
+                            },{
+                                name: "app.js",
+                                type: FILE,
+                                desc: "Hauptklasse, in der die SPA-Routen definiert und alle anderen Klassen instantiiert werden",
+                                edit: true,
+                            },{
+                                name: "backend.js",
+                                type: FILE,
+                                desc: "Hilfsklasse zur Vereinfachung der Backend-Webserviceaufrufe",
+                                edit: false,
+                            },{
+                                name: "page.js",
+                                type: FILE,
+                                desc: "Basisklasse für Unterseiten der Single Page App",
+                                edit: false,
+                            },{
+                                name: "router.js",
+                                type: FILE,
+                                desc: "Single Page Router zur Navigation innerhalb der App",
+                                edit: false,
+                            }],
+                        },{
+                            name: "static",
+                            type: DIRECTORY,
+                            desc: "Statische Webdateien des Backends (werden unverändert kopiert)",
+                            edit: true,
+                            tree: [{
+                                name: "api.url",
+                                type: FILE,
+                                desc: "Von Docker überschriebene Datei mit der URL das Backend-Services",
+                                edit: false,
+                            },{
+                                name: "favicon.svg",
+                                type: FILE,
+                                desc: "Im Kopfbereich des Browsers angezeigtes Icon der Webanwendung",
+                                edit: false,
+                            },{
+                                name: "index.html",
+                                type: FILE,
+                                desc: "HTML-Grundgerüst der Single Page App (enthält u.a. das Navigationsmenü)",
+                                edit: true,
+                            }],
+                        },{
+                            name: "Dockerfile",
+                            type: FILE,
+                            desc: "Docker File zum Bauen eines produktiven Docker Images",
+                            edit: false,
+                        },{
+                            name: "package.json",
+                            type: FILE,
+                            desc: "Beschreibung des Node.js-Modules und seiner Abhängigkeiten",
+                            edit: false,
+                        },{
+                            name: "package-lock.json",
+                            type: FILE,
+                            desc: "Von Node.js erzeugte Datei mit der exakten Version aller Abhängigkeiten",
+                            edit: false,
+                        },{
+                            name: "README.md",
+                            type: FILE,
+                            desc: "Dokumentation und wichtige Hinweise zum Frontend",
+                            edit: true,
+                        },{
+                            name: "save-api-url.js",
+                            type: FILE,
+                            desc: "Im Docker Container ausgeführtes Skript zum Übernehmen der API-URL in die Datei <tt>static/api.url</tt>",
+                            edit: false,
+                        }],
+                    },{
+                        name: "Gateway",
+                        type: DIRECTORY,
+                        desc: "Konfiguration des Gateway-Servers",
+                        edit: false,
+                        tree: [{
+                            name: "default.conf",
+                            type: FILE,
+                            desc: "Konfiguration für den nginx-Webserver",
+                            edit: false,
+                        },{
+                            name: "Dockerfile",
+                            type: FILE,
+                            desc: "Docker File zum Bauen eines produktiven Docker Images",
+                            edit: false,
+                        },{
+                            name: "README.md",
+                            type: FILE,
+                            desc: "Dokumentation und wichtige Hinweise zum Gateway-Server",
+                            edit: false,
+                        }],
+                    },{
+                        name: "docker-compose.dev.yml",
+                        type: FILE,
+                        desc: "Docker Compose File (Entwicklungsversion)",
+                        edit: false,
+                    },{
+                        name: "docker-compose.prod.yml",
+                        type: FILE,
+                        desc: "Docker Compose File (Produktiversion)",
+                        edit: false,
+                    },{
+                        name: "README.md",
+                        type: FILE,
+                        desc: "Dokumentation des Projekts und wichtige Hinweise",
+                        edit: true,
+                    }],
+                };
+
+                render_filetable = (table, tree, breadcrumb) => {
+                    // Alte Inhalte entfernen
+                    table.innerHTML = "";
+
+                    // Kopfzeile mit Breadcrumb generieren
+                    if (breadcrumb) {
+                        let thead = document.createElement("thead");
+                        table.appendChild(thead);
+
+                        let tr = document.createElement("tr");
+                        thead.appendChild(tr);
+
+                        let th = document.createElement("th");
+                        tr.appendChild(th);
+                        th.colSpan = 4;
+
+                        for (let i in breadcrumb) {
+                            let breadcrumbEntry = breadcrumb[i];
+                            let el = null;
+
+                            if (i == (breadcrumb.length - 1)) {
+                                el = document.createElement("b");
+                            } else {
+                                el = document.createElement("a");
+                                el.href = "";
+
+                                el.addEventListener("click", event => {
+                                    // Ersatz für breadcrumb.slice(0, i+1), das nicht funktioniert?!
+                                    let newBreadcrumb = [... breadcrumb];
+
+                                    for (let j = breadcrumb.length - 1; j > i; j--) {
+                                        newBreadcrumb.pop();
+                                    }
+
+                                    render_filetable(table, breadcrumbEntry.tree, newBreadcrumb);
+                                    event.preventDefault();
+                                });
+                            }
+
+                            el.textContent = breadcrumbEntry.name;
+                            th.appendChild(el);
+                            th.appendChild(document.createTextNode(" / "));
+                        }
+                    }
+
+                    // Einträge der Verzeichnisinhalte erzeugen
+                    for (let node of tree) {
+                        let tr = document.createElement("tr");
+                        table.appendChild(tr);
+
+                        let tdIcon = document.createElement("td");
+                        tr.appendChild(tdIcon);
+                        tdIcon.textContent = node.type === FILE ? "📝" : "📂";
+
+                        let tdName = document.createElement("td");
+                        tr.appendChild(tdName);
+
+                        if (node.type === FILE || !node.tree) {
+                            tdName.textContent = node.name;
+                        } else {
+                            let link = document.createElement("a");
+                            tdName.appendChild(link);
+                            link.href = "";
+                            link.textContent = node.name;
+
+                            link.addEventListener("click", event => {
+                                render_filetable(table, node.tree, [...breadcrumb, node]);
+                                event.preventDefault();
+                            });
+                        }
+
+                        let tdDescription = document.createElement("td");
+                        tr.appendChild(tdDescription);
+                        tdDescription.innerHTML = node.desc;
+
+                        let tdEdit = document.createElement("td");
+                        tr.appendChild(tdEdit);
+                        tdEdit.classList.add("red");
+                        tdEdit.textContent = node.edit ? "(anpassen)" : "";
+                    }
+                };
+
+                for (let table of document.querySelectorAll(".dhbw-filetable")) {
+                    render_filetable(table, files.tree, [files]);
+                }
+            </script>
+
+            <section data-title="Grundgerüst einer Restify-Anwendung" class="limited-width">
+                <div class="markdown">
+                    Mit Node.js entwickelte, serverseitige Webanwendungen und Webservices nutzen
+                    traditionell den eingebauten Webserver von Node.js mit einem sehr einfachen
+                    Programmiermodell zur Definition von Rückruffunktionen, die bei Eintreffen
+                    bestimmter HTTP-Anfragen aufgerufen werden, um eine Antwort zu generieren.
+                    Bei den meisten „Sinatra-style” Frameworks sieht das Quellcode hierfür
+                    relativ ähnlich aus. Die folgenden Beispiele zeigen daher Schritt für Schritt,
+                    wie sich die <span class="fn">index.js</span> des Backend-Services zusammensetzt.
+                </div>
+
+                <lsx-accordion>
+                    <lsx-accordion-page title="Ein Server, der nichts tut">
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    import restify from "restify";
+                                    const server = restify.createServer();
+                                    server.listen(3000);
+                                </source-code>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Erklärung">
+                                <div class="markdown">
+                                    Die einfachste Version einer Restify-Serveranwendung besteht aus
+                                    gerade mal drei Zeilen. Diese importieren das Hauptobjekt des
+                                    Frameworks, erzeugen eine neue Server-Instanz und starten den
+                                    Server. Jedoch macht dieser nichts sinnvolles, da hierfür mindestens
+                                    noch HTTP-Handler-Funktionen registriert werden müssen.
+                                </div>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Grundgerüst mit Handler-Funktionen">
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    // Hauptobjekt des Frameworks importieren
+                                    import restify from "restify";
+
+                                    // Server-Instanz erzeugen
+                                    const server = restify.createServer();
+
+                                    // HTTP-Handler registrieren
+                                    server.get("/address", function(req, res, next) {
+                                        res.send(200, "Hallo, Welt!");
+                                        next();
+                                    });
+
+                                    server.post("/address", function(req, res, next)) {
+                                        ...
+                                    }
+
+                                    server.get("/address/:id", function(req, res, next)) {
+                                        ...
+                                    }
+
+                                    // Server starten
+                                    server.listen(3000);
+                                </source-code>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Erklärung">
+                                <div class="markdown">
+                                    Das <tt>server</tt>-Objekt besitzt für jedes HTTP-Verb eine Methode, mit der
+                                    Callback-Funktionen zur Verarbeitung eintreffender HTTP-Anfrange registriert
+                                    werden können. Sie erwarten hierfür den URL-Pfad sowie die aufzurufende
+                                    Funktion als Parameter. Das Framework prüft daraufhin bei jeder empfangenen
+                                    HTTP-Anfrage das Verb und die URL, um die aufzurufenden Handler-Funktionen
+                                    zu ermitteln.
+
+                                    Die Handler (die im Falle mehrerer zutreffender Handler immer in der Reihenfolge
+                                    ihrer Registrierung durchlaufen werden), bekommen hierfür drei Parameter übergeben:
+
+                                     1. <tt>req</tt>: Ein Objekt mit den Daten der HTTP-Anfrage
+                                     2. <tt>res</tt>: Ein Objekt zur Generierung der HTTP-Antwort
+                                     3. <tt>next</tt>: Funktion, zur Bestätigung der Verarbeitung
+
+                                    Eine besondere Bedeutung kommt dabei dem Parameter <tt>next</tt> zu. Es handelt
+                                    sich dabei ebenfalls um eine Methode, die explizit aufgerufen werden muss,
+                                    die Kontrolle an das Framework zurückzugeben und somit den Aufruf weiterer
+                                    Handler-Funktionen sowie das tatsächliche Zurückschicken der Antwort an den
+                                    Client zu ermöglichen.
+                                </div>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Abweichende Konfigurationswerte zulassen">
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    import restify from "restify";
+
+                                    // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                    const config = {
+                                        port:    parseInt(process.env.PORT) || 3000,
+                                        host:    process.env.HOST           || "localhost",
+                                    };
+
+                                    // Erzeugen der Server-Instanz
+                                    const server = restify.createServer();
+
+                                    // Registrierung der HTTP-Handler
+                                    server.get("/", function(req, res, next) {
+                                        res.send(200, "Hallo, Welt!");
+                                        next();
+                                    });
+
+                                    ...
+
+                                    // Server starten
+                                    server.listen(config.port, config.host, function() {
+                                        console.log("Server wurde erfolgreich gestartet.");
+                                        console.log("Ausführung mit folgender Konfiguration:");
+                                        console.log();
+                                        console.log(config);
+                                        console.log();
+                                    });
+                                </source-code>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Erklärung">
+                                <div class="markdown">
+                                    In dieser Version wird die Portnummer des Servers nicht hart-codiert
+                                    sondern am Anfang des Programms anhand von Umgebungsvariablen zur
+                                    Laufzeit ermittelt. Für die lokale Entwicklung werden hier dieselben
+                                    Standardwerte wie zuvor vorgegeben. In der Produktion können sie durch
+                                    Setzen der Umgebungsvariablen im Betriebssystems jedoch leicht überschrieben
+                                    werden.
+
+                                    Außerden wird hier eine weitere Rückruffunktion aufgerufen, sobald der
+                                    Server erfolgreich gestartet wurde. Sie gibt eine Statusmeldung auf der
+                                    Konsole sowie die verwendeten Konfigurationswerte auf der Konsole aus.
+                                </div>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Registrierung üblicher Middleware-Funktionen">
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    import restify from "restify";
+
+                                    // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                    const config = {
+                                        port:    parseInt(process.env.PORT) || 3000,
+                                        host:    process.env.HOST           || "localhost",
+                                    };
+
+                                    // Erzeugen der Server-Instanz
+                                    const server = restify.createServer();
+
+                                    // Registrierung eingebauter Middleware-Funktionen für gägngie HTTP-Praktiken
+                                    server.use(restify.plugins.acceptParser(server.acceptable));
+                                    server.use(restify.plugins.authorizationParser());
+                                    server.use(restify.plugins.dateParser());
+                                    server.use(restify.plugins.queryParser());
+                                    server.use(restify.plugins.jsonp());
+                                    server.use(restify.plugins.gzipResponse());
+                                    server.use(restify.plugins.bodyParser());
+                                    server.use(restify.plugins.throttle({burst: 100, rate: 50, ip: true}));
+                                    server.use(restify.plugins.conditionalRequest());
+
+                                    // Registrierung der HTTP-Handler
+                                    ...
+
+                                    // Server starten
+                                    server.listen(config.port, config.host, function() {
+                                        console.log("Server wurde erfolgreich gestartet.");
+                                        ...
+                                    });
+                                </source-code>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Erklärung">
+                                <div class="markdown">
+                                    Ein Vorteil von Restify im Vergleich zu anderen Frameworks ist, dass jeder Aspekt
+                                    konfiguriert werden kann. Das Framework macht nichts, was nicht explizit konfiguriert
+                                    wurde. Da bestimmte Funktionen wie das Parsen des Request Body oder die Komprimierung
+                                    der HTTP-Antwort aber sehr oft benötigt werden, können diese durch „Middleware”-Funktionen
+                                    nachgerüstet werden.
+
+                                    Hierfür wird die Methode <src-code language="javascript">server.use()</src-code> verwendet,
+                                    um für alle HTTP-Anfragen durchlaufene Callback-Funktionen zu registrieren. Folgende
+                                    Features werden dadurch nachgerüstet:
+
+                                     1. <tt>acceptParser</tt>: Auswertung des <tt>Accept</tt> Header Fields, um andere
+                                     Datenformate außer JSON zu ermöglichen.
+
+                                     1. <tt>authorizationParser</tt>: Auswertung des <tt>Authorization</tt> Header Fields,
+                                     um personaliserte Anmeldedaten empfangen zu können.
+
+                                     1. <tt>dateParser</tt>: Auswertung des <tt>Date</tt> Header Fields und Prüfung,
+                                     dass dieses nicht zu sehr von der Uhrzeit des Servers abweicht.
+
+                                     1. <tt>queryParser</tt>: Auswertung von URL-Parametern, die als Teil der URL an den
+                                     Server geschickt werden.
+
+                                     1. <tt>jsonp</tt>: Unterstützung für den alten JSONP-Standard zum Abruf von Daten.
+
+                                     1. <tt>gzipResponse</tt>: Komprimierung der Antwort vor ihrem Versand, sofern
+                                     dies vom Client unterstützt wird.
+
+                                     1. <tt>bodyParser</tt>: Parsen verschiedener Datenformate, die als Teil der
+                                     HTTP-Anfrage empfangen werden können.
+
+                                     1. <tt>throttle</tt>: Maximale Anzahl von Verbindungen je IP begrenzen, um somit
+                                     der Verwendung des Mail-Servers zum Versand von Span entgegenzuwirken.
+
+                                     1. <tt>conditionalRequest</tt>: Auswertung des <tt>ETag</tt> Header Fields,
+                                     zur Vermweidung überflüssiger Abrufe unveränderter Daten.
+                                </div>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Definition nützlicher Default-Handler">
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    "use strict"
+
+                                    import restify from "restify";
+
+                                    // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                    ...
+                                    // Erzeugen der Server-Instanz
+                                    const server = restify.createServer();
+
+                                    // Registrierung eingebauter Middleware-Funktionen für gägngie HTTP-Praktiken
+                                    server.use(restify.plugins.acceptParser(server.acceptable));
+                                    ...
+
+                                    // Protokollzeile für jede HTTP-Anfrage auf der Konsole ausgeben
+                                    server.pre((req, res, next) => {
+                                        console.log(new Date(), req.method, req.url, `HTTP ${req.httpVersion}`);
+                                        return next();
+                                    });
+
+                                    // Exceptions ebenfalls auf der Konsole protokollieren, um die betroffene
+                                    // Quellcodestelle identifizieren zu können.
+                                    server.on("restifyError", function(req, res, err, callback) {
+                                        console.error(`${err.stack}\n`);
+                                        return callback();
+                                    });
+
+                                    // CORS-Header setzen, um Zugriffe von anderen URLs außer der Backend-URL zuzulassen.
+                                    // Außerdem OPTIONS-Anfragen (sog. CORS-Preflight) immer mit Status 200 beantworten,
+                                    // damit die Browser ändernde Aufrufe tatsächlich durchführen.
+                                    server.use((req, res, next) => {
+                                        res.header("Access-Control-Allow-Origin", req.header("Origin"));
+                                        res.header("Access-Control-Allow-Methods", req.header("Access-Control-Request-Method"));
+                                        res.header("Access-Control-Allow-Headers", req.header("Access-Control-Request-Headers"));
+                                        res.header("Access-Control-Allow-Credentials", "true");
+                                        res.header("Vary", "Origin");
+                                        return next();
+                                    });
+
+                                    server.opts("*", (req, res, next) => {
+                                        res.status(200);
+                                        res.send({});
+                                        next();
+                                    });
+
+                                    // HTTP-Controller registrieren
+                                    ...
+
+                                    // Server tatsächlich starten
+                                    server.listen(config.port, config.host, function() {
+                                        console.log("Server wurde erfolgreich gestartet.");
+                                        ...
+                                    });
+                                </source-code>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Erklärung">
+                                <div class="markdown">
+                                    In dieser Variante werden die speziell in Restify enthaltenen Methoden
+                                    <src-code language="javascript">server.pre()</src-code> und
+                                    <src-code language="javascript">server.on()</src-code> verwendet,
+                                    um für jede HTTP-Anfrage eine Protokollzeile auf der Konsole auszugeben
+                                    bzw. nicht abgefangene Exceptions zu protokollieren.
+
+                                    Darüber hinaus werden zwei Handler-Funktionen zur Umgehung typischer
+                                    CORS-Restriktionen bei der Entwicklung verteilter Webanwendungen zu
+                                    umgehen (Vgl. <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank">Wikipedia</a>).
+                                </div>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+                </lsx-accordion>
+            </section>
+
+            <section data-title="Integration der OpenAPI-Spezifkation" class="limited-width">
+                <div class="markdown">
+                    Da die Generierung von Serveranwendungen mit OpenAPI noch in den Kinderschuhen
+                    steckt, wird die OpenAPI-Spezifikation im Vorlageprojekt hauptsächlich genutzt,
+                    um die HTTP-Anfragen und Antworten zu validieren. Der Quellcode zur Verarbeitung
+                    der Anfrage bleibt jedoch weiterhin komplett selbst entwickelt. Zusätzlich
+                    besteht für Clients die Möglichkeit, die OpenAPI-Spezifikation vom Server abzurufen
+                    sowie dessen Struktur anhand einer einfachen Form des HATEOAS-Prinzips zur
+                    Laufzeit zu ermitteln.
+
+                    Hierfür können Clients unter der Wurzeladresse des Webservices sowohl die
+                    OpenAPI-Spezifikation hertunerladen als auch eine Auflistung aller „Collections”
+                    mitsamt der erlaubten URLs und HTTP-Verben abrufen. Jede Collection und jede
+                    Ressource beinhaltet darüber hinaus ebenfalls relevante Verlinkungen auf andere
+                    Teile des Webservices.
+                </div>
+
+                <lsx-accordion>
+                    <lsx-accordion-page title="Validierung der HTTP-Anfragen und Antworten">
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    import restify from "restify";
+                                    import OpenApiEnforcer from "openapi-enforcer";
+                                    import OpenApiEnforcerMiddleware from "@dschulmeis/restify-openapi-enforcer-middleware";
+
+                                    // Verzeichnisnamen der Quellcodedatei ermitteln
+                                    import path from "path";
+                                    import { fileURLToPath } from "url";
+                                    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+                                    // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                    ...
+                                    // Erzeugen der Server-Instanz
+                                    ...
+                                    // Protokollzeile für jede HTTP-Anfrage auf der Konsole ausgeben
+                                    ...
+                                    // Exceptions ebenfalls auf der Konsole protokollieren
+                                    ...
+                                    // CORS-Header setzen
+                                    ...
+
+                                    // Anfragen und Antworten gegen die OpenAPI-Spezifikation prüfen und dabei
+                                    // fehlerhafte Anfragen oder Antworten mit einer Exception ablehnen.
+                                    const openApiFile = path.relative("", path.join(__dirname, "api", "openapi.yaml"));
+                                    const openApiValidation = await OpenApiEnforcer(openApiFile, {fullResult: true});
+
+                                    const openApiEnforcer = await OpenApiEnforcer(openApiFile, {
+                                        hideWarnings: true,
+                                        componentOptions: {
+                                            production: process.env.NODE_ENV === "production"
+                                        },
+                                    });
+
+                                    server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
+
+                                    // HTTP-Controller registrieren
+                                    ...
+
+                                    // Server tatsächlich starten
+                                    server.listen(config.port, config.host, function() {
+                                        console.log("Server wurde erfolgreich gestartet.");
+                                        ...
+                                        console.log(`OpenAPI-Spezifikation: ${openApiFile}`)
+
+                                        if (openApiValidation.error) {
+                                            console.error(`${openApiValidation.error}\n`);
+                                        }
+
+                                        if (openApiValidation.warning) {
+                                            console.warn(`${openApiValidation.warning}\n`);
+                                        }
+                                    });
+                                </source-code>
+                            </lsx-tab-page>
+
+                            <lsx-tab-page title="Erklärung">
+                                <div class="markdown">
+                                    Die Validierung der HTTP-Anfrage nund Antworten erfolgt mit dem Node.js-Modul
+                                    <span class="fn">openapi-enforcer</span>, das mit <span class="cmd">npm</span>
+                                    als Abhängigkeit zum Vorlageprojekt installiert wird. Denn dieses kann nahezu
+                                    alle Inhalte einer OpenAPI-Spezifikation auf ihre Einhaltung prüfen, wofür
+                                    lediglich eine kleine, eigene Middleware namens
+                                    <span class="fn">@dschulmeis/openapi-enforcer-middleware</span> geschrieben
+                                    werden musste. Die Middleware fängt alle Anfragen und Antworten ab, wandelt
+                                    sie in das von <span class="fn">openapi-enforcer</span> erwartete Format um
+                                    und wirft eine Exception, wenn eine Abweichung erkannt wurde.
+
+                                    Hierfür muss der Inhalt der OpenAPI-Datei beim Start des Servers eingelesen
+                                    und an das Node.js-Modul übergeben werden. Da dabei auch die OpenAPI-Spezifikation
+                                    selbst überprüft wird, werden die dabei gefundenen Fehler und Warnungen zur Kontrolle
+                                    nach dem Start des Servers auf der Konsole ausgegeben.
+                                </div>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Aufruf der Klasse RootController">
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    import restify from "restify";
+
+                                    // OpenAPI-spezifische Importe
+                                    ...
+                                    // Verzeichnisnamen der Quellcodedatei ermitteln
+                                    ...
+                                    // Sonstige Klassen importieren
+                                    import RootController from "./controller/root.controller.js";
+
+                                    // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                    ...
+                                    // Erzeugen der Server-Instanz
+                                    const server = restify.createServer();
+
+                                    // Protokollzeile für jede HTTP-Anfrage auf der Konsole ausgeben
+                                    ...
+                                    // Exceptions ebenfalls auf der Konsole protokollieren
+                                    ...
+                                    // CORS-Header setzen
+                                    ...
+                                    // Anfragen und Antworten gegen die OpenAPI-Spezifikation prüfen
+                                    ...
+
+                                    // HTTP-Controller registrieren
+                                    new RootController(server, "/", openApiFile);
+
+                                    // Server tatsächlich starten
+                                    server.listen(config.port, config.host, function() {
+                                        console.log("Server wurde erfolgreich gestartet.");
+                                        ...
+                                    });
+                                </source-code>
+                            </lsx-tab-page>
+
+                            <lsx-tab-page title="Erklärung">
+                                <div class="markdown">
+                                    Zur Umsetzung des HATEOAS-Prinzips können die Clients des Webservices
+                                    unter seiner Wurzeladresse eine Übersicht all seiner „Collections” und
+                                    der dazu passenden HTTP-Anfragen abrufen. Zusätzlich kann der Inhalt der
+                                    OpenAPI-Datei abgerufen werden. Da das Hauptprogramme an diesem Punkt
+                                    aber schon ziemlich lang ist, wurde diese Funktionalität in ein neue
+                                    Klasse namens <span class="fn">RootController</span> ausgelagert, wobei
+                                    das Wort <span class="fn">Controller</span> hier andeuten soll, dass sich
+                                    die Klassen um die Bearbeitung von HTTP-Anfragen dreht.
+                                </div>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Inhalt der Klasse RootController">
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    "use strict"
+
+                                    import {wrapHandler} from "../utils.js";
+                                    import path from "path";
+                                    import { readFile } from "fs/promises";
+
+                                    // Konstruktor
+                                    export default class RootController {
+                                        constructor(server, prefix, openApiFile) {
+                                            this._openApiFile = openApiFile;
+
+                                            server.get(prefix, wrapHandler(this, this.index));
+                                            server.get(prefix + "/openapi.yaml", wrapHandler(this, this.openApi));
+                                        }
+
+                                        // GET /: Abruf einer HATEOAS-Übersicht aller Collections
+                                        async index(req, res, next) {
+                                            res.sendResult([
+                                                {
+                                                    _name: "address",
+                                                    query: {url: "/address", method: "GET", query_params: ["search", "first_name", "last_name", "phone", "email"]},
+                                                    create: {url: "/address", method: "POST"},
+                                                }
+                                            ]);
+
+                                            next();
+                                        }
+
+                                        //
+                                        async openApi(req, res, next) {
+                                            if (req.query.openapi !== undefined) {
+                                                let filecontent = await readFile(this._openApiFile);
+
+                                                res.status(200);
+                                                res.header("content-type", "application/openapi+yaml");
+                                                res.sendRaw(filecontent);
+                                            } else {
+                                                res.send();
+                                            }
+
+                                            next();
+                                        }
+                                    }
+                                </source-code>
+                            </lsx-tab-page>
+
+                            <lsx-tab-page title="Erklärung">
+                                <div class="markdown">
+                                    ... TODO ...
+                                </div>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+                </lsx-accordion>
+            </section>
+
+            <section data-title="Integration der Mongo-Datenbank" class="limited-width">
+                <!-- ... TODO ... -->
+                <source-code language="javascript">
+                    // Import der Klasse zum Zugriff auf die MongoDB
+                    import { MongoClient } from "mongodb";
+
+                    // Verbindung mit dem Datenbankserver herstellen
+                    let client = new MongoClient("mongodb://localhost:27017");
+                    await this.client.connect();
+
+                    // Öffnen einer Datenbank (Sammelcontainer für mehrere Collections)
+                    let database = this.client.db("adressbook");
+
+                    // Zugriff auf eine einzelne Collection ermöglichen (beinhaltet die Daten)
+                    let addresses = this.database.collection("addresses");
+
+                    // Anzahl der vorhandenen Einträge schätzen
+                    let count = await addresses.estimatedDocumentCount();
+
+                    // Neue Einträge anlegen
+                    addresses.insertMany([
+                        {
+                            first_name: "Willy",
+                            last_name: "Tanner",
+                            phone: "+49 711 564412",
+                            email: "willy.tanner@alf.com",
+                        },
+                        {
+                            first_name: "Michael",
+                            last_name: "Knight",
+                            phone: "+49 721 554194",
+                            email: "michael@knight-rider.com",
+                        },
+                    ]);
+
+                    // Auslesen eines Eintrags anhand seiner ID
+                    let id = "47110815";
+                    let result = await addresses.findOne({_id: new ObjectId(id)});
+
+                    // Löschen eines Eintrags anhand seiner ID
+                    let result = this._addresses.deleteOne({_id: new ObjectId(id)});
+                    let count = result.deletedCount;
+
+                    // Speichern eines neuen Eintrags
+                    let newAddress = {
+                        first_name: address.first_name || "",
+                        last_name:  address.last_name  || "",
+                        phone:      address.phone      || "",
+                        email:      address.email      || "",
+                    };
+
+                    let result = await this._addresses.insertOne(newAddress);
+
+                    // Einträge suchen und zurückgeben
+                    let query = {
+                        first_name: "Willy",
+                    };
+
+                    let cursor = addresses.find(query, {
+                        sort: {
+                            first_name: 1,
+                            last_name: 1,
+                        }
+                    });
+
+                    let result = cursor.toArray();
+
+                    // Ändern eines Eintrags
+                    let updateDoc = {
+                        $set: {
+                            first_name: "Willy",
+                            last_name: "Tanner",
+                        },
+                    }
+
+                    await addresses.updateOne({_id: new ObjectId(id)}, updateDoc);
+                    let newEntry = addresses.findOne({_id: new ObjectId(id)});
+                </source-code>
+            </section>
+
+            <section data-title="Aufteilung in Controller und Services" class="limited-width">
+                ... TODO ...
+            </section>
+
+            <!-- <lsx-accordion>
+                <lsx-accordion-page title="...">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                ...
+                            </source-code>
+                        </lsx-tab-page>
+
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                ...
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="...">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                ...
+                            </source-code>
+                        </lsx-tab-page>
+
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                ...
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="...">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                ...
+                            </source-code>
+                        </lsx-tab-page>
+
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                ...
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="...">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                ...
+                            </source-code>
+                        </lsx-tab-page>
+
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                ...
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+            </lsx-accordion> -->
+
+            <!-- ============================== -->
+            <!-- Programmierung der Clientseite -->
+            <!-- ============================== -->
+            <section data-title="Programmierung der Clientseite" data-chapter></section>
+            <section data-title="Programmierung der Clientseite" data-background-image="../trennfolie.jpg"></section>
+
+            <section data-title="Vorbereitungen zur Entwicklung">
+                <div class="markdown dhbw-limited-width m-auto mb-5">
+                    Für die Backend-Entwicklung muss einerseits das Backend mit seiner Datenbank
+                    laufen, andererseits benötigen wir hier aber eine weitere **Node.js**-Umgebung,
+                    welche zur Installation der benötigten JavaScript-Bibliotheken und zur Ausführung
+                    des [esbuild](https://esbuild.github.io/) Bundlers benötigt wird. Denn erst duch
+                    den Bundler wird der Quellcode des Frontends mit dem Quellcode der verwendeten
+                    Bibliotheken kombiniert, so dass beide vom Browser geladen werden können. Auch
+                    diese Aufgaben erledigen die Docker Compose Files im Hauptverzeichnis.
+
+                    * <span class="cmd">docker-compose -f docker-compose.dev.yml up -d</span>: Starten der Docker-Container
+                    * <span class="cmd">docker logs adressbuch_frontend_1 -f</span>: Konsolenausgaben des Frontends anzeigen
+                </div>
+
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="docker1.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="docker3.png" class="d-block w-100 img-thumbnail"/>
+                </div>
+                <!-- <terminal-cast url="demo.cast"></terminal-cast> -->
+            </section>
+
+            <section data-title="Benötigte Dokumentationen" class="limited-width">
+                <div class="markdown">
+                    Bei der Programmierung der Frontend-App helfen uns natürlich die Vorlesungsunterlagen
+                    aus dem dritten Semester weiter, da die Struktur genaue der damals besprochenen Single
+                    Page App entspricht. Hinzu kommt lediglich noch die „Fetch API” des Browsers, mit der
+                    HTTP-Aufrufe aus JavaScript heraus erzeugt werden können.
+
+                    [MDN: Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+                </div>
+
+                <img src="mdn-fetch-api.png" class="d-block w-100 img-thumbnail"/>
+            </section>
+
+            <section data-clone="#section-codeverzeichnis" class="limited-width"></section>
+
+            <section data-title="Anlegen einer neuen SPA-Unterseite" class="limited-width">
+                ... TODO ...
+            </section>
+
+            <section data-title="Daten abrufen mit der Fetch API" class="limited-width">
+                ... TODO ...
+            </section>
+
+            <section data-title="Verwendung der vorprogrammierten Backend-Klasse" class="limited-width">
+                ... TODO ...
             </section>
 
             <!-- ==================== -->

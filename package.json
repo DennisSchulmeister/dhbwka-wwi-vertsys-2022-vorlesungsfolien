@@ -38,10 +38,10 @@
         "@dschulmeis/ls-plugin-highlight.js": "^2.0.3",
         "@dschulmeis/ls-plugin-markdown": "^1.0.0",
         "@dschulmeis/mini-tutorial.js": "^2.2.1",
+        "asciinema-player": "^3.0.0-rc.2",
         "bootstrap": "^5.1.3",
         "esbuild": "^0.14.24",
         "esbuild-plugin-less": "^1.1.6",
         "shelljs": "^0.8.5"
-    },
-    "dependencies": {}
+    }
 }
