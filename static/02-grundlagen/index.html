@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Grundlagen verteilter Systeme | Verteilte Systeme 2022</title>
+        <title>Grundlagen verteilter Systeme | Verteilte Systeme</title>
 
         <script src="../_bundle.js"></script>
         <link rel="stylesheet" href="../_bundle.css" />
@@ -22,10 +22,11 @@
 
         <!-- Folien -->
         <main>
-            <!-- ============================= -->
-            <!-- Grundlagen verteilter Systeme -->
-            <!-- ============================= -->
-            <section data-title="Grundlagen verteilter Systeme" data-chapter></section>
+            <!-- ==================== -->
+            <!-- Begriffsdefinitionen -->
+            <!-- ==================== -->
+            <section data-title="Begriffsdefinitionen" data-chapter></section>
+            <section data-title="Begriffsdefinitionen" data-background-image="../trennfolie.jpg"></section>
 
             <section data-title="Was ist ein System? (1)" class="markdown limited-width">
                 <lsx-youtube video="UWU14-EK9CE" aspect-ratio="16x9" style="width: 50em; max-width: 100%;"></lsx-youtube>
@@ -48,45 +49,68 @@
                 </blockquote>
             </section>
 
-            <section data-title="Definition nach Andrew Tanenbaum" style="max-width: 55em;">
-                <div class="card p-3 mb-3 markdown">
-                    ## Verteiltes System und verteilte Anwendung {.mt-0}
-
+            <section data-title="Definition nach Andrew Tanenbaum">
+                <div class="markdown dhbw-limited-width mb-3 m-auto">
                     Ein **verteiltes System** ist ein System, in dem sich Hardware-
                     und Softwarekomponenten auf mehreren Computern befinden und diese
                     nur über den Austausch von Nachrichten untereinander kommunizieren,
                     um ihre Aktionen zu koordinieren.
 
-                    Eine **verteilte Anwendung** ist eine Anwendung, die ein verteiltes
+                    <!-- Eine **verteilte Anwendung** ist eine Anwendung, die ein verteiltes
                     System zur Lösung des Anwendungsproblems nutzt und aus mehreren
                     Komponenten besteht, die über wohl-definierte Schnittstellen mit anderen
-                    Komponenten des Systems und dem Anwender kommunizieren. {.mb-0}
+                    Komponenten des Systems und dem Anwender kommunizieren. {.mb-0} -->
                 </div>
-
-                <div class="card p-3 markdown bg-light">
-                    ## Aufgaben {.mt-0}
-
-                     1. Wenden Sie die beiden Definitionen auf Ihnen bekannte
-                        Beispiele aus dem Alltag an.
-                     1. Welche Art der Programmierung soll durch die Definitionen
-                        wohl ausgeschlossen werden (Stichwort „Threads”)?
-                     1. Warum sind die beiden Definitionen aus heutiger Sicht
-                        möglicherweise problematisch?
-                        <!--
-                            Antwort: Abgrenzung der Begriffe ist problematisch,
-                            und außerdem ist heute fast jede Anwendung auch eine
-                            verteilte Anwendung.
-                        -->
-                     1. Wie viele Rechner werden mindestens benötigt, um eine
-                        verteilte Anwendung entwickeln zu können?
-                </div>
+    
+                <lsx-tab-pages style="width: 70em; max-width: 100%;" class="m-auto">
+                    <lsx-tab-page title="ARPANET / Internet">
+                        <div class="card p-3">
+                            <img src="arpanet.png" class="d-block w-100"/>
+                        </div>
+                    </lsx-tab-page>
+                    <lsx-tab-page title="Webanwendungen">
+                        <div class="card p-3">
+                            <img src="webapp.png" class="d-block w-100" />
+                        </div>
+                    </lsx-tab-page>
+                    <lsx-tab-page title="Internet of Things">
+                        <div class="container-fluid">
+                            <div class="row gap-3">
+                                <div class="col-md card p-3">
+                                    <img src="pubsub-iot.png" class="d-block w-100" />
+                                </div>
+                            </div>
+                            <div class="row gap-3">
+                                <div class="col-md card p-3">
+                                    <img src="iot.jpg" class="d-block w-100" />
+                                </div>
+                                <div class="col-md card p-3">
+                                    <img src="iot-cartoon.png" class="d-block w-100" />
+                                </div>
+                            </div>
+                        </div>
+                    </lsx-tab-page>
+                    <lsx-tab-page title="Blockchain">
+                        <div class="container-fluid">
+                            <div class="row gap-3">
+                                <div class="col-md card p-3">
+                                    <img src="blockchain1.png" class="d-block w-100" />
+                                </div>
+                            </div>
+                            <div class="row gap-3">
+                                <div class="col-md card p-3">
+                                    <img src="blockchain2.png" class="d-block w-100" />
+                                </div>
+                            </div>
+                            <div class="row gap-3">
+                                <div class="col-md card p-3">
+                                    <img src="blockchain5.png" class="d-block w-100" />
+                                </div>
+                            </div>
+                        </div>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
             </section>
-
-            <!--
-            <section data-title="Verteilte Kommunikation früher und heute">
-                TODO: Schreiben / Animieren
-            </section>
-            -->
 
             <section data-title="Verteilte Systeme im Alltag" data-background-color="rgb(210,190,210)" class="limited-width">
                 <lsx-grid-fluid>
@@ -148,7 +172,307 @@
                 </lsx-grid-fluid>
             </section>
 
-            <section data-title="Allgemeine Anforderungen" style="max-width: 65em;">
+            <section data-title="Von Clients, Servern und Peers">
+                <table class="m-auto mb-5">
+                    <tr>
+                        <td style="padding-right: 0.5em;">
+                            💿
+                        </td>
+                        <td>
+                            <b>Server</b>
+                        </td>
+                        <td style="padding-bottom: 0.33em;">
+                            Langlaufendes Programm, das einen Dienst zur Verfügung stellt.
+                            <span style="color: darkred;">
+                                Wartet darauf, bis sich ein Client mit ihm verbindet.
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 0.33em;">
+                            💿
+                        </td>
+                        <td>
+                            <b>Client</b>
+                        </td>
+                        <td style="padding-bottom: 0.33em;">
+                            Kurzlebiges Programm, das den Dienst nutzt.
+                            <span style="color: darkred;">
+                                Stellt hierfür eine Verbindung zum Server her.
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 0.5em;">
+                            💿
+                        </td>
+                        <td>
+                            <b>Peer</b>
+                        </td>
+                        <td style="padding-bottom: 0.66em;">
+                            Spezielles Programm, das sowohl Client als auch Server ist.
+                        </td>
+                    </tr>
+                    <tr style="border: 0px dashed black; border-top-width: 1px;">
+                        <td style="padding-top: 1em; padding-right: 0.5em;">
+                            🖥
+                        </td>
+                        <td style="padding-top: 1em;">
+                            ️<b>Host</b>
+                        </td>
+                        <td style="padding-top: 1em;">
+                            Der Rechner, auf dem die Software läuft.
+                            <span style="color: darkred;">
+                                Oft sagen die Leute „Server” und meinen damit den „Host”.
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+
+                <lsx-tab-pages>
+                    <lsx-tab-page title="Einfache Architekturmuster">
+                        <div class="d-flex gap-3">
+                            <div class="card p-3">
+                                <h3 class="mb-4">Client/Server-Architektur</h3>
+                                <img src="client-server.svg" alt="Skizze mit vielen Clients und einem Server in der Mitte" class="d-block w-100" />
+                            </div>
+                            <div class="card p-3">
+                                <h3 class="mb-4">Peer-to-Peer-Architektur</h3>
+                                <img src="peer-to-peer.svg" alt="Skizze mit vielen untereinander verbundenen Peers" class="d-block w-100" />
+                            </div>
+                        </div>
+                    </lsx-tab-page>
+                    <lsx-tab-page title="Fallbeispiel: Socketprogrammierung mit Node.js">
+                        <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Socketprogrammierung%20mit%20Node.js"></lsx-github-edit>
+
+                        <lsx-grid-fluid class="mt-3 p-0">
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <img src="socket-server.png" class="img-thumbnail d-block w-100" />
+                                </lsx-col>
+                                <lsx-col size="md">
+                                    <img src="socket-client.png" class="img-thumbnail d-block w-100" />
+                                </lsx-col>
+                                <lsx-col size="md">
+                                    <img src="socket-netcat.png" class="img-thumbnail d-block w-100" />
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </section>
+
+            <section data-title="Grundlegende Architekturmodelle" class="w-100">
+                <lsx-tab-pages class="w-100">
+                    <lsx-tab-page title="Grundmodell">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
+                            der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Sehr oft kommt
+                            dabei ein synchrones, den Client blockierendes Request/Reply-Verfahren zum Einsatz, das
+                            besonders einfach zu programmieren ist. Technisch gesehen ist dies aber kein Muss, da
+                            Sockets prinzipiell jede Kommunikationsreihenfolge zulassen.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block dhbw-limited-width m-auto" />
+                        </div>
+                        
+                        <h2>Fallbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Browser und Webserver im World Wide Web
+                            </li>
+                            <li>
+                                Browser App mit Zugriff auf den Server via Websockets
+                            </li>
+                            <li>
+                                Wartungszugang auf einen Rechner per Secure Shell
+                            </li>
+                            <li>
+                                Zugriff auf ein E-Mailpostfach mit IMAP
+                            </li>
+                            <li>
+                                Zentrale Quellcodeverwaltung mit Subversion
+                            </li>
+                            <li>
+                                WebDAV-Zugriff auf einen geteilten Onlineordner
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Dreischichtenarchitektur">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
+                            auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
+                            <b>Anwendungslogik</b> und <b>Datenhaltung</b> zugeordnet. Für die Darstellung wurden früher ausschließlich
+                            native Clients verwendet, die heute zunehmend von Webanwendungen und mobilen Apps verdrängt werden. Die
+                            Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block dhbw-limited-width m-auto" />
+                        </div>
+                        
+                        <h2>Fallbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Jede Webanwendung mit einer Datenbank im Hintergrund
+                            </li>
+                            <li>
+                                Einfache Informationssysteme ohne eigenständigen Präsentationsserver
+                            </li>
+                            <li>
+                                Die meisten ERP- und CRM-Systeme (unter anderem SAP und Navision)
+                            </li>
+                            <li>
+                                Per Webservice erreichbare Microservices
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Vierschichtenarchitektur">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
+                            in eine <b>Präsentations-</b> und eine <b>Anwendungsschicht</b> zerlegt wurde. Dieses Modell
+                            findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block dhbw-limited-width m-auto" />
+                        </div>
+                        
+                        <h2>Fallbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                ERP- und CRM-Systeme mit einem eigenständigen Präsentationsserver
+                            </li>
+                            <li>
+                                Java-Webanwendung mit getrenntem Deployment von Servlets und EJBs
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Microservices">
+                        <h2>Beschreibung</h2>
+                        <p>
+                            Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
+                            ein klar umrissenes Aufgabengebiet, besitzt eine gut dokumentierte und versionierte Schnittstelle und wird in der
+                            Regel von einem eigenen Team entwickelt und betrieben. Entwicklung, Test und Betrieb sind sehr stark automatisiert.
+                            Microservices eignen sich daher oft für große Firmen mit mehreren, unabhängigen Entwicklungsmannschaften.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="microservices.svg" alt="Skizze einer Microservicearchitektur"
+                                style="max-height: 26em; max-width: 100%;" />
+                        </div>
+                        
+                        <h2>Fallbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Amazon gilt allgemein als Vorreiter, obwohl sie den Begriff selbst nicht verwenden
+                            </li>
+                            <li>
+                                Große Internetplattformen wie eBay, Netflix, SoundCloud, Spotify, …
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+                    
+                    <lsx-tab-page title="Reverse Proxy / API-Gateway">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Serverseitig kann ein Reverse Proxy als API-Gateway eingesetzt werden, um die eingehenden Anfragen
+                            zu bündeln. Dadurch wird es möglich, zusätzliche Sicherheitsprüfungen zu implementieren, häufig
+                            angefragte Inhalte zu cachen oder eine transparente Lastverteilung vorzunehmen.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy"
+                                style="max-height: 16em; max-width: 100%; margin-bottom: 2em;" />
+                        </div>
+                        
+                        <h2>Anwendungsbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Steigerung der Performance durch Caching häufig angefragter Daten
+                            </li>
+                            <li>
+                                Implementierung von Zugangsbeschränkungen und Upload Filtern
+                            </li>
+                            <li>
+                                Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
+                            </li>
+                            <li>
+                                Sicherstellen einer vorgelagerten, zentralen Authentifizierung
+                            </li>
+                            <li>
+                                Serverseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+                    
+                    <lsx-tab-page title="Proxy">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
+                            des lokalen Netzwerks ab. Die Anfragen der Clients werden nicht direkt an den Server
+                            sondern an den lokalen Proxy gesendet, der daraufhin entscheiden kann, ob er die
+                            Anfragen weiterleitet oder selbst beantwortet.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy"
+                                style="max-height: 16em; max-width: 100%; margin-bottom: 2em;" />
+                        </div>
+                        
+                        <h2>Anwendungsbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Steigerung der Performance durch Caching häufig angefragter Daten
+                            </li>
+                            <li>
+                                Implementierung von Zugangsbeschränkungen und Content Filtern
+                            </li>
+                            <li>
+                                Clientseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </section>
+
+            <!-- ================== -->
+            <!-- Entwurfsprinzipien -->
+            <!-- ================== -->
+            <section data-title="Entwurfsprinzipien" data-chapter></section>
+            <section data-title="Entwurfsprinzipien" data-background-image="../trennfolie.jpg"></section>
+
+            <section data-title="Die acht Irrtümer verteilter Systeme" class="w-100">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <div class="markdown">
+                        1. Das Netzwerk ist immer verfügbar.
+                        1. Es gibt keine Latenzzeiten.
+                        1. Der Datendurchsatz ist unendlich schnell.
+                        1. Die Kommunikation ist automatisch sicher.
+                        1. Die Netzwerktopologie ist unveränderlich.
+                        1. Es gibt nur einen Administrator.
+                        1. Datentransfer kostet nichts.
+                        1. Das Netzwerk ist homogen.
+                    </div>
+                    <div class="dhbw-limited-width">
+                        <img src="dilbert-1997-01-28.gif" class="d-block w-100 mb-3"/>
+                        <img src="dilbert-1997-01-29.gif" class="d-block w-100 mb-3" />
+                        <img src="dilbert-2018-03-22.gif" class="d-block w-100 mb-3" />
+                        
+                        <small>
+                            <small>
+                                Bildnachweise:
+                                <a href="https://dilbert.com/strip/1997-01-28" target="_blank">Dilbert vom 28.01.1997</a>,
+                                <a href="https://dilbert.com/strip/1997-01-29" target="_blank">Dilbert vom 29.01.1997</a>,
+                                <a href="https://dilbert.com/strip/2018-03-22" target="_blank">Dilbert vom 22.03.2018</a>
+                            </small>
+                        </small>
+                    </div>
+                </div>
+            </section>
+
+            <section data-title="Anforderungen an den Systementwurf" style="max-width: 65em;">
                 <lsx-grid-fluid>
                     <lsx-row>
                         <lsx-col size="md">
@@ -795,167 +1119,271 @@
 
             </section>
 
-            <section data-title="Umgang mit Fehlersituationen">
-                <lsx-grid-fluid>
-                    <lsx-row>
-                        <lsx-col size="md-4">
-                            <h3>Fehler vermeiden</h3>
-                            <img src="fehler-vermeiden.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                            Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
-                        </lsx-col>
-                        <lsx-col size="md-4">
-                            <h3>Fehler erkennen</h3>
-                            <img src="fehler-erkennen.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                            Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
-                        </lsx-col>
-                        <lsx-col size="md-4">
-                            <h3>Fehler maskieren</h3>
-                            <img src="fehler-maskieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                            Zum Beispiel durch spätere Wiederholung des Vorgangs
-                        </lsx-col>
-                    </lsx-row>
-                    <lsx-row>
-                        <lsx-col size="md-4">
-                            <h3>Fehler tolerieren</h3>
-                            <img src="fehler-tolerieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                            Zum Beispiel durch Speichern beider Versionen bei Schreibkonflikten
-                        </lsx-col>
-                        <lsx-col size="md-4">
-                            <h3>Fehler beheben</h3>
-                            <img src="fehler-beheben.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                            Zum Beispiel durch automatisches Umschalten auf ein Hot-Standby
-                        </lsx-col>
-                    </lsx-row>
-                    <lsx-row>
-                        <lsx-col size="md">
+            <section data-title="Fehlertoleranz in verteilten Systemen" class="dhbw-limited-width2">
+                <lsx-tab-pages>
+                    <lsx-tab-page title="Das CAP-Theorem">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="md-5">
+                                    <img src="cap-theorem.png" alt="Visualisierung des CAP-Theorems" style="width: 100%;" />
+                                </lsx-col>
+                                <lsx-col size="md">
+                                    <h4>Consistency (Konsistenz)</h4>
+                                    <p>
+                                        Alle Knoten sehen immer exakt dieselben, konsistenten Daten. Bei replizierten Datenbeständen
+                                        werden die Änderungen daher erst sichtbar, wenn sie in allen Repliken nachgezogen wurden.
+                                    </p>
+                        
+                                    <h4>Availability (Verfügbarkeit)</h4>
+                                    <p>
+                                        Das System ist jederzeit erreichbar und überschreitet niemals die maximal zulässige
+                                        Antwortzeit.
+                                    </p>
+                        
+                                    <h4>Partition Tolerance (Partitionstoleranz)</h4>
+                                    <p>
+                                        Die Anwendung funktioniert auch dann noch, wenn einzelne Teile ausgefallen sind.
+                                    </p>
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <p style="color: darkred;">
+                                        Eine verteilte Anwendung kann immer nur zwei dieser Anforderungen gänzlich erfüllen!
+                                    </p>
+                                    <p>
+                                        Moderne Anwendungen sind deshalb oft nur „eventuell-konsistent”. Beispielsweise kann es
+                                        in Facebook vorkommen, dass ein Like in den ersten Sekunden nicht für alle Profilbesucher
+                                        sichtbar wird, da nicht alle auf derselben Datenreplik arbeiten.
+                                    </p>
+                                    <p>
+                                        eBay hingegen würde bei der Gebotsabgabe sicher lieber eine etwas längere Antwortzeit in
+                                        Kauf nehmen, anstatt sich überschreibende Gebote zu riskieren.
+                                    </p>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Strategien zur Fehlerbehandlung">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler vermeiden</h3>
+                                    <img src="fehler-vermeiden.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
+                                </lsx-col>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler erkennen</h3>
+                                    <img src="fehler-erkennen.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
+                                </lsx-col>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler maskieren</h3>
+                                    <img src="fehler-maskieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch spätere Wiederholung des Vorgangs
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler tolerieren</h3>
+                                    <img src="fehler-tolerieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch Speichern beider Versionen bei Schreibkonflikten
+                                </lsx-col>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler beheben</h3>
+                                    <img src="fehler-beheben.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch automatisches Umschalten auf ein Hot-Standby
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <small>
+                                        <small>
+                                            Bildnachweise:
+                                            <a href="https://pixabay.com/en/rappelling-rope-safety-security-755400/" target="_blank">Pixabay:
+                                                cegoh</a>,
+                                            <a href="https://pixabay.com/en/equipment-hospital-ecg-3089883/" target="_blank">Pixabay:
+                                                hioahelsefag</a>,
+                                            <a href="https://pixabay.com/en/redirect-shield-tree-attention-2257746/" target="_blank">Pixabay:
+                                                Digitalpfade</a>,
+                                            <a href="https://pixabay.com/en/home-single-family-home-on-the-head-2308799/"
+                                                target="_blank">Pixabay: ulleo</a>,
+                                            <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay:
+                                                Alexas_Fotos</a>
+                                        </small>
+                                    </small>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Fallbeispiel: Coffe Shop">
+                        <a href="https://ieeexplore.ieee.org/document/1407829" target="_blank">IEEE Software, Volume: 22, Issue: 2, Pages 64–66</a>
+                        <div class="d-flex gap-3">
+                            <img src="coffeeshop1.png" class="img-thumbnail d-block w-100"/>
+                            <img src="coffeeshop2.png" class="img-thumbnail d-block w-100" />
+                            <img src="coffeeshop3.png" class="img-thumbnail d-block w-100" />
+                        </div>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </section>
+
+            <section data-title="Zeitsynchronisation verteilter Anwendungen" class="dhbw-limited-width2">
+                <lsx-tab-pages>
+                    <lsx-tab-page title="Fallbeispiel">
+                        <img src="zeitproblem-karte.jpg" class="d-block img-fluid img-thumbnail" />
+                        <p>
                             <small>
                                 <small>
                                     Bildnachweise:
-                                    <a href="https://pixabay.com/en/rappelling-rope-safety-security-755400/" target="_blank">Pixabay: cegoh</a>,
-                                    <a href="https://pixabay.com/en/equipment-hospital-ecg-3089883/" target="_blank">Pixabay: hioahelsefag</a>,
-                                    <a href="https://pixabay.com/en/redirect-shield-tree-attention-2257746/" target="_blank">Pixabay: Digitalpfade</a>,
-                                    <a href="https://pixabay.com/en/home-single-family-home-on-the-head-2308799/" target="_blank">Pixabay: ulleo</a>,
-                                    <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay: Alexas_Fotos</a>
+                                    <a href="https://pixabay.com/illustrations/map-central-europe-europe-1804891/s"
+                                        target="_blank">Pixabay: Hans</a>,
+                                    <a href="https://pixabay.com/vectors/map-pin-illustrator-holder-place-42871/"
+                                        target="_blank">Pixabay: Clker-Free-Vector-Images</a>
                                 </small>
                             </small>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </section>
-
-            <section data-title="Das CAP-Theorem verteilter Anwendungen" class="limited-width">
-                <lsx-grid-fluid>
-                    <lsx-row>
-                        <lsx-col size="md-5">
-                            <img src="cap-theorem.png" alt="Visualisierung des CAP-Theorems" style="width: 100%;" />
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <h4>Consistency (Konsistenz)</h4>
-                            <p>
-                                Alle Knoten sehen immer exakt dieselben, konsistenten Daten. Bei replizierten Datenbeständen
-                                werden die Änderungen daher erst sichtbar, wenn sie in allen Repliken nachgezogen wurden.
-                            </p>
-
-                            <h4>Availability (Verfügbarkeit)</h4>
-                            <p>
-                                Das System ist jederzeit erreichbar und überschreitet niemals die maximal zulässige
-                                Antwortzeit.
-                            </p>
-
-                            <h4>Partition Tolerance (Partitionstoleranz)</h4>
-                            <p>
-                                Die Anwendung funktioniert auch dann noch, wenn einzelne Teile ausgefallen sind.
-                            </p>
-                        </lsx-col>
-                    </lsx-row>
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <p style="color: darkred;">
-                                Eine verteilte Anwendung kann immer nur zwei dieser Anforderungen gänzlich erfüllen!
-                            </p>
-                            <p>
-                                Moderne Anwendungen sind deshalb oft nur „eventuell-konsistent”. Beispielsweise kann es
-                                in Facebook vorkommen, dass ein Like in den ersten Sekunden nicht für alle Profilbesucher
-                                sichtbar wird, da nicht alle auf derselben Datenreplik arbeiten.
-                            </p>
-                            <p>
-                                eBay hingegen würde bei der Gebotsabgabe sicher lieber eine etwas längere Antwortzeit in
-                                Kauf nehmen, anstatt sich überschreibende Gebote zu riskieren.
-                            </p>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </section>
-
-            <section data-title="Fallbeispiel zur Zeitsynchronisation">
-                <lsx-grid>
-                    <lsx-row>
-                        <lsx-col size="lg-7" class="card p-3">
-                            <h2 class="mt-0">Beginn der Zeitrechnung</h2>
-
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <img src="zeitproblem-beginn-wissenschaft.jpg" class="d-block img-fluid" />
-                                        <b>Wissenschaft:</b> Mit dem Urknall
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <img src="zeitproblem-beginn-kirche.jpg" class="d-block img-fluid" />
-                                        <b>Kirche:</b> Als Gott die Erde erschuf
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <img src="zeitproblem-beginn-sport.jpg" class="d-block img-fluid" />
-                                        <b>Wettläufer:</b> Ab dem Startschuss
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <img src="zeitproblem-beginn-entwickler.jpg" class="d-block img-fluid" />
-                                        <b>Softwareentwickler:</b> <a href="https://de.wikipedia.org/wiki/Unixzeit" target="_blank">01.01.1970 0:00 Uhr</a> 🥴
-                                        <br />
+                        </p>
+                        <lsx-ul>
+                            <li emoji="🌡️">
+                                Aufzeichnung von Umweltdaten zur Vorhersage von Unwettern und Naturkatastrophen
+                            </li>
+                            <li emoji="🗺️">
+                                Aktuell 19 Messstationen in verschiedenen Ländern und Zeitzonen
+                            </li>
+                            <li emoji="🕒">
+                                Messung und Übermittlung eines kompletten Datensatzes alle fünf Minuten
+                            </li>
+                            <li emoji="💽 ">
+                                Speicherung aller Messwerte im Rechenzentrum in Frankfurt am Main
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+                
+                    <lsx-tab-page title="Fallstricke">
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md-6">
+                                    <img src="zeitproblem-latenz-deutschland.jpg" alt="" class="img-thumbnail" style="width: 100%" />
+                                    <small>
+                                        Latenz beim Zugriff auf wpvs.de aus Deutschland
+                                    </small>
+                                </lsx-col>
+                                <lsx-col size="md-6">
+                                    <img src="zeitproblem-latenz-spanien.jpg" alt="" class="img-thumbnail" style="width: 100%" />
+                                    <small>
+                                        Latenz beim Zugriff auf wpvs.de aus Südspanien
+                                    </small>
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <lsx-ul emoji="🗯️">
+                                        <li>
+                                            Werden Datum und Uhrzeit der Messwerte vor Ort oder vom Server ermittelt?
+                                        </li>
+                                        <li>
+                                            Wie kann die zeitliche Reihenfolge aller Messwerte garantiert werden?
+                                        </li>
+                                        <li>
+                                            Wie können Latenzen in der Datenübertragung ausgeglichen werden?
+                                        </li>
+                                        <li>
+                                            Was passiert, wenn die Uhren der Messstationen nicht gleich gehen?
+                                        </li>
+                                        <li>
+                                            Wie kann verhindert werden, dass die Uhren auseinander driften?
+                                        </li>
+                                        <li>
+                                            Wie sollen die Zeitzonen oder die Sommer-/Winterzeit berücksichtigt werden?
+                                        </li>
+                                        <li>
+                                            Wie können verspätet eintreffende Messwerte korrekt gespeichert werden?
+                                        </li>
+                                        <li>
+                                            Wie sollen fehlende Messdaten (z.B. wegen dem Ausfall einer Station) behandelt werden?
+                                        </li>
+                                    </lsx-ul>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+                
+                    <lsx-tab-page title="Lösungsansätze">
+                        <lsx-ul emoji="🌞">
+                            <li>
+                                Datum und Uhrzeit sowohl auf den Devices als auch dem Server ermitteln und vergleichen.
+                            </li>
+                            <li>
+                                Alle Uhren in regelmäßigen Abständen via
+                                <a href="https://de.wikipedia.org/wiki/Network_Time_Protocol" target="blank">NTP</a>
+                                synchronisieren.
+                            </li>
+                            <li>
+                                Sämtliche Messwerte zusätzlich zum Zeitstempel fortlaufend durchnummerieren.
+                            </li>
+                            <li>
+                                Die Messwerte immer inklusive Zeitzone und Abweichung zur Normalzeit speichern.
+                            </li>
+                            <li>
+                                Alternativ Datum und Uhrzeit immer in die Zeitzone des Servers umrechnen.
+                            </li>
+                            <li>
+                                Nachträgliches Einfügen von Messwerten innerhalb eines gegebenen Zeitfensters zulassen.
+                            </li>
+                        </lsx-ul>
+                
+                        <h3 class="dhbw-lightblue" style="margin-top: 1em;">Beginn der Zeitrechnung</h3>
+                
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <img src="zeitproblem-beginn-wissenschaft.jpg" class="d-block img-fluid img-thumbnail" />
+                                    <b>Wissenschaft:</b> Mit dem Urknall
+                                </lsx-col>
+                                <lsx-col size="md">
+                                    <img src="zeitproblem-beginn-kirche.jpg" class="d-block img-fluid img-thumbnail" />
+                                    <b>Kirche:</b> Als Gott die Erde erschuf
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <img src="zeitproblem-beginn-sport.jpg" class="d-block img-fluid img-thumbnail" />
+                                    <b>Wettläufer:</b> Ab dem Startschuss
+                                </lsx-col>
+                                <lsx-col size="md">
+                                    <img src="zeitproblem-beginn-entwickler.jpg" class="d-block img-fluid img-thumbnail" />
+                                    <b>Softwareentwickler:</b> <a href="https://de.wikipedia.org/wiki/Unixzeit"
+                                        target="_blank">01.01.1970 0:00 Uhr</a> 🥴
+                                    <br />
+                                    <small>
+                                        <b>Youtube:</b>
+                                        <a href="https://www.youtube.com/watch?v=jNQXAC9IVRw" target="_blank">23.04.2005</a>
+                                    </small>
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <p>
                                         <small>
-                                            <b>Youtube:</b>
-                                            <a href="https://www.youtube.com/watch?v=jNQXAC9IVRw" target="_blank">23.04.2005</a>
-                                        </small>
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <p>
                                             <small>
-                                                <small>
-                                                    Bildnachweise:
-                                                    <a href="https://pixabay.com/illustrations/universe-space-expansion-big-bang-11636/" target="_blank">Pixabay: WikiImages</a>,
-                                                    <a href="https://pixabay.com/photos/genesis-mosaic-iconography-2435989/" target="_blank">Pixabay: dimitrisvetsikas1969</a>,
-                                                    <a href="https://pixabay.com/photos/race-finish-line-athletes-695303/" target="_blank">Pixabay: skeeze</a>,
-                                                    <a href="https://commons.wikimedia.org/wiki/File:Vt100-adventure.jpg" target="_blank">Wikimedia: Shieldforyoureyes</a>
-                                                </small>
+                                                Bildnachweise:
+                                                <a href="https://pixabay.com/illustrations/universe-space-expansion-big-bang-11636/"
+                                                    target="_blank">Pixabay: WikiImages</a>,
+                                                <a href="https://pixabay.com/photos/genesis-mosaic-iconography-2435989/"
+                                                    target="_blank">Pixabay: dimitrisvetsikas1969</a>,
+                                                <a href="https://pixabay.com/photos/race-finish-line-athletes-695303/"
+                                                    target="_blank">Pixabay: skeeze</a>,
+                                                <a href="https://commons.wikimedia.org/wiki/File:Vt100-adventure.jpg"
+                                                    target="_blank">Wikimedia: Shieldforyoureyes</a>
                                             </small>
-                                        </p>
-                                    </lsx-col>
-                                </lsx-row>
-                            </lsx-grid-fluid>
-                        </lsx-col>
-                        <lsx-col size="lg">
-                            <div class="card p-3 bg-light h-100 markdown">
-                                ## Aufgabe {.mt-0}
-
-                                 1. Eine Datenbankanwendung speichert Zeitstempel als Kombination aus
-                                    Datum und Uhrzeit. Welche Probleme können sich daraus ergeben ...
-
-                                     * Wenn von Sommerzeit auf Winterzeit umgestellt wird?
-                                     * Wenn von Winterzeit auf Sommerzeit umgestellt werden?
-                                     * Wenn die Zeitstempel weltweit verglichen werden?
-                                     * Wenn sehr viele Zeitstempel in kurzer Zeit entstehen? {.mb-3}
-
-                                 1. Recherchieren Sie den Begriff **Unix-Zeitstempel**. Wie funktioniert
-                                    er und welche Probleme werden dadurch gelöst bzw. nicht gelöst?
-
-                                 1. Was ist das NTP und welche Probleme löst es?
-                            </div>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid>
+                                        </small>
+                                    </p>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
             </section>
 
             <!-- ==================== -->
@@ -972,7 +1400,7 @@
 
                 #### Urheberrecht und Lizenzvereinbarung
 
-                © 2022 Dennis Schulmeister-Zimolong<br/>
+                © 2022 – 2023 Dennis Schulmeister-Zimolong<br/>
                 <a href="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2020-folien" target="_blank">https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2020-folien</a>
 
                 ![Creative Commons Lizenzvertrag](https://i.creativecommons.org/l/by/4.0/88x31.png)
