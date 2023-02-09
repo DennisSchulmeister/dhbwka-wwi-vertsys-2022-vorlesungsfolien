@@ -49,8 +49,8 @@
                 </blockquote>
             </section>
 
-            <section data-title="Definition nach Andrew Tanenbaum">
-                <div class="markdown dhbw-limited-width mb-3 m-auto">
+            <section data-title="Definition nach Andrew Tanenbaum" class="dhbw-limited-width">
+                <div class="markdown mb-4">
                     Ein **verteiltes System** ist ein System, in dem sich Hardware-
                     und Softwarekomponenten auf mehreren Computern befinden und diese
                     nur über den Austausch von Nachrichten untereinander kommunizieren,
@@ -62,54 +62,54 @@
                     Komponenten des Systems und dem Anwender kommunizieren. {.mb-0} -->
                 </div>
     
-                <lsx-tab-pages style="width: 70em; max-width: 100%;" class="m-auto">
-                    <lsx-tab-page title="ARPANET / Internet">
-                        <div class="card p-3">
-                            <img src="arpanet.png" class="d-block w-100"/>
-                        </div>
-                    </lsx-tab-page>
-                    <lsx-tab-page title="Webanwendungen">
-                        <div class="card p-3">
-                            <img src="webapp.png" class="d-block w-100" />
-                        </div>
-                    </lsx-tab-page>
-                    <lsx-tab-page title="Internet of Things">
+                <lsx-accordion>
+                    <lsx-accordion-page title="ARPANET / Internet">
+                        <img src="arpanet.png" class="d-block w-100"/>
+                    </lsx-accordion-page>
+                    <lsx-accordion-page title="Webanwendungen">
+                        <img src="webapp.png" class="d-block w-100" />
+                    </lsx-accordion-page>
+                    <lsx-accordion-page title="Internet of Things">
                         <div class="container-fluid">
                             <div class="row gap-3">
-                                <div class="col-md card p-3">
+                                <div class="col-md p-3">
                                     <img src="pubsub-iot.png" class="d-block w-100" />
                                 </div>
                             </div>
                             <div class="row gap-3">
-                                <div class="col-md card p-3">
+                                <div class="col-md p-3">
                                     <img src="iot.jpg" class="d-block w-100" />
                                 </div>
-                                <div class="col-md card p-3">
+                                <div class="col-md p-3">
                                     <img src="iot-cartoon.png" class="d-block w-100" />
                                 </div>
                             </div>
                         </div>
-                    </lsx-tab-page>
-                    <lsx-tab-page title="Blockchain">
+                    </lsx-accordion-page>
+                    <lsx-accordion-page title="Blockchain">
                         <div class="container-fluid">
                             <div class="row gap-3">
-                                <div class="col-md card p-3">
+                                <div class="col-md p-3">
                                     <img src="blockchain1.png" class="d-block w-100" />
                                 </div>
                             </div>
                             <div class="row gap-3">
-                                <div class="col-md card p-3">
+                                <div class="col-md p-3">
                                     <img src="blockchain2.png" class="d-block w-100" />
                                 </div>
                             </div>
                             <div class="row gap-3">
-                                <div class="col-md card p-3">
+                                <div class="col-md p-3">
                                     <img src="blockchain5.png" class="d-block w-100" />
                                 </div>
                             </div>
                         </div>
-                    </lsx-tab-page>
-                </lsx-tab-pages>
+                    </lsx-accordion-page>
+                    <lsx-accordion-page title="MIDI">
+                        <lsx-youtube video="pzhh9_5iqB0" aspect-ratio="16x9" style="width: 100%;"></lsx-youtube>
+                        <a href="https://youtu.be/pzhh9_5iqB0" target="_blank">Link zum Video</a>
+                    </lsx-accordion-page>
+                </lsx-accordion>
             </section>
 
             <section data-title="Verteilte Systeme im Alltag" data-background-color="rgb(210,190,210)" class="limited-width">
@@ -444,32 +444,38 @@
             <section data-title="Entwurfsprinzipien" data-background-image="../trennfolie.jpg"></section>
 
             <section data-title="Die acht Irrtümer verteilter Systeme" class="w-100">
-                <div class="d-flex justify-content-between align-items-center w-100">
-                    <div class="markdown">
-                        1. Das Netzwerk ist immer verfügbar.
-                        1. Es gibt keine Latenzzeiten.
-                        1. Der Datendurchsatz ist unendlich schnell.
-                        1. Die Kommunikation ist automatisch sicher.
-                        1. Die Netzwerktopologie ist unveränderlich.
-                        1. Es gibt nur einen Administrator.
-                        1. Datentransfer kostet nichts.
-                        1. Das Netzwerk ist homogen.
-                    </div>
-                    <div class="dhbw-limited-width">
-                        <img src="dilbert-1997-01-28.gif" class="d-block w-100 mb-3"/>
-                        <img src="dilbert-1997-01-29.gif" class="d-block w-100 mb-3" />
-                        <img src="dilbert-2018-03-22.gif" class="d-block w-100 mb-3" />
-                        
-                        <small>
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="lg-7">
+                            <div style="height: 100%; display: flex; align-items: center;">
+                                <div class="markdown">
+                                    1. Das Netzwerk ist immer verfügbar.
+                                    1. Es gibt keine Latenzzeiten.
+                                    1. Der Datendurchsatz ist unendlich schnell.
+                                    1. Die Kommunikation ist automatisch sicher.
+                                    1. Die Netzwerktopologie ist unveränderlich.
+                                    1. Es gibt nur einen Administrator.
+                                    1. Datentransfer kostet nichts.
+                                    1. Das Netzwerk ist homogen.
+                                </div>
+                            </div>
+                        </lsx-col>
+                        <lsx-col size="lg">
+                            <img src="dilbert-1997-01-28.gif" class="d-block w-100 mb-3"/>
+                            <img src="dilbert-1997-01-29.gif" class="d-block w-100 mb-3" />
+                            <img src="dilbert-2018-03-22.gif" class="d-block w-100 mb-3" />
+                            
                             <small>
-                                Bildnachweise:
-                                <a href="https://dilbert.com/strip/1997-01-28" target="_blank">Dilbert vom 28.01.1997</a>,
-                                <a href="https://dilbert.com/strip/1997-01-29" target="_blank">Dilbert vom 29.01.1997</a>,
-                                <a href="https://dilbert.com/strip/2018-03-22" target="_blank">Dilbert vom 22.03.2018</a>
+                                <small>
+                                    Bildnachweise:
+                                    <a href="https://dilbert.com/strip/1997-01-28" target="_blank">Dilbert vom 28.01.1997</a>,
+                                    <a href="https://dilbert.com/strip/1997-01-29" target="_blank">Dilbert vom 29.01.1997</a>,
+                                    <a href="https://dilbert.com/strip/2018-03-22" target="_blank">Dilbert vom 22.03.2018</a>
+                                </small>
                             </small>
-                        </small>
-                    </div>
-                </div>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
             </section>
 
             <section data-title="Anforderungen an den Systementwurf" style="max-width: 65em;">
@@ -1116,7 +1122,6 @@
                          * …
                     </div>
                 </div>
-
             </section>
 
             <section data-title="Fehlertoleranz in verteilten Systemen" class="dhbw-limited-width2">
