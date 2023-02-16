@@ -361,7 +361,7 @@
                             Microservices eignen sich daher oft für große Firmen mit mehreren, unabhängigen Entwicklungsmannschaften.
                         </p>
                         <div class="d-flex justify-content-center">
-                            <img src="microservices.svg" alt="Skizze einer Microservice-Architektur"
+                            <img src="microservices.png" alt="Skizze einer Microservice-Architektur"
                                 style="max-height: 26em; max-width: 100%;" />
                         </div>
                         
@@ -442,41 +442,6 @@
             <!-- ================== -->
             <section data-title="Entwurfsprinzipien" data-chapter></section>
             <section data-title="Entwurfsprinzipien" data-background-image="../trennfolie.jpg"></section>
-
-            <section data-title="Die acht Irrtümer verteilter Systeme" class="w-100">
-                <lsx-grid-fluid>
-                    <lsx-row>
-                        <lsx-col size="lg-7">
-                            <div style="height: 100%; display: flex; align-items: center;">
-                                <div class="markdown">
-                                    1. Das Netzwerk ist immer verfügbar.
-                                    1. Es gibt keine Latenzzeiten.
-                                    1. Der Datendurchsatz ist unendlich schnell.
-                                    1. Die Kommunikation ist automatisch sicher.
-                                    1. Die Netzwerktopologie ist unveränderlich.
-                                    1. Es gibt nur einen Administrator.
-                                    1. Datentransfer kostet nichts.
-                                    1. Das Netzwerk ist homogen.
-                                </div>
-                            </div>
-                        </lsx-col>
-                        <lsx-col size="lg">
-                            <img src="dilbert-1997-01-28.gif" class="d-block w-100 mb-3"/>
-                            <img src="dilbert-1997-01-29.gif" class="d-block w-100 mb-3" />
-                            <img src="dilbert-2018-03-22.gif" class="d-block w-100 mb-3" />
-                            
-                            <small>
-                                <small>
-                                    Bildnachweise:
-                                    <a href="https://dilbert.com/strip/1997-01-28" target="_blank">Dilbert vom 28.01.1997</a>,
-                                    <a href="https://dilbert.com/strip/1997-01-29" target="_blank">Dilbert vom 29.01.1997</a>,
-                                    <a href="https://dilbert.com/strip/2018-03-22" target="_blank">Dilbert vom 22.03.2018</a>
-                                </small>
-                            </small>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </section>
 
             <section data-title="Anforderungen an den Systementwurf" style="max-width: 65em;">
                 <lsx-grid-fluid>
@@ -1124,6 +1089,41 @@
                 </div>
             </section>
 
+            <section data-title="Die acht Irrtümer verteilter Systeme" class="w-100">
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="lg-7">
+                            <div style="height: 100%; display: flex; align-items: center;">
+                                <div class="markdown">
+                                    1. Das Netzwerk ist immer verfügbar.
+                                    1. Es gibt keine Latenzzeiten.
+                                    1. Der Datendurchsatz ist unendlich schnell.
+                                    1. Die Kommunikation ist automatisch sicher.
+                                    1. Die Netzwerktopologie ist unveränderlich.
+                                    1. Es gibt nur einen Administrator.
+                                    1. Datentransfer kostet nichts.
+                                    1. Das Netzwerk ist homogen.
+                                </div>
+                            </div>
+                        </lsx-col>
+                        <lsx-col size="lg">
+                            <img src="dilbert-1997-01-28.gif" class="d-block w-100 mb-3" />
+                            <img src="dilbert-1997-01-29.gif" class="d-block w-100 mb-3" />
+                            <img src="dilbert-2018-03-22.gif" class="d-block w-100 mb-3" />
+            
+                            <small>
+                                <small>
+                                    Bildnachweise:
+                                    <a href="https://dilbert.com/strip/1997-01-28" target="_blank">Dilbert vom 28.01.1997</a>,
+                                    <a href="https://dilbert.com/strip/1997-01-29" target="_blank">Dilbert vom 29.01.1997</a>,
+                                    <a href="https://dilbert.com/strip/2018-03-22" target="_blank">Dilbert vom 22.03.2018</a>
+                                </small>
+                            </small>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </section>
+            
             <section data-title="Fehlertoleranz in verteilten Systemen" class="dhbw-limited-width2">
                 <lsx-tab-pages>
                     <lsx-tab-page title="Das CAP-Theorem">

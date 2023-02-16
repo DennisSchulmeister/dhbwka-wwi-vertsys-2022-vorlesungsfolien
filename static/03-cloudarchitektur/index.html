@@ -8,6 +8,26 @@
         <script src="../_bundle.js"></script>
         <link rel="stylesheet" href="../_bundle.css" />
         <link rel="shortcut icon" href="../favicon.png" />
+
+        <script>
+            function change_example(event) {
+                let label             = event.target.textContent       || "";
+                let dropdownSelector  = event.target.dataset.dropdown  || "";
+                let containerSelector = event.target.dataset.container || "";
+                let showSelector      = event.target.dataset.show      || "";
+
+                if (dropdownSelector) {
+                    document.querySelectorAll(dropdownSelector).forEach(element => element.textContent = label);
+                }
+                if (containerSelector) {
+                    document.querySelectorAll(`${containerSelector} > *`).forEach(element => element.classList.add("hidden"));
+                }
+
+                if (showSelector) {
+                    document.querySelectorAll(showSelector).forEach(element => element.classList.remove("hidden"));
+                }
+            }
+        </script>
     </head>
 
     <body class="hidden">
@@ -316,7 +336,7 @@
             </section>
 
             <section data-title="Das As-a-Service-Geschäftsmodell" class="dhbw-limited-width2">
-                <div class="markdown mt-3 mb-3">
+                <div class="markdown mt-3 mb-5">
                     Cloudangebote werden häufig mit dem Namenszusatz „as-a-Service” angeboten,
                     wie beispielsweise „Database-as-a-Service“ oder „Software-as-a-Service".
                     Damit ist gemeint, dass die jeweilige Software **nicht klassisch lizenziert,
@@ -325,92 +345,426 @@
                     komplett ausgelagert werden können.
                 </div>
 
-                <div class="d-flex gap-3 flex-column flex-md-row">
-                    <div class="card w-100">
-                        <div class="card-header fw-bold">
-                            Infrastructure-as-a-Service
-                        </div>
-                        <div class="card-body markdown small">
-                            <img src="modelle-iaas.png" class="d-block w-100 mb-3">
+                <div class="d-flex gap-3 flex-column flex-md-row mb-4">
+                    <div class="flex-grow-1 w-100 markdown small">
+                        ### Infrastructure-as-a-Service {.mb-3}
 
-                            xxx
-                        </div>
+                        <img src="modelle-iaas.png" class="w-100 mb-3">
+                
+                        Im einfachsten Fall stellt die Cloud virtuelle Maschinen zur manuellen Einrichtung
+                        sowie dazugehörige Dienste wie Objektspeicher und Netzwerkrouting zur Verfügung.
+                        Lediglich die Bereitstellung aus Sicht des Cloudanbieters wird dabei automatisiert.
                     </div>
+                    <div class="flex-grow-1 w-100 markdown small">
+                        ### Platform-as-a-Service {.mb-3}
 
-                    <div class="card w-100">
-                        <div class="card-header fw-bold">
-                            Platform-as-a-Service
-                        </div>
-                        <div class="card-body markdown small">
-                            <img src="modelle-paas.png" class="d-block w-75 m-auto mb-3">
-
-                            xxx
-                        </div>
+                        <img src="modelle-paas.png" class="w-100 mb-3">
+                
+                        Auf die Entwicklung von Cloudanwendungen zugeschnittene Angebote bieten eine
+                        vorkonfigurierte Laufzeitumgebung für selbstgeschriebenen Quellcode. Deployment
+                        und Betrieb werden weitgehend automatisiert. Es besteht jedoch die Gefahr von
+                        Vendor Lock-In aufgrund der Verwendung anbieterspezifischer Bibliotheken.
                     </div>
+                    <div class="flex-grow-1 w-100 markdown small">
+                        ### Software-as-a-Service {.mb-3}
 
-                    <div class="card w-100">
-                        <div class="card-header fw-bold">
-                            Software-as-a-Service
-                        </div>
-                        <div class="card-body markdown small">
-                            <img src="modelle-saas.png" class="d-block w-100 mb-3">
-
-                            xxx
-                        </div>
+                        <img src="modelle-saas.png" class="w-100 mb-3">
+                
+                        Am weitesten abstrahiert sind SaaS-Angebote zur Bereitstellung ganzer Anwendungspakete.
+                        Als Kunde registriert man sich lediglich für eine Anwendung, die gegen eine monatliche
+                        Gebühr zur Verfügung gestellt wird. Alle Kunden teilen sich meist den Quellcode, während
+                        die Daten getrennt werden.
                     </div>
+                </div>
+
+                <div class="markdown">
+                    Angebote wie **Function-as-a-Service** (auch **Serverless** genannt, da die Verwaltung von Serverinstanzen komplett
+                    wegabstrahiert wird) oder **Database-as-a-Service** richten ebenfalls an Anwendungsentwickler und zählen deshalb zu
+                    Platform-as-a-Service.
+                    
+                    Die großen Anbieter wie Amazon, Google oder Microsoft bieten grundsätzlich eine Mischung aus allen Modellen, während
+                    sich kleinere Anbieter wie [Heroku](https://heroku.com/){target="_blank"}, [Render](https://render.com/){target="_blank"},
+                    [Fly.io](https://fly.io/){target="_blank"} meist auf Plattformdienste beschränken.
+                    [MongoDB Atlas](https://www.mongodb.com/de-de/atlas){target="_blank"}, [Auth0](https://auth0.com/){target="_blank"}
+                    und viele mehr zielen hingegen auf ganz spezielle Anwendungsfälle ab.
                 </div>
             </section>
 
-            <!-- 
-                Infrastructure-as-a-Service
-                Platform-as-a-Service
-                Container-Orchestrierung
+            <section data-title="Container-Virtualisierung in der Cloud" class="w-100">
+                <div class="dhbw-limited-width2 d-flex flex-column flex-lg-row align-items-center gap-3 m-auto mt-3 mb-4">
+                    <img src="virtualisierung-container.png" class="d-block" style="width: 24em; max-width: 100%;">
+                    <div class="markdown flex-grow-1">
+                        Viele Cloudumgebungen nutzen Container-Virtualisierung, um beliebige Workloads ausführen zu können.
+                        Die auszuführenden Anwendungen und Services werden hierfür in **Anwendungscontainer** verpackt, die ein
+                        **sehr abgespecktes Dateisystem** mit den notwendigsten **Bibliotheken**, **Hilfsprogrammen** sowie
+                        dem **Anwendungscode** beinhalten. Der Anwendung wird dadurch vorgetäuscht, sie sei die einzige innerhalb
+                        des Host-Betriebssystems ausgeführte Anwendung.
 
-                Fallbeispiel: DevOps-Workflow -> Mit Database-as-a-Service und Container-Orchestrierung?
+                        Hierbei wird zwischen Container-Abbild (Image) und Container-Instanz unterschieden:
 
-                Container-Orchestrierung -> Wo unterbringen?
-            -->
+                         * **Image:** Binärpaket, das innerhalb der Cloud deployed werden kann
+                         * **Instanz:** Tatsächlich ausgeführter Container auf einem Rechnerknoten
+                        
+                        Die Erstellung der Images wird grundsätzlich automatisiert. Unterschiede bestehen lediglich in
+                        den verwendeten Werkzeugen und den hierfür benötigten Konfigurationsdateien. Typische Quellcodes einer
+                        bestimmten Programmiersprache können häufig ohne Konfiguration direkt deployed werden, wobei ein in der
+                        Cloud laufendes **Buildpack** diese in Anwendungscontainer verpackt. Meist kann der Prozess durch
+                        zusätzliche Konfigurationsdateien beeinflusst werden, wenn man die Container nicht alternativ selbst baut. {.mb-0}
+                    </div>
+                </div>
+                
+                <div class="dhbw-limited-width2 m-auto mb-5 markdown">
+                    Das folgende Beispiel zeigt einen typischen **DevOps-Workflow**, bei dem die Anwendungscontainer durch eine
+                    Continous-Integration/Continous-Deployment-Pipeline automatisiert gebaut, in einer Container-Registrierung
+                    abgelegt und anschließend in der Cloud deployed werden.
+                </div>
+                <img src="devops.png" class="img-fluid w-100">
+            </section>
 
-            <!-- ======================= -->
-            <!-- Skalierung in der Cloud -->
-            <!-- ======================= -->
-            <section data-title="Skalierung in der Cloud" data-chapter></section>
-            <section data-title="Skalierung in der Cloud" data-background-image="../trennfolie.jpg"></section>
+            <!-- ================================== -->
+            <!-- Verteilte Anwendungen in der Cloud -->
+            <!-- ================================== -->
+            <section data-title="Verteilte Anwendungen in der Cloud" data-chapter></section>
+            <section data-title="Verteilte Anwendungen in der Cloud" data-background-image="../trennfolie.jpg"></section>
+
+            <section data-title="Anwendungsarchitektur früher">
+                <lsx-grid-fluid class="p-0">
+                    <lsx-row>
+                        <lsx-col size="md-8" class="mb-3">
+                            <img src="monolith.png" class="d-block w-100" />
+                        </lsx-col>
+                        <lsx-col size="md" class="markdown">
+                            Frühere Anwendungsarchitekturen, bei denen sämtliche Funktionen in einer großen Codebasis
+                            untergebracht waren, werden heute als **Monolith** bezeichnet. Zwar kann der Quellcode
+                            durchaus modular aufgebaut und somit leicht um neue Funktionen erweiterbar sein. Jedoch
+                            kann die Anwendung nur als Ganzes deployed und in Betrieb genommen werden.
+
+                            ### Vorteile eines Monolithen {.mt-4}
+
+                            * Einfache Anwendungsarchitektur mit wenigen Komponenten
+                            * Insbesondere für kleine Entwicklerteams leicht handlebar
+                            * Eine Programmiersprache für alle Teile der Anwendung
+                            * Direkter Datenaustausch zwischen den Anwendungskomponenten
+                            * Anwendungskomponenten können sich gegenseitig direkt aufrufen
+
+                            ### Nachteile eines Monolithen {.mt-4}
+
+                            * Unpraktisch für sehr große Anwendungen mit vielen Funktionen
+                            * Auswirkungen einer Quellcodeänderung sind oft schwer nachvollziehbar
+                            * In großen Entwicklerteams kommt es oft zu gegenseitigen Störungen
+                            * Kein getrenntes Deployment einzelner Anwendungsfunktionen möglich
+                            * Vor jedem Deployment muss die komplette Anwendung getestet werden
+                            * Fehlerkorrekturen brauchen daher oft lange, bis sie produktiv gehen
+                            * Die Anwendung kann nur als Ganzes skaliert werden
+
+                            Cloudanwendungen werden daher häufig mit einer *Microservice-Architektur* gestaltet.
+                            Für kleine Entwicklerteams kann ein Monolith trotzdem die bessere Wahl sein. {.mt-4}
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </section>
+
+            <section data-title="Probleme beim Deployment monolithischer Anwendungen" class="dhbw-limited-width2 p-3">
+                <div class="d-flex flex-column flex-md-row gap-5">
+                    <img src="wanted-monolith.jpg" class="d-block w-100" alt="Wanted! The Monolith …">
+                    <img src="code-freeze.jpg" class="d-block w-100" alt="It's really, really, really, really code freeze">
+                </div>
+
+                <small>
+                    <small>
+                        Bildnachweise:
+                        <a href="https://turnoff.us/geek/not-wanted/" target="_blank">{turnoff.us} not wanted</a>,
+                        <a href="https://geek-and-poke.com/geekandpoke/2015/3/25/code-freeze" target="_blank">Geek & Poke: Code Freeze</a>
+                    </small>
+                </small>
+            </section>
+
+            <section data-title="Anwendungsarchitektur heute">
+                <lsx-grid-fluid class="p-0 mt-3">
+                    <lsx-row>
+                        <lsx-col size="md-8" class="mb-3">
+                            <div class="dropdown mb-3">
+                                <button
+                                    id             = "microservices-dropdown"
+                                    class          = "btn btn-outline-secondary dropdown-toggle"
+                                    style          = "font-size: 0.9rem;"
+                                    type           = "button"
+                                    data-bs-toggle = "dropdown"
+                                    aria-haspopup  = "true"
+                                    aria-expanded  = "false"
+                                >
+                                    Single Page App mit API-Gateway
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <button
+                                            class          = "dropdown-item"
+                                            type           = "button"
+                                            data-dropdown  = "#microservices-dropdown"
+                                            data-container = "#microservices-bilder"
+                                            data-show      = "#microservices-bilder-1"
+                                            onclick        = "change_example(event)"
+                                        >
+                                            Single Page App mit API-Gateway
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            class          = "dropdown-item"
+                                            type           = "button"
+                                            data-dropdown  = "#microservices-dropdown"
+                                            data-container = "#microservices-bilder"
+                                            data-show      = "#microservices-bilder-2"
+                                            onclick        = "change_example(event)"
+                                        >
+                                            Webanwendung mit Composite UI
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="microservices-bilder">
+                                <img id="microservices-bilder-1" src="microservices-gateway.png" class="d-block w-100" />
+                                <img id="microservices-bilder-2" src="microservices-compositeui.png" class="d-block w-100 hidden" />
+                            </div>
+                        </lsx-col>
+                        <lsx-col size="md" class="markdown">
+                            Moderne Anwendungen werden heute oft als **Microservice-Architektur** ausgeführt, in welcher die
+                            Teilfunktionen einer Anwendung in einzelne Serverdienste ausgelagert werden. Microservice-basierte
+                            Anwendungen sind daher immer verteilte Anwendungen. Dabei bildet jeder Microservice eine getrennte
+                            Einheit, die weitgehend unabhängig entwickelt, deployed und betrieben wird. Meistens besitzt jeder
+                            Microservice deshalb eine eigene Datenbank, auf deren Inhalte nur über die öffentliche Schnittstelle
+                            des Microservices entfernt zugegriffen werden kann. Martin Fowler definiert Microservices
+                            [auf seiner Webseite](https://martinfowler.com/microservices/){target=_blank} daher wie folgt:
+
+                            * Entfernte Serverdienste als Teilkomponenten einer Anwendung
+                            * Dezentralisierte Verwaltung und dezentrales Datenmanagement
+                            * Entsprechen oft organisatorischer Unternehmenseinheiten
+                            * Deshalb meist langfristig durch eigenständige Teams betreut
+                            * Über eine öffentliche Schnittstelle entfernt aufrufbar
+                            * Fehlertoleranter Entwurf mit evolutionärem Design
+                            * Hoher Automatisierungsgrad für Betrieb und Weiterentwicklung
+
+                            Die öffentliche Benutzeroberfläche einer Microservice-basierten Anwendung wird häufig als **Webanwendung**
+                            oder **Mobile App** implementiert, wobei Webanwendungen zunehmend Single Page Apps sind, deren generelle
+                            Anwendungslogik zwar im Browser läuft. Ein **Gateway-Server** versteckt dann in der Regel die einzelnen
+                            Backend-Services vor dem Frontend. Alternativ können die Microservices aber auch so genannte **Microfrontends**
+                            bereitstellen, die jeweils einen Ausschnitt der darzustellenden Bildschirminhalte liefern und nach dem
+                            **Composite UI Pattern** innerhalb eines Anwendungsrahmens eingeblendet werden.
+
+                            ### Vorteile von Microservices {.mt-4}
+
+                            * Die Services sind durch ihre Schnittstellen klar gekapselt.
+                            * Jeder Service kann einzeln deployed und skaliert werden.
+                            * Sprachen, Bibliotheken, … können passend zum Service ausgewählt werden.
+
+                            ### Nachteile von Microservices {.mt-4}
+
+                            * Verteilte Systeme mit vielen Komponenten sind schwer zu programmieren.
+                            * Microservices müssen eventuellkonsistent und fehlertolerant programmiert werden.
+                            * Deployment, Betrieb und Überwachung bringen zusätzliche Komplexität.
+
+                            Laut Martin Fowler lohnt sich eine Microservice-Architektur daher nur, wenn eine Anwendung hinreichend
+                            groß ist und von mehreren Entwicklerteams betreut werden kann. Vgl.
+                            [Martin Fowler: Microservice Guide](https://martinfowler.com/microservices/){target=_blank}
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </section>
+
+            <section data-title="Herausforderungen bei der Nutzung von Microservices" class="dhbw-limited-width2 p-3">
+                <div class="d-flex flex-column flex-md-row gap-3">
+                    <img src="valentines-day.png" class="d-block w-100" alt="Happy Valentines Day">
+                    <img src="microservices-and-monolithic.png" class="d-block w-100" alt="Are you ready for microservices?">
+                </div>
+            
+                <small>
+                    <small>
+                        Bildnachweise:
+                        <a href="https://turnoff.us/geek/valentines-day/" target="_blank">{turnoff.us} valentine's day at the kernel</a>,
+                        <a href="https://turnoff.us/geek/are-you-ready-for-microservices/" target="_blank">{turnoff.us} are you ready for microservices?</a>
+                    </small>
+                </small>
+            </section>
+
+            <section data-title="Skalierung von Microservices" class="dhbw-limited-width2">
+                <lsx-carousel class="carousel-fade">
+                    <lsx-carousel-page>
+                        <img src="skalierung-1.png" class="d-block w-100 mb-5">
+                        <p>
+                            Microservice-Architekturen lassen sich grundsätzlich einfach skalieren als monolithische Anwendungen,
+                            da jeder Service getrennt deployed wird. Für jeden Service kann daher eine optimale Ressourcenzuteilung
+                            entsprechend dem tatsächlichen Bedarf vorgenommen werden.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="skalierung-2.png" class="d-block w-100 mb-5">
+                        <p>
+                            Bei leicht ansteigender Last könnte die Cloudumgebung beispielsweise den laufenden Instanzen des
+                            betroffenen Microservices mehr Leistung zur Verfügung stellen.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="skalierung-3.png" class="d-block w-100 mb-5">
+                        <p>
+                            In der Regel werden so genannte Skalierungstrigger wie die Anzahl von HTTP-Anfragen je Sekunde jedoch
+                            eher dazu genutzt, einfach weitere Serviceinstanzen zu starten und alle eingehenden Anfragen über einen
+                            Load Balancer auf die Instanzen zu verteilen.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="skalierung-4.png" class="d-block w-100 mb-5">
+                        <p>
+                            Damit diese Art der Skalierung jedoch funktioniert, dürfen die Services keine temporären Sitzungdaten
+                            in Hauptspeicher vorhalten. Denn es kann in der Regel nicht garantiert werden, dass aufeinanderfolgende
+                            Anfragen eines Benutzers stets an dieselbe Instanz weitergeleitet werden. Außerdem können die Instanzen
+                            jederzeit neugestartet werden, wodurch die im Hauptspeicher liegenden Daten ebenfalls verloren gehen.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="skalierung-5.png" class="d-block w-100 mb-5">
+                        <p>
+                            Cloud-Anwendungen, welche serverseitige Sitzungsdaten verwalten, legen diese daher in der Regel in einer
+                            externen Datenbank dauerhaft ab. Oft ist dies dieselbe Datenbank, in der auch die eigentlichen Daten des
+                            Microservices liegen. Genauso oft kommen allerdings auch spezialisierte Datenbanken oder Objektspeicher
+                            wie Redis zum Einsatz.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="skalierung-6.png" class="d-block w-100 mb-5">
+                        <p>
+                            Idealerweise verlangt eine Anwendung allerdings überhaupt keine serverseitigen Sitzungsdaten, sondern
+                            verwaltet diese rein clientseitig. Auf diese Weise werden der Server entlastet und Zeitverzögerungen
+                            aufgrund einer langsamen Serververbindung vermieden. Besonders gut funktioniert dies, wenn die Anfragen
+                            an das Backend gebündelt übertragen und nicht als einzelne HTTP-Aufrufe abgewickelt werden.
+                        </p>
+                    </lsx-carousel-page>
+
+                    <lsx-carousel-page>
+                        <img class="active d-block w-25 m-auto" src="../finish.svg" />
+                        <p>
+                            Wird eine Anwendung nach den vorgenannten Prinzipien serverseitig möglichst zustandslos implementiert,
+                            kann sie jederzeit problemlos hoch- oder runterskaliert werden.
+                        </p>
+                    </lsx-carousel-page>
+                </lsx-carousel>
+            </section>
+
+            <section data-title="12-Faktor-Apps / Cloud Native Apps">
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="lg">
+                            <img src="12factor.net.png" class="d-block w-100 dhbw-border">
+                        </lsx-col>
+                        <lsx-col size="lg">
+                            <div class="markdown">
+                                Eine elastische Skalierung setzt voraus, dass jederzeit weitere Instanzen eines Services gestartet
+                                oder nicht mehr benötigte Instanzen gestoppt werden können. Um dies zu vereinfachen, haben die Macher
+                                der Heroku-Cloud auf der Webseite [12factor.net](https://12factor.net){target=_blank} das 12-Faktor-Manifest
+                                mit zwölf Regeln für **Cloud Native Apps** (auch **12-Faktor-Apps** genannt) veröffentlicht. Diese lassen
+                                sich wie folgt zusammenfassen:
+                            </div>
+
+                            <lsx-tab-pages>
+                                <lsx-tab-page title="Entwicklung">
+                                    <div class="markdown">
+                                        * Zentral verwalteter Quellcode
+                                        * Abhängigkeiten explizit deklarieren
+                                        * Getrennte Build-, Release- und Run-Phasen
+                                        * Vergleichbare Entwicklungs- und Produktivumgebungen
+            
+                                        Microservices werden mit modernen Werkzeugen und modernen Programmierpraktiken entwickelt. Ihr Quellcode
+                                        wird deshalb mit Werkzeugen wie Git versioniert, so dass jede Änderung daran nachvollziehbar ist. Werkzeuge
+                                        wie `npm`, `pip` oder `maven` verwalten darüber hinaus die Abhängigkeiten zu externen Bibliotheken und sorgen
+                                        für automatisierte Build- und Releaseprozesse.
+                                        
+                                        Zusätzlich finden Entwicklung und Test und vergleichbaren Bedingungen wie der spätere Produktiveinsatz statt,
+                                        wofür die Produktivumgebung auf den Entwicklungs- und Testmaschinen so gut wie möglich nachgebildet wird.
+                                    </div>
+                                </lsx-tab-page>
+
+                                <lsx-tab-page title="Konfiguration">
+                                    <div class="markdown">
+                                        * Nutzung fremder Dienste über das Netzwerk
+                                        * Unterstützende Dienste sind Ressourcen
+                                        * Konfiguration durch Umgebungsvariablen
+                                        * Adminprozesse sind einmalige Vorgänge
+
+                                        Microservices kommunizieren grundsätzlich über das Netzwerk bzw. das Internet mit anderen Microservices.
+                                        Andere Schnittstellen sind nicht vorgesehen, um die Microservices auf getrennten virtuellen Maschinen und
+                                        oft sogar getrennten physischen Maschinen betreiben zu können. Über die Konfiguration der Services, welche
+                                        innerhalb der Cloudumgebung vorgenommen wird, werden jedem Microservice die Netzadressen der von ihm benötigten
+                                        anderen Services mitgeteilt. Diese stehen dann zur Laufzeit als Umgebungsvariablen des Betriebssystems zur
+                                        Verfügung, da es sich hierbei um eine universale, einfache Möglichkeit handelt.
+
+                                        Falls administrative Aktionen wie die Reorganisation einer Datenbank oder das Löschen veralteter Daten
+                                        notwendig sind, erfolgen diese durch einmalig aufgerufene, vom eigentlichen Microservice getrennt laufende
+                                        Werkzeugprogramme.
+                                    </div>
+                                </lsx-tab-page>
+
+                                <lsx-tab-page title="Ausführung">
+                                    <div class="markdown">
+                                        * Ausführung als einzelner Betriebssystemprozess
+                                        * Parallelität durch weitere Betriebssystemprozesse
+                                        * Robuster und schneller Start bzw. Stopp der Prozesse
+                                        * Protokollierung durch zeitbezogene Ereignisse
+
+                                        Microservices sind immer in sich geschlossen und bringen sämtliche Laufzeitumgebungen, Bibliotheken und
+                                        Hilfsprogramme mit, um ausgeführt werden zu können. Sie können dadurch als einzelner Betriebssystemprozess
+                                        leicht gestartet und gestoppt werden, beispielsweise indem sie in ein Container-Image verpackt werden.
+                                        Start und Stopp müssen besonders schnell gehen, damit die Skalierung jederzeit elastisch angpasst werden
+                                        kann.
+
+                                        Für die Fehlersuche schreiben Microservices umfangreiche Protokollmeldungen in die Konsole (ihne Standardausgabe).
+                                        Jede Meldung wird dabei mit einem eindeutigen Zeitstempel am Anfang versehen, so dass die Protokollmeldungen
+                                        von der Cloud wie ein kontinuierlicher Datenstrom von zeitpunktbezogenen Ereignissen behandelt und archiviert
+                                        werden können.
+                                    </div>
+                                </lsx-tab-page>
+                            </lsx-tab-pages>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </section>
+
+            <section data-title="Fallbeispiel: Adressbuch">
+                <div class="mb-3">
+                    <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Beispielanwendung%20Adressbuch"></lsx-github-edit>
+                </div>
+
+                <div class="d-flex flex-column flex-md-row gap-3">
+                    <img src="beispiel-adressbuch-1.png" class="img-thumbnail d-block w-100">
+                    <img src="beispiel-adressbuch-2.png" class="img-thumbnail d-block w-100">
+                    <img src="beispiel-adressbuch-3.png" class="img-thumbnail d-block w-100">
+                </div>
+            </section>
+
 
             <!--
-                Monolithische Architektur: Vor- und Nachteile (Sinnbild aus Video)
-                Microservice-Architektur: Eigenschaften, Vor- und Nachteile (Beispiel-Skizze aus Vorlesungsmaterialien?)
                 12-Faktor-Apps / Cloud Native Apps
-                Architektur mit API-Gateway und Load Balancer (Bilder aus Vorlesungsmaterialien?)
-                Verwaltung des Sitzungszustands (Bilder aus Video?)
             -->
 
-            <!-- ============================ -->
-            <!-- Umgang mit Fehlersituationen -->
-            <!-- ============================ -->
-            <section data-title="Umgang mit Fehlersituationen" data-chapter></section>
-            <section data-title="Umgang mit Fehlersituationen" data-background-image="../trennfolie.jpg"></section>
+            <!-- ============================= -->
+            <!-- Fehlertoleranz und Sicherheit -->
+            <!-- ============================= -->
+            <!--
+            <section data-title="Fehlertoleranz und Sicherheit" data-chapter></section>
+            <section data-title="Fehlertoleranz und Sicherheit" data-background-image="../trennfolie.jpg"></section>
+            -->
 
-            <!-- =========================== -->
-            <!-- Cloud-Anwendungen absichern -->
-            <!-- =========================== -->
-            <section data-title="Cloud-Anwendungen absichern" data-chapter></section>
-            <section data-title="Cloud-Anwendungen absichern" data-background-image="../trennfolie.jpg"></section>
+            <!--
+                https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
+                https://aaronparecki.com/oauth-2-simplified/
+                https://www.keycloak.org/guides#operator
+                https://apisix.apache.org/docs/apisix/tutorials/observe-your-api/
+                https://www.jaegertracing.io/docs/1.42/
+                https://www.techtarget.com/searchitoperations/tip/The-3-pillars-of-observability-Logs-metrics-and-traces
+                https://community.openhab.org/t/using-loki-promtail-grafana-for-openhab-system-and-log-monitoring/130853
+                https://grafana.com/docs/tempo/latest/getting-started/tempo-in-grafana/
 
-            <!-- <section data-title="Aufgabe: Vorlagequellcode übernehmen (10 Minuten)" class="limited-width"
-                data-background-color="rgb(231, 221, 141)">
-                <div class="markdown">
-                    ### Aufgabe
-            
-                    Kopieren Sie nun den Vorlagequellcode in ihr neues Git-Repository,
-                    committen Sie diesen und verteilen Sie ihn über GitHub auf die Rechner aller
-                    Gruppenmitglieder.
-            
-                    <a href="https://dennisschulmeister.github.io/DownGit/#/home?url=https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Grundger%C3%BCst%20einer%20Single%20Page%20App%20mit%20REST-Backend"
-                        target="_blank" class="fw-bold">
-                        Download-Link
-                    </a>
-            </section> -->
+                Am Ende: Fallbeispiel Webflix
+            -->
         </main>
 
         <!-- Navigation -->
