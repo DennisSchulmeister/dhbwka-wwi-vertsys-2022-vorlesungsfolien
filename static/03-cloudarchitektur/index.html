@@ -592,7 +592,7 @@
                     <lsx-carousel-page>
                         <img src="skalierung-1.png" class="d-block w-100 mb-5">
                         <p>
-                            Microservice-Architekturen lassen sich grundsätzlich einfach skalieren als monolithische Anwendungen,
+                            Microservice-Architekturen lassen sich grundsätzlich einfacher skalieren als monolithische Anwendungen,
                             da jeder Service getrennt deployed wird. Für jeden Service kann daher eine optimale Ressourcenzuteilung
                             entsprechend dem tatsächlichen Bedarf vorgenommen werden.
                         </p>
@@ -600,32 +600,32 @@
                     <lsx-carousel-page>
                         <img src="skalierung-2.png" class="d-block w-100 mb-5">
                         <p>
-                            Bei leicht ansteigender Last könnte die Cloudumgebung beispielsweise den laufenden Instanzen des
-                            betroffenen Microservices mehr Leistung zur Verfügung stellen.
+                            Bei leicht ansteigender Last könnte die Cloudumgebung beispielsweise den laufenden Instanzen mehr
+                            Leistung zur Verfügung stellen.
                         </p>
                     </lsx-carousel-page>
                     <lsx-carousel-page>
                         <img src="skalierung-3.png" class="d-block w-100 mb-5">
                         <p>
-                            In der Regel werden so genannte Skalierungstrigger wie die Anzahl von HTTP-Anfragen je Sekunde jedoch
-                            eher dazu genutzt, einfach weitere Serviceinstanzen zu starten und alle eingehenden Anfragen über einen
-                            Load Balancer auf die Instanzen zu verteilen.
+                            In der Regel werden so genannte Skalierungstrigger, wie die Anzahl HTTP-Anfragen je Sekunde, jedoch
+                            genutzt, um weitere Serviceinstanzen zu starten. Die eingehenden Anfragen werden dann durch einen Load
+                            Balancer gleichmäßig auf die Instanzen verteilt.
                         </p>
                     </lsx-carousel-page>
                     <lsx-carousel-page>
                         <img src="skalierung-4.png" class="d-block w-100 mb-5">
                         <p>
-                            Damit diese Art der Skalierung jedoch funktioniert, dürfen die Services keine temporären Sitzungdaten
-                            in Hauptspeicher vorhalten. Denn es kann in der Regel nicht garantiert werden, dass aufeinanderfolgende
-                            Anfragen eines Benutzers stets an dieselbe Instanz weitergeleitet werden. Außerdem können die Instanzen
-                            jederzeit neugestartet werden, wodurch die im Hauptspeicher liegenden Daten ebenfalls verloren gehen.
+                            Damit diese Art der Skalierung funktioniert, dürfen die Services allerdings keine temporären Sitzungdaten
+                            im Hauptspeicher ablegen. Denn es kann in der Regel nicht garantiert werden, dass zusammengehörige Anfragen
+                            stets dieselbe Instanz erreichen. Außerdem können die Instanzen jederzeit neugestartet werden, wodurch die
+                            im Hauptspeicher liegenden Daten ebenfalls verloren gingen.
                         </p>
                     </lsx-carousel-page>
                     <lsx-carousel-page>
                         <img src="skalierung-5.png" class="d-block w-100 mb-5">
                         <p>
-                            Cloud-Anwendungen, welche serverseitige Sitzungsdaten verwalten, legen diese daher in der Regel in einer
-                            externen Datenbank dauerhaft ab. Oft ist dies dieselbe Datenbank, in der auch die eigentlichen Daten des
+                            Cloud-Anwendungen, welche serverseitige Sitzungsdaten verwalten, persistieren diese daher meist in einer
+                            Datenbank. Oft wird hierfür dieselbe Datenbank genutzt, in der auch die originären Nutzdaten des jeweiligen
                             Microservices liegen. Genauso oft kommen allerdings auch spezialisierte Datenbanken oder Objektspeicher
                             wie Redis zum Einsatz.
                         </p>
@@ -633,10 +633,12 @@
                     <lsx-carousel-page>
                         <img src="skalierung-6.png" class="d-block w-100 mb-5">
                         <p>
-                            Idealerweise verlangt eine Anwendung allerdings überhaupt keine serverseitigen Sitzungsdaten, sondern
-                            verwaltet diese rein clientseitig. Auf diese Weise werden der Server entlastet und Zeitverzögerungen
-                            aufgrund einer langsamen Serververbindung vermieden. Besonders gut funktioniert dies, wenn die Anfragen
-                            an das Backend gebündelt übertragen und nicht als einzelne HTTP-Aufrufe abgewickelt werden.
+                            Idealerweise benötigt eine Anwendung überhaupt keine serverseitigen Sitzungsdaten, sondern verwaltet diese
+                            rein clientseitig. Dadurch werden der Server entlastet und Zeitverzögerungen aufgrund einer langsamen
+                            Internetverbindung vermieden. Gemäß
+                            <a href="https://martinfowler.com/articles/distributed-objects-microservices.html" target="_blank">Martin Fowler's „First Law of Distributed Objects”</a>
+                            funktioniert dies am besten, wenn die Kommunikation mit dem Backend auf wenige Anfragen mit gebündelten
+                            Inhalten reduziert wird.
                         </p>
                     </lsx-carousel-page>
 
@@ -740,17 +742,12 @@
                 </div>
             </section>
 
-
+            <!-- =========================== -->
+            <!-- Architekturmuster im Detail -->
+            <!-- =========================== -->
             <!--
-                12-Faktor-Apps / Cloud Native Apps
-            -->
-
-            <!-- ============================= -->
-            <!-- Fehlertoleranz und Sicherheit -->
-            <!-- ============================= -->
-            <!--
-            <section data-title="Fehlertoleranz und Sicherheit" data-chapter></section>
-            <section data-title="Fehlertoleranz und Sicherheit" data-background-image="../trennfolie.jpg"></section>
+            <section data-title="Architekturmuster im Detail" data-chapter></section>
+            <section data-title="Architekturmuster im Detail" data-background-image="../trennfolie.jpg"></section>
             -->
 
             <!--
@@ -763,7 +760,10 @@
                 https://community.openhab.org/t/using-loki-promtail-grafana-for-openhab-system-and-log-monitoring/130853
                 https://grafana.com/docs/tempo/latest/getting-started/tempo-in-grafana/
 
-                Am Ende: Fallbeispiel Webflix
+                Fehlertoleranz
+                Sicherheit
+                Fallbeispiel Webflix (Folie analog Fallbeispiel Adressbuch nur Verweis auf den Code)
+                Folie mit Bild zum Umschalten: Bewertung verschiedener Architekturmuster (Kopplung, Synchron/Asynchron, Workflow, ...)
             -->
         </main>
 
