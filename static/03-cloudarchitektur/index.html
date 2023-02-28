@@ -106,6 +106,30 @@
                 </lsx-info-box>
             </section>
 
+            <section data-title="Die Cloud aus Konsumentensicht" class="dhbw-limited-width2">
+                <img src="cloud-storage.png" class="d-block w-100 mb-5">
+
+                <div class="d-flex flex-column flex-md-row gap-2">
+                    <img src="cat1.jpg" class="d-block w-100 img-thumbnail">
+                    <img src="cat2.jpg" class="d-block w-100 img-thumbnail">
+                    <img src="cat3.jpg" class="d-block w-100 img-thumbnail">
+                    <img src="cat4.jpg" class="d-block w-100 img-thumbnail">
+                </div>
+
+                <small>
+                    <small>
+                        Zitat gefunden auf:
+                        <a href="https://docs.kraudcloud.com/technology/storage/" target="_blank">kraudcloud.com</a>, <br>
+                        
+                        Bildnachweise:
+                        <a href="https://pixabay.com/photos/cat-pet-licking-animal-tabby-cat-323262/" target="_blank">Pixabay: TeamK</a>,
+                        <a href="https://pixabay.com/photos/cat-kitten-pets-animals-housecat-2934720/" target="_blank">Pixabay: Kirgiz03</a>,
+                        <a href="https://pixabay.com/photos/cat-siamese-cat-fur-kitten-2068462/" target="_blank">Pixabay: webandi</a>,
+                        <a href="https://pixabay.com/photos/cat-tired-yawn-stretch-814952/" target="_blank">Pixabay: jonathansautter</a>
+                    </small>
+                </small>
+            </section>
+
             <section data-title="Abgrenzung von typischen Onlinediensten" class="dhbw-limited-width2">
                 <div class="markdown mt-3 mb-3">
                     Anwendungen zum Synchronisieren von Dateien wie Dropbox, OneDrive oder Owncloud
@@ -397,8 +421,9 @@
                         Viele Cloudumgebungen nutzen Container-Virtualisierung, um beliebige Workloads ausführen zu können.
                         Die auszuführenden Anwendungen und Services werden hierfür in **Anwendungscontainer** verpackt, die ein
                         **sehr abgespecktes Dateisystem** mit den notwendigsten **Bibliotheken**, **Hilfsprogrammen** sowie
-                        dem **Anwendungscode** beinhalten. Der Anwendung wird dadurch vorgetäuscht, sie sei die einzige innerhalb
-                        des Host-Betriebssystems ausgeführte Anwendung.
+                        dem **Anwendungscode** beinhalten und somit das zugrunde liegende Linux-System **wegabstrahieren**.
+                        Der Anwendung wird dadurch vorgetäuscht, sie sei die einzige innerhalb des Host-Betriebssystems
+                        ausgeführte Anwendung, was **Isolation** genannt wird.
 
                         Hierbei wird zwischen Container-Abbild (Image) und Container-Instanz unterschieden:
 
