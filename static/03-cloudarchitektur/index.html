@@ -60,9 +60,10 @@
                         * Die typischen Probleme monolithischer Anwendungen einordnen können
                         * **Elastizität und Skalierung** in der Cloud beschreiben können
                         * Die Begriffe **12-Faktor-App** und **Cloud Native App** erklären können
-                        * Typische Architekturmuster wie **API-Gateway** oder **Cloud Messaging** kennen
+                        * Typische Architekturmuster wie **API-Gateway** <!-- oder **Cloud Messaging** --> kennen
                     </div>
                 </div>
+                <!--
                 <div class="card flex-fill mb-3">
                     <div class="card-header fw-bold dhbw-lightblue">
                         Umgang mit Fehlersituationen
@@ -86,6 +87,7 @@
                         * Anwendungsfälle und die grundsätzliche Implementierung von **OAuth** kennen
                     </div>
                 </div>
+                -->
             </section>
 
             <!-- ============================= -->
@@ -94,12 +96,11 @@
             <section data-title="Definition des Cloud-Begriffs" data-chapter></section>
             <section data-title="Definition des Cloud-Begriffs" data-background-image="../trennfolie.jpg"></section>
 
-            <section data-title="Grundlagen der Cloud-Architektur" class="markdown limited-width">
+            <section data-title="Grundlagen der Cloud-Architektur" class="limited-width">
                 <lsx-youtube video="_epyprLse_4" aspect-ratio="16x9" style="width: 50em; max-width: 100%;"></lsx-youtube>
-            
-                [Link zum Video](https://youtu.be/_epyprLse_4)
+                <a href="https://youtu.be/_epyprLse_4" target="_blank">Link zum Video</a>
 
-                <lsx-info-box type="warning">
+                <lsx-info-box type="warning" class="mt-3">
                     Das Video bezieht sich an manchen Stellen noch auf die Entwicklung mit Java und
                     dem Spring-Framework. Auch wenn wir inzwischen Node.js/JavaScript in der Vorlesung
                     verwenden, sind die Grundprinzipien jedoch dieselben.
@@ -357,6 +358,38 @@
                         </lsx-col>
                     </lsx-row>
                 </lsx-grid-fluid>
+            </section>
+
+            <section data-title="Pet vs. Cattle" class="dhbw-limited-width2">
+                <div class="d-flex gap-3 flex-column flex-md-row">
+                    <div class="card flex-grow-1 w-100">
+                        <img src="pet-vs-cattle-1.jpg" class="card-img-top">
+                        <div class="card-header border-top fw-bold">
+                            Hosting
+                        </div>
+                        <div class="card-body small">
+                            Die Software wird gehegt und gepflegt wie ein Haustier.
+                        </div>
+                    </div>
+                
+                    <div class="card flex-grow-1 w-100">
+                        <img src="pet-vs-cattle-2.jpg" class="card-img-top">
+                        <div class="card-header border-top fw-bold">
+                            Cloud
+                        </div>
+                        <div class="card-body small">
+                            Die Software wird wie Vieh in der Massentierhaltung behandelt.
+                        </div>
+                    </div>
+                </div>
+
+                <small>
+                    <small>
+                        Bildnachweise:
+                        <a href="https://pixabay.com/photos/children-dog-pet-cute-footwear-1866531/" target="_blank">Pixabay: Pexels</a>,
+                        <a href="https://pixabay.com/photos/sheeps-animals-mammals-live-stock-6828766/" target="_blank">Pixabay: smoms_photography</a>
+                    </small>
+                </small>
             </section>
 
             <section data-title="Das As-a-Service-Geschäftsmodell" class="dhbw-limited-width2">
@@ -767,13 +800,516 @@
                 </div>
             </section>
 
+            <!-- ============================ -->
+            <!-- Exkurs: Grundlagen zu Docker -->
+            <!-- ============================ -->
+            <section data-title="Exkurs: Grundlagen zu Docker" data-chapter></section>
+            <section data-title="Exkurs: Grundlagen zu Docker" data-background-image="../trennfolie.jpg"></section>
+
+            <section data-title="Was ist Docker?">
+                <div class="markdown dhbw-limited-width m-auto mb-4">
+                    Docker ist eine **Laufzeitumgebung zur Isolation laufender Prozesse**
+                    unter Linux. (Aktuelle Versionen von Microsoft Windows unterstützen diese
+                    Funktion inzwischen auch). Die Programme werden hierfür mit allen für ihre
+                    Ausführung benötigten Systembibliotheken und Hilfsdateien in binäre Filesystem
+                    Images (hier **Container Image** genannt) verpackt und dann durch den
+                    Docker Daemon also sog. **Container** ausgeführt, wobei das Wort
+                    Container hier die Isolation der Prozesse verdeutlichen soll.
+
+                    Intern werden hierfür verschiedene Mechanismen des Linux-Kernels genutzt,
+                    um den Programmen vorzugaukeln, dass sie die einzigen laufenden Programme
+                    innerhalb des Betriebssystems wären. Gute Container Images starten daher
+                    tatsächlich nur einen Prozess, der automatisch die **Prozess-ID 1**
+                    bekommt.
+
+                    Darüber hinaus virtualisiert Docker das Netzwerk sowie den Massenspeicher,
+                    um die Container noch weiter voneinander zu isolieren. Zusammengehörige
+                    Container können über ein **virtuelles Netzwerk** untereinander
+                    kommunizieren und einzelne Ports können vom Host an die Container
+                    weitergeleitet werden.
+
+                    Wichtig zu verstehen ist, dass Container ,,immutabel'' sind, was bedeutet,
+                    dass sie zwar Dateien in ihrem virtuellen Dateisystem erzeugen können,
+                    diese bei einem Neustart des Containers aber verloren gehen. Über sog.
+                    **Volumes** können stattdessen externe Massenspeicher angebunden
+                    werden, um persistente Daten abzulegen.
+                </div>
+
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="docker-1.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="docker-2.png" class="d-block w-100 img-thumbnail"/>
+                </div>
+            </section>
+
+            <section data-title="Container Images bauen mit einem Dockerfile" class="limited-width">
+                <div class="markdown">
+                    Um ein sog. Image zu bauen, das von Docker als Container ausgeführt werden
+                    kann, muss im Quellcode-Verzeichnis der Anwendung eine Datei namens
+                    <span class="fn">Dockerfile</span> angelegt werden. Ihre Aufgabe ist zu
+                    beschreiben, aus welchen Inhalten (also aus welchen Dateien) sich das Image
+                    zusammensetzen soll.
+
+                    Hierfür wird in der Regel aus dem „Docker Hub” (oft auch „Registry” genannt,
+                    was aber nicht mit der „Node.js Registry” verwechselt werden darf) ein vorhandenes
+                    Image referenziert und um eigene Dateien erweitert. Als Basis-Image kann dann
+                    entweder ein minimales Betriebssystem-Image (z.B. Debian oder Alpine Linux)
+                    oder eine vorkonfigurierte Laufzeitumgebung wie Node.js, Python, … (die selbst
+                    auf einem der genannten Betriebssystem-Images basiert) ausgewählt werden.
+                </div>
+
+                <div class="card p-3 mt-3 mb-3 bg-light">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>
+                                <src-code language="docker">FROM node:17-alpine</src-code>
+                            </td>
+                            <td>
+                                Node.js 17.x als Basis-Image verwenden
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">ENV NODE_ENV=production HOST=::</src-code>
+                            </td>
+                            <td>
+                                Zur Ausführung benötigte Umgebungsvariablen definieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">WORKDIR /app</src-code>
+                            </td>
+                            <td>
+                                Wechseln des für die folgenden Befehle verwendeten Arbeitsverzeichnisses im Image
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">COPY package.json package-lock.json ./</src-code>
+                            </td>
+                            <td>
+                                Quellcode-Dateien in das eben ausgewählte Arbeitsverzeichnis kopieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">RUN npm install</src-code>
+                            </td>
+                            <td>
+                                Ausführen eines Befehls, um die benötigten Node.js-Module zu installieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">COPY src ./src</src-code>
+                            </td>
+                            <td>
+                                Am Schluss den eigentlichen Quellcode in das Filesystem Image kopieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">EXPOSE 3000/tcp</src-code>
+                            </td>
+                            <td>
+                                Dokumentieren, dass der Container auf TCP-Port 3000 einen Serverdienst bereitstellt
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">ENTRYPOINT ["node", "src/index.js"]</src-code>
+                            </td>
+                            <td>
+                                Definition des zur Ausführung des Containers zu startenden Programms
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+                    Die Reihenfolge der Anweisungen ist wichtig, da die meisten Anweisungen ein neues,
+                    sog. „Filesystem Layer” erzeugen, in dem die durch die Anweisung verursachten
+                    Änderungen an der Dateistruktur festgehalten werden. Indem sich weniger oft ändernde
+                    Dateien an den Anfang gestellt werden, kann die Zeit zum Neubauen eines Containers
+                    und die damit verbrauchte Bandbreite deutlich reduziert werden.
+                </p>
+            </section>
+
+            <section data-title="Netzwerkvirtualisierung mit Docker" class="w-100">
+                <div class="markdown">
+                    * Standardmäßig werden Docker Container vollständig isoliert ausgeführt.
+                    * Sie können zwar auf das Internet zugreifen, selbst aber keine Verbindungen entgegennehmen.
+                    * Hierfür muss entweder eine Portweiterleitung oder ein virtuelles Netzwerk eingerichtet werden.
+                    * Eine Portweiterleitung leitet an den Host gerichtete TCP-Anfragen an einen Container weiter.
+                    * Ein virtuelles Netzwerk hingegen ermöglicht es mehreren Containern, untereinander zu kommunizieren.
+                </div>
+
+                <div class="d-flex align-items-stretch w-100" style="gap: 1em;">
+
+                <div class="card w-100">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Start eines Containers mit Portweiterleitung
+                    </div>
+                    <div class="card-body bg-light p-3">
+                        <p>
+                            <span class="cmd">docker run -d --name mongodb -p 27777:27017 mongo</span>
+                        </p>
+                        <table class="table table-striped">
+                            <tr>
+                                <td>
+                                    <tt>docker run</tt>
+                                </td>
+                                <td>
+                                    Subkommando zum Starten eines Containers
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <tt>-d</tt>
+                                </td>
+                                <td>
+                                    Container im Hintergrund ausführen
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <tt>--name mongodb</tt>
+                                </td>
+                                <td>
+                                    Festen Namen für den Container verwenden
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <tt>-p 27777:27017</tt>
+                                </td>
+                                <td>
+                                    Anfragen an den TCP-Port 27777 des Hosts an Port 27017 des Containers weiterleiten
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <tt>mongo</tt>
+                                </td>
+                                <td>
+                                    Name des auszuführenden Images
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card w-100">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Verbinden mehrerer Container über ein virtuelles Netzwerk
+                    </div>
+                    <div class="card-body bg-light p-3">
+                        <p>
+                            <span class="cmd">docker net create beispiel</span> <br />
+                            Virtuelles Netzwerk mit dem Namen <span class="cmd">beispiel</span> erzeugen
+                        </p>
+                        <p>
+                            <span class="cmd">docker run -d --name mongodb --net beispiel mongo</span> <br />
+                            Container im Hintergrund starten und diesen mit dem Beispiel-Netzwerk verbinden.
+                            Über das virtuelle Netzwerk können die im Container laufenden Serverdienste
+                            aufgerufen werden. Von Außen ist der Container allerdings nicht erreichbar.
+                        </p>
+                        <p>
+                            <span class="cmd">docker run -d --name backend --net beispiel -p 3000:3000 adressbuch-backend</span> <br />
+                            Weiteren Container starten und sowohl mit dem Beispiel-Netzwerk verbinden als
+                            auch eine Portweiterleitung definieren. Warum? Weil das Backend unserer Anwendung
+                            vom Browser aus aufrufbar sein muss, über das virtuelle Netzwerk jedoch auch mit der
+                            Datenbank kommunizieren soll.
+                        </p>
+
+                        <h3>Service Discovery</h3>
+                        <p>
+                            Über den Domainnamen <span class="fn">mongo</span> kann der
+                            Backend-Service die interne IP-Adresse des Datenbank-Containers ermitteln.
+                        </p>
+
+                        <h3>Load Balancing</h3>
+                        <p>
+                            Wurden mehrere Instanzen des Datenbank-Containers gestartet, verteilt
+                            Docker die Anfragen automatisch auf die unterschiedlichen Instanzen,
+                            indem es bei jedem DNS Lookup die IP-Adresse einer anderen Instanz
+                            zurück liefert.
+                        </p>
+                    </div>
+                </div>
+
+                </div>
+            </section>
+
+            <section data-title="Mehrere Container orchestrieren mit Docker Compose" style="width: 70em;">
+                <div class="markdown">
+                    Da die Befehlsketten zur Ausführung und Verknüpfung mehrerer Docker-Container
+                    mitunter sehr komplex werden können, lässt sich ein Setup aus zusammehängenden
+                    Containern auch deklarativ in einer Datei namens <span class="fn">docker-compose.yml</span>
+                    beschreiben. Das Werkzeug **Docker Compose** übernimmt dann den Start und auch die
+                    Beendigung aller Container in der richtigen Reihenfolge. Außerdem kann damit eine
+                    einfache Skalierung durch Starten mehrerer, paralleler Containerinstanzen erreicht
+                    werden. Mit **Docker Swarm** kann eine so definierte Anwendung auch ganz einfach
+                    in einem Cluster produktiv deployed werden.
+                </div>
+
+                <div class="card p-3 mt-3 mb-3 bg-light">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>
+                                <source-code language="yaml">
+                                    version: "3.9"
+                                </source-code>
+                            </td>
+                            <td>
+                                Definition der Version des Docker-Compose-Dateiformats
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <source-code language="yaml">
+                                    volumes:
+                                        dbdata:
+                                        dbconfig:
+                                </source-code>
+                            </td>
+                            <td>
+                                Aufzählung von sog. Volumes zur Ablage persistenter Daten
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <source-code language="yaml">
+                                    services:
+                                </source-code>
+                            </td>
+                            <td>
+                                Beginn der Service-Definitionen mit den zu startenden Containern
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 3em;">
+                                <source-code language="yaml">
+                                        # MongoDB-Datenbank
+                                        mongodb:
+                                            image: mongo
+                                            restart: always
+                                            environment:
+                                                MONGO_INITDB_ROOT_USERNAME: dbuser
+                                                MONGO_INITDB_ROOT_PASSWORD: dbpass
+                                            volumes:
+                                                - dbdata:/data/db
+                                                - dbconfig:/data/configdb
+                                </source-code>
+                            </td>
+                            <td>
+                                <p>
+                                    Definition des Containers <span class="scr">mongodb</span> zur Ausführung
+                                    des Images <span class="scr">mongo</span> aus dem Docker Hub.
+                                </p>
+                                <p>
+                                    Bei einem Absturz wird der Container automatisch neugestartet (Resilienz).
+                                </p>
+                                <p>
+                                    Im Container werden zwei Umgebungsvariablen mit Konfigurationswerten für
+                                    einen beim ersten Start anzulegenden Admin-Benutzer definiert.
+                                </p>
+                                <p>
+                                    Durch die oben benannten Volumes werden die Inhalte der beiden Verzeichnisse
+                                    <span class="fn">/data/db</span> und <span class="fn">/data/configdb</span>
+                                    mit dem Host geteilt und bleiben somit nach einem Neustart des Containers
+                                    erhalten.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 3em;">
+                                <source-code language="yaml">
+                                    # Adressbuch-Backend (Produktivmodus)
+                                    backend:
+                                        build:
+                                            context: ./Backend
+                                        depends_on:
+                                            - mongodb
+                                        restart: always
+                                        environment:
+                                            HOST: "::"
+                                            PORT: 3000
+                                            MONGODB: mongodb://dbuser:dbpass@mongodb:27017/
+                                        deploy:
+                                            replicas: 3
+                                </source-code>
+                            </td>
+                            <td>
+                                <p>
+                                    Definition des Containers <span class="scr">backend</span>, der aus dem
+                                    <span class="fn">Dockerfile</span> im Unterverzeichnis <span class="fn">Backend</span>
+                                    gebaut wird.
+                                </p>
+                                <p>
+                                    Der Container kann erst gestartet werden, wenn der Container mit dem Namen
+                                    <span class="scr">mongodb</span> läuft.
+                                </p>
+                                <p>
+                                    Bei einem Absturz wird der Container automatisch neugestartet (Resilienz).
+                                </p>
+                                <p>
+                                    Im Container werden drei Umgebungsvariablen mit den Verbindungsdaten zur
+                                    Mongo-Datenbank definiert.
+                                </p>
+                                <p>
+                                    Standardmäßig werden drei Instanzen des Containers gestartet.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <section data-title="Typische Befehle zur Verwendung von Docker" class="markdown limited-width">
+                ### Docker CLI
+
+                * <span class="cmd">docker help</span>: <br />
+                  Hilfe! 🤕
+
+                * <span class="cmd">docker &lt;kommando&gt; help</span>: <br />
+                  Hilfe zu einem Docker-Subkommando
+
+                * <span class="cmd">docker run -d &lt;container&gt;</span>: <br />
+                  Start eines Containers im Hintergrund
+
+                * <span class="cmd">docker run -it &lt;container&gt; &lt;befehl&gt;</span>: <br />
+                  Ausführen eines interaktiven Befehls in einem neuen Container
+
+                * <span class="cmd">docker container ls</span>: <br />
+                  Alle laufenden Container anzeigen
+
+                * <span class="cmd">docker container stop &lt;name&gt;</span> <br />
+                  Beenden eines laufenden Containers
+
+                * <span class="cmd">docker logs &lt;name&gt;</span> <br />
+                  Konsolen- und Log-Ausgaben eines Containers zeigen
+
+                * <span class="cmd">docker net create &lt;netwerk&gt;</span> <br />
+                  Neues, virtuelles Netzwerk zur Kommunikation mehrerer Container untereinander erstellen
+
+                * <span class="cmd">docker system prune</span> <br />
+                  Nicht mehr benötigte Ressourcen freigeben (wichtig!)
+
+                * <span class="cmd">docker volume prune</span> <br />
+                  Nicht mehr verwendete Volumes löschen, da diese sehr viel Speicher belegen können.
+
+                  <lsx-info-box type="warning" title="Achtung, Datenverlust!">
+                      Es werden alle Volumes gelöscht, die aktuell von keinem laufenden Container
+                      genutzt werden. Dadurch sind ggf. dann auch die persistenten Daten der MongoDB
+                      weg, wenn diese bei Ausführung des Befehls gerade nicht läuft.
+                  </lsx-info-box>
+
+                ### Docker Compose {.mt-5}
+
+                * <span class="cmd">docker compose up</span>:  <br />
+                  Start mehrerer zusammengehöriger Docker Container **im Vordergrund**
+
+                * <span class="cmd">docker compose up -d</span>: <br />
+                  Start mehrerer zusammengehöriger Docker Container **im Hintergrund**
+
+                * <span class="cmd">docker compose down</span>:  <br />
+                  Stoppen der mit Docker Compose gestarteten Container
+
+                * <span class="cmd">docker compose build</span>:  <br />
+                  Neubauen aller Container Images anhand ihres <span class="fn">Dockerfile</span>
+            </section>
+
+            <section data-title="Aufgabe: Wir erkunden Docker (30 Minuten)" class="markdown limited-width" data-background-color="rgb(231, 221, 141)">
+                Öffnen Sie den folgenden Link zum Starten der GitPod Online IDE mit den Quellcodes
+                zur Vorlesung. Neben einem an Visual Studio Code angelehnten Code-Editor und einer
+                Linux-Umgebung mit Node.js und anderen Werkzeugen, stellt diese Ihnen auch Docker
+                und Docker Compose zur Verfügung. Sie können somit Docker ausprobieren oder gar am
+                Portfolioprojekt der Vorlesung arbeiten, ohne etwas auf Ihrem Rechner installieren
+                zu müssen. Im Gegenzug benötigen Sie allerdings eine dauerhafte Internetverbindung,
+                um programmieren zu können.
+
+                <a href="https://www.gitpod.io/#https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes" target="_blank" class="fw-bold">Online IDE: Quellcodes zur Vorlesung</a>
+
+                ![Gitpod](docker-aufgabe-gitpod.png){.img-thumbnail img-responsive}
+
+                Falls noch nicht geschehen, öffnen Sie über das Hamburger-Menü oben links ein
+                neues Terminal. In diesem Wechseln Sie mit dem <span class="cmd">cd</span>-Befehl
+                in das Adressbuch-Beispiel:
+
+                <span class="cmd">cd Beispielanwendung\ Adressbuch</span>
+
+                Um nicht den gesamten Befehl eintippen zu müssen, genügt es, wenn Sie nur die
+                ersten paar Buchstaben tippen und dann die <kbd>Tab</kbd>-Taste drücken, um
+                die sog. „Command Completion” der Konsole auszuführen. Da es mehrere Verzeichnisse
+                mit dem Wort „Beispielanwendung” am Anfang gibt, drücken Sie anschließend
+                <kbd>A</kbd> und dann wieder <kbd>Tab</kbd>, damit sich der Befehl vervollständigt.
+
+                Das Tolle an GitPod ist, dass innerhalb des Terminals ausgeführte Serverdienste
+                wie z.B. der Backend-Service der Anwendung über eine öffentliche URL testbar
+                gemacht werden. Dies benötigen wir, damit die Frontend-Anwendung (die ja innerhalb
+                des Browsers und somit nicht in der Linux-Umgebung der IDE läuft) auf das Backend
+                zugreifen kann. Im ersten Schritt geht es daher darum, die URL des Backend-Services
+                zu ermitteln und in der Umgebungsvariable `API_KEY` abzulegen. Gehen Sie hierfür
+                wie folgt vor:
+
+                 1. Starten Sie alle Container mit dem Befehl <br />
+                   <span class="cmd">docker-compose -f docker-compose.dev.yml up -d</span>
+
+                 1. Öffnen Sie links in der Sidebar den „Remote Explorer”.
+
+                 1. Schalten Sie alle Ports frei, um eine öffentliche URL zu erzeugen.
+
+                 1. Öffnen Sie die Vorschau für den Port 3000.
+
+                 1. Kopieren Sie sich die URL des Services aus dem Vorschaufenster.
+
+                 1. Erzeugen Sie die Umgebungsvariable im Terminal mit folgendem Befehl: <br />
+                    <span class="cmd">export API_URL=https://3000-….gitpod.io</span>
+
+                 1. Starten Sie anschließend mit folgenden Befehlen alle Container neu: <br />
+                    <span class="cmd">docker-compose -f docker-compose.dev.yml down</span> <br />
+                    <span class="cmd">docker-compose -f docker-compose.dev.yml up -d</span> <br />
+
+                 1. Öffnen Sie anschließend die Vorschau für den Remote Port 8080.
+                    Wenn Sie wollen können Sie die URL aus dem Vorschaufenster in
+                    einen neuen Browser-Tab einfügen. Auf jeden Fall testen Sie, ob
+                    sich die App fehlerfrei bedienen lässt.
+
+                Nehmen Sie nun eine Änderung am Backend-Quellcode vor und laden
+                Sie die Vorschauseite neu. Beobachten Sie dabei, dass die
+                Änderung sofort aktiv wurde. Anschließend nehmen Sie eine
+                Änderung am Frontend-Quellcode vor und laden Sie Vorschseite
+                wieder neu. Beobachten Sie auch hier, dass die Änderung ohne
+                manuelles Eingreifen sofort aktiv wurde.
+
+                Versuchen Sie abschließend, mit der Datei <span class="fn">docker-compose.prod.yml</span>
+                die Produktivversion der Anwendung zu starten. Verschen Sie dann,
+                die in der Entwicklungsversion definierte Mongo-Admin-Oberfläche
+                in die Produktiversion aufzunehmen. Welche Schritte sind hierfür
+                notwendig?
+            </section>
+            
             <!-- =========================== -->
             <!-- Architekturmuster im Detail -->
             <!-- =========================== -->
-            <!--
             <section data-title="Architekturmuster im Detail" data-chapter></section>
             <section data-title="Architekturmuster im Detail" data-background-image="../trennfolie.jpg"></section>
-            -->
+
+            <section data-title="Übersichtsvideo zu typischen Architekturmustern" class="limited-width">
+                <lsx-youtube video="Q7580888ce4" aspect-ratio="16x9" style="width: 50em; max-width: 100%;"></lsx-youtube>
+                <a href="https://youtu.be/Q7580888ce4" target="_blank">Link zum Video</a>
+            
+                <lsx-info-box type="warning" class="mt-3">
+                    Die Einleitung des Videos ist nicht mehr ganz aktuell, da wir in der Vorlesung inzwischen
+                    erst die Cloud-Architektur und dann die Programmierung besprechen. Auch programmieren wir
+                    inzwischen in JavaScript und nicht mehr mit dem Spring Framework in Java. Von den gelegentlichen
+                    Bezügen zu Java und Spring sind die Konzepte des Videos aber auch hier allgemeingültig.
+                </lsx-info-box>
+                <p>
+                    <span class="red fw-bold">And now go!</span> 🏁 😅
+                </p>
+            </section>
 
             <!--
                 https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
@@ -785,10 +1321,149 @@
                 https://community.openhab.org/t/using-loki-promtail-grafana-for-openhab-system-and-log-monitoring/130853
                 https://grafana.com/docs/tempo/latest/getting-started/tempo-in-grafana/
 
+                - BILD: Weitere Services / Planes
+                - Metriken, Logging, Tracing
+                - Fowler: Circuit Breaker
+
                 Fehlertoleranz
                 Sicherheit
-                Fallbeispiel Webflix (Folie analog Fallbeispiel Adressbuch nur Verweis auf den Code)
+            -->
+
+            <section data-title="Überwachung von Microservices">
+                <div class="markdown dhbw-limited-width m-auto mb-5">
+                    Typische Services in der **Kontrollebene** sind jene zur Überwachung des laufenden
+                    Betriebs einer Cloud-Anwendung. Diese unterteilen sich typischerweise in:
+
+                    * **Metriken:**: Kennzahlen wie Speicherverbrauch, Anzahl Requests je Sekunde, CPU-Auslastung, ...
+                    * **Logging:** Protokollausgaben der einzelnen Services, um Fehler nachvollziehen zu können
+                    * **Tracing:** Nachverfolgung von Aufrufketten, um komplexe Fehlersituationen analysieren zu können
+                </div>
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="metriken.png" class="d-block w-100 img-thumbnail" />
+                    <img src="logging.png" class="d-block w-100 img-thumbnail" />
+                    <img src="tracing.png" class="d-block w-100 img-thumbnail" />
+                </div>
+            </section>
+
+            <section data-title="Zwei-Faktor-Authentifizierung ja oder nein?" class="dhbw-limited-width">
+                <img src="ct-schlagseite-2fa.jpg" class="d-block w-100" alt="Jeden Tag verschwindet einer …">
+            
+                <small>
+                    <small>
+                        Bildnachweis:
+                        <a href="https://www.heise.de/select/ct/2022/11/2200714175714756235" target="_blank">c't 11/2022, S. 13 (Schlagseite)</a>
+                    </small>
+                </small>
+            </section>
+
+            <!--
+            <section data-title="Fallbeispiel: Webflicks">
+                <div class="mb-3">
+                    <lsx-github-edit
+                        url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Beispielanwendung%20Webflicks"></lsx-github-edit>
+                </div>
+            
+                <div class="d-flex flex-column flex-md-row gap-3">
+                    <img src="beispiel-webflicks-1.png" class="img-thumbnail d-block w-100">
+                    <img src="beispiel-webflicks-2.png" class="img-thumbnail d-block w-100">
+                    <img src="beispiel-webflicks-3.png" class="img-thumbnail d-block w-100">
+                </div>
+            </section>
+            -->
+
+            <!--
                 Folie mit Bild zum Umschalten: Bewertung verschiedener Architekturmuster (Kopplung, Synchron/Asynchron, Workflow, ...)
+            -->
+            <!--
+            <section data-title="Vor- und Nachteile verschiedene Architekturansätze">
+                <div class="dropdown mb-3">
+                    <button
+                        id             = "architekturbeispiele-dropdown"
+                        class          = "btn btn-outline-secondary dropdown-toggle"
+                        style          = "font-size: 0.9rem;"
+                        type           = "button"
+                        data-bs-toggle = "dropdown"
+                        aria-haspopup  = "true"
+                        aria-expanded  = "false"
+                    >
+                        TODO: Architekturbeispiel 1
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <button
+                                class          = "dropdown-item"
+                                type           = "button"
+                                data-dropdown  = "#architekturbeispiele-dropdown"
+                                data-container = "#architekturbeispiele-bilder"
+                                data-show      = "#architekturbeispiele-bilder-1"
+                                onclick        = "change_example(event)"
+                            >
+                                TODO: Architekturbeispiel 1
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                class          = "dropdown-item"
+                                type           = "button"
+                                data-dropdown  = "#architekturbeispiele-dropdown"
+                                data-container = "#architekturbeispiele-bilder"
+                                data-show      = "#architekturbeispiele-bilder-2"
+                                onclick        = "change_example(event)"
+                            >
+                                TODO: Architekturbeispiel 2
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="architekturbeispiele-bilder">
+                    <lsx-grid-fluid id="architekturbeispiele-bilder-1" class="p-0 mt-3" >
+                        <lsx-row>
+                            <lsx-col size="md-8" class="mb-3">
+                                <img src="microservices-gateway.png" class="d-block w-100" />
+                            </lsx-col>
+                            <lsx-col size="md" class="markdown">
+                                xxx - Gateway
+    
+                                ### Vorteile dieser Architektur {.mt-4}
+    
+                                * xxx
+                                * xxx
+                                * xxx
+    
+                                ### Nachteile dieser Architektur {.mt-4}
+    
+                                * xxx
+                                * xxx
+                                * xxx
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+    
+                    <lsx-grid-fluid id="architekturbeispiele-bilder-2" class="p-0 mt-3 hidden">
+                        <lsx-row>
+                            <lsx-col size="md-8" class="mb-3">
+                                <img src="microservices-compositeui.png" class="d-block w-100" />
+                            </lsx-col>
+                            <lsx-col size="md" class="markdown">
+                                xxx - Composite UI
+                    
+                                ### Vorteile dieser Architektur {.mt-4}
+                    
+                                * xxx
+                                * xxx
+                                * xxx
+                    
+                                ### Nachteile dieser Architektur {.mt-4}
+                    
+                                * xxx
+                                * xxx
+                                * xxx
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </div>
+            </section>
             -->
         </main>
 
