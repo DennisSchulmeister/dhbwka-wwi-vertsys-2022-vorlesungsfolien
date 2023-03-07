@@ -8,6 +8,26 @@
         <script src="../_bundle.js"></script>
         <link rel="stylesheet" href="../_bundle.css" />
         <link rel="shortcut icon" href="../favicon.png" />
+
+        <script>
+            function change_example(event) {
+                let label             = event.target.textContent       || "";
+                let dropdownSelector  = event.target.dataset.dropdown  || "";
+                let containerSelector = event.target.dataset.container || "";
+                let showSelector      = event.target.dataset.show      || "";
+
+                if (dropdownSelector) {
+                    document.querySelectorAll(dropdownSelector).forEach(element => element.textContent = label);
+                }
+                if (containerSelector) {
+                    document.querySelectorAll(`${containerSelector} > *`).forEach(element => element.classList.add("hidden"));
+                }
+
+                if (showSelector) {
+                    document.querySelectorAll(showSelector).forEach(element => element.classList.remove("hidden"));
+                }
+            }
+        </script>
     </head>
     <body class="hidden">
         <!-- Seitenkopf und Inhaltsverzeichnis -->
@@ -83,12 +103,31 @@
                 </div>
             </section>
 
-            <!-- ============================= -->
-            <!-- Praktische Bedeutung von REST -->
-            <!-- ============================= -->
-            <section data-title="Praktische Bedeutung von REST" data-chapter></section>
-            <section data-title="Praktische Bedeutung von REST" data-background-image="../trennfolie.jpg"></section>
+            <!-- ==================== -->
+            <!-- Praktische Bedeutung -->
+            <!-- ==================== -->
+            <section data-title="Praktische Bedeutung" data-chapter></section>
+            <section data-title="Praktische Bedeutung" data-background-image="../trennfolie.jpg"></section>
 
+            <section data-title="Was ist eine Anwendung?">
+                <!-- https://de.wikipedia.org/wiki/Anwendungssoftware
+                https://en.wikipedia.org/wiki/Application_software -->
+
+                Zitate Wikipedia: Abgrenzung zu Systemsoftware und Werkzeugen, Besseres Bild / Bilder?
+
+                <img src="webanwendung.png" class="d-block w-100 img-thumbnail" />
+            </section>
+
+            <section data-title="Was ist ein Service?">
+                <!-- https://de.wikipedia.org/wiki/Dienst_(Informatik)
+                https://en.wikipedia.org/wiki/Service_(systems_architecture) -->
+
+                Zitate Wikipedia, Abgrenzung zu Servern (mögliche technische Implementierung), Abgrenzung zu Microservices (bieten oft einen Webservice und/oder Webapp)
+
+                <img src="webservice.png" class="d-block w-100 img-thumbnail" />
+            </section>
+
+            <!--
             <section data-title="Abgrenzung von Webanwendungen und Webservices">
                 <div class="markdown mb-5">
                     * Die Begriffe Web<u>anwendung</u> und Web<u>service</u> klingen zwar ähnlich,
@@ -118,8 +157,82 @@
                     </div>
                 </div>
             </section>
+            -->
 
-            <section data-title="Typische Einsatzgebiete für REST-Webservices">
+            <section data-title="Webanwendungen im Detail" class="w-100">
+                <div class="dropdown mb-3">
+                    <button
+                        id             = "webapp-architektur-dropdown"
+                        class          = "btn btn-outline-secondary dropdown-toggle"
+                        style          = "font-size: 0.9rem;"
+                        type           = "button"
+                        data-bs-toggle = "dropdown"
+                        aria-haspopup  = "true"
+                        aria-expanded  = "false"
+                    >
+                        Statische Webseite
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <button
+                                class          = "dropdown-item"
+                                type           = "button"
+                                data-dropdown  = "#webapp-architektur-dropdown"
+                                data-container = "#webapp-architektur"
+                                data-show      = "#webapp-architektur-1"
+                                onclick        = "change_example(event)"
+                            >
+                                Statische Webseite
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                class          = "dropdown-item"
+                                type           = "button"
+                                data-dropdown  = "#webapp-architektur-dropdown"
+                                data-container = "#webapp-architektur"
+                                data-show      = "#webapp-architektur-2"
+                                onclick        = "change_example(event)"
+                            >
+                                Multi Page App (serverseitige Webanwendung)
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                class          = "dropdown-item"
+                                type           = "button"
+                                data-dropdown  = "#webapp-architektur-dropdown"
+                                data-container = "#webapp-architektur"
+                                data-show      = "#webapp-architektur-3"
+                                onclick        = "change_example(event)"
+                            >
+                                Single Page App (clientseitige Webanwendung)
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                class          = "dropdown-item"
+                                type           = "button"
+                                data-dropdown  = "#webapp-architektur-dropdown"
+                                data-container = "#webapp-architektur"
+                                data-show      = "#webapp-architektur-4"
+                                onclick        = "change_example(event)"
+                            >
+                                Single Page App mit Backend
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="webapp-architektur">
+                    <img id="webapp-architektur-1" src="wiederholung_spa-1.svg" class="b-block w-100" />
+                    <img id="webapp-architektur-2" src="wiederholung_spa-2.svg" class="b-block w-100 hidden" />
+                    <img id="webapp-architektur-3" src="wiederholung_spa-3.svg" class="b-block w-100 hidden" />
+                    <img id="webapp-architektur-4" src="wiederholung_spa-4.svg" class="b-block w-100 hidden" />
+                </div>
+            </section>
+
+            <section data-title="Typische Einsatzgebiete für Webservices">
                 <div class="markdown dhbw-limited-width m-auto mb-5">
                     Im Gegensatz zu früher ist es heute üblich, dass viele Anwendungen und Apps
                     auf Dienste im Internet zugreifen. Dies reicht vom einfachen Auslagern einzelner
@@ -148,18 +261,7 @@
                 </div>
             </section>
 
-            <section data-title="Fallbeispiele für die Nutzung von REST-Webservice" class="w-100">
-                <lsx-tab-pages class="w-100">
-                    <lsx-tab-page title="Reiseportal">
-                        <img src="anwendungen-reiseportal.png" class="b-block img-fluid" />
-                    </lsx-tab-page>
-                    <lsx-tab-page title="Business-to-Business">
-                        <img src="anwendungen-b2b.png" class="b-block img-fluid" />
-                    </lsx-tab-page>
-                </lsx-tab-pages>
-            </section>
-
-            <section data-title="Ökonomische Bedeutung von REST-Webservices">
+            <section data-title="Ökonomische Bedeutung von Webservices">
                 <div class="markdown dhbw-limited-width m-auto mb-5">
                     Ist eine Webservice dafür gemacht, von unterschiedlichen Anwendungen aufgerufen zu werden,
                     spricht man heute auch von einer API. Gemeint ist damit ein **Application Programming Interface**,
@@ -192,6 +294,17 @@
                 </div>
             </section>
 
+            <section data-title="Fallbeispiele für Webservice-Architekturen" class="w-100">
+                <lsx-tab-pages class="w-100">
+                    <lsx-tab-page title="Reiseportal">
+                        <img src="anwendungen-reiseportal.png" class="b-block img-fluid" />
+                    </lsx-tab-page>
+                    <lsx-tab-page title="Business-to-Business">
+                        <img src="anwendungen-b2b.png" class="b-block img-fluid" />
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </section>
+
             <section data-title="Beispiele für öffentliche Webservices" class="limited-width">
                 <p>
                     <a href="https://github.com/public-apis/public-apis" target="_blank">https://github.com/public-apis/public-apis</a> <br />
@@ -201,11 +314,11 @@
                 <img src="public-apis.png" class="img-thumbnail w-100" />
             </section>
 
-            <!-- =============================== -->
-            <!-- Technische Hintergründe zu REST -->
-            <!-- =============================== -->
-            <section data-title="Technische Hintergründe zu REST" data-chapter></section>
-            <section data-title="Technische Hintergründe zu REST" data-background-image="../trennfolie.jpg"></section>
+            <!-- ======================= -->
+            <!-- Technische Hintergründe -->
+            <!-- ======================= -->
+            <section data-title="Technische Hintergründe" data-chapter></section>
+            <section data-title="Technische Hintergründe" data-background-image="../trennfolie.jpg"></section>
 
             <section data-title="Eigenschaften des HTTP-Übertragungsprotokolls" class="limited-widh">
                 <article>
@@ -1885,13 +1998,17 @@
                 </div>
 
                 <div class="d-flex flex-row gap-3">
-                    <div class="fw-bold">
+                    <div class="fw-bold flex-fill">
                         <a href="https://editor.swagger.io" target="_blank">Swagger Editor</a> (Nur Quellcode)
-                        <img src="openapi-beispiel.png" class="img-thumbnail w-100" />
+                        <img src="openapi-beispiel.png" class="img-thumbnail d-block w-100" />
                     </div>
-                    <div class="fw-bold">
-                        <a href="https://stoplight.io" target="_blank">Stoplight</a> (grafischer Editor)
-                        <img src="stoplight.png" class="img-thumbnail w-100" />
+                    <div class="fw-bold flex-fill">
+                        <a href="https://www.apicur.io" target="_blank">Apicurio Studio</a> (grafischer Editor, open-source)
+                        <img src="apicurio-1.png" class="img-thumbnail d-block w-100" />
+                    </div>
+                    <div class="fw-bold flex-fill">
+                        Live-Vorschau in Apicurio Studio
+                        <img src="apicurio-2.png" class="img-thumbnail d-block w-100" />
                     </div>
                 </div>
             </section>
