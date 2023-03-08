@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Einführung in REST-Webservices | Verteilte Systeme</title>
+        <title>REST-Webservices | Verteilte Systeme</title>
 
         <script src="../_bundle.js"></script>
         <link rel="stylesheet" href="../_bundle.css" />
@@ -33,7 +33,7 @@
         <!-- Seitenkopf und Inhaltsverzeichnis -->
         <header>
             <div id="title">
-                <h1>Einführung in REST-Webservices</h1>
+                <h1>REST-Webservices</h1>
                 <h2 id="page-title"></h2>
             </div>
 
@@ -47,58 +47,39 @@
             <!-- ========== -->
             <section data-title="Einleitung" data-chapter></section>
 
-            <section data-title="Inhalt der heutigen Vorlesung" data-background-image="../trennfolie.jpg">
-                <div class="d-flex align-items-stretch" style="gap: 1em;">
-                    <div class="card flex-fill">
-                        <div class="card-header fw-bold dhbw-lightblue">
-                            Funktionsweise und Bedeutung
-                        </div>
-                        <div class="card-body p-3 bg-light markdown">
-                            * Unterschied zu Webanwendungen
-                            * Typische Anwendungsfälle für REST APIs
-                            * Umsetzung der REST-Prinzipien
-                            * Hypermedia-Driven Anwendungen
-                        </div>
+            <section data-title="Lernziele" data-background-image="../trennfolie.jpg">
+                <div class="card flex-fill mb-3">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Praktische Bedeutung von REST
                     </div>
-                    <div class="card flex-fill">
-                        <div class="card-header fw-bold dhbw-lightblue">
-                            Beschreibung mit OpenAPI
-                        </div>
-                        <div class="card-body p-3 bg-light markdown">
-                            * Dokumentation von Webservices
-                            * Bestandteile einer OpenAPI-Spezifikation
-                            * Hinweise zur Programmierung
-                            * Praktisches Fallbeispiel
-                        </div>
+                    <div class="card-body p-3 markdown">
+                        * Den Unterschied zwischen Webanwendungen und Webservices verstehen
+                        * Typische Einsatzgebiete von REST-Webservices erkennen können
+                        * Die wirtschaftliche Bedeutung von REST APIs und offener Schnittstellen kennen
                     </div>
                 </div>
 
-                <div class="d-flex align-items-stretch" style="margin-top: 1em; gap: 1em;">
-                    <div class="card flex-fill">
-                        <div class="card-header fw-bold dhbw-lightblue">
-                            Lernziele
-                        </div>
-                        <div class="card-body p-3 markdown">
-                            ### Praktische Bedeutung von REST
+                <div class="card flex-fill mb-3">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Technische Hintergründe zu REST
+                    </div>
+                    <div class="card-body p-3 markdown">
+                        * Die Funktionsweise von HTTP als Übertragungsprotokoll beschreiben können
+                        * Zustandslose von zustandsbehafteter Programmierung abgrenzen können
+                        * Die Umsetzung der REST-Prinzipien mit HTTP und JSON erklären können
+                        * Die Funktionsweise sowie Vorteile des HATEOAS-Prinzips beschreiben können
+                    </div>
+                </div>
 
-                            * Den Unterschied zwischen Web<u>anwendungen</u> und Web<u>services</u> verstehen
-                            * Typische Einsatzgebiete von REST-Webservices erkennen können
-                            * Die wirtschaftliche Bedeutung von REST APIs und offener Schnittstellen kennen
-
-                            ### Technische Hintergründe zu REST
-
-                            * Die Funktionsweise von HTTP als Übertragungsprotokoll beschreiben können
-                            * Zustandslose von zustandsbehafteter Programmierung abgrenzen können
-                            * Die Umsetzung der REST-Prinzipien mit HTTP und JSON erklären können
-                            * Die Funktionsweise sowie Vorteile des HATEOAS-Prinzips beschreiben können
-
-                            ### Beschreibung mit OpenAPI
-
-                            * Die Vorteile einer maschinenlesbaren API-Spezifikation kennen
-                            * Die typischen Inhalte einer OpenAPI-Beschreiben erklären können
-                            * Webservices anhand ihrer OpenAPI-Beschreibung verstehen können
-                            * OpenAPI-Spezifikationen mit Swagger Editor und Stoplight erstellen können
-                        </div>
+                <div class="card flex-fill mb-3">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Beschreibung mit OpenAPI
+                    </div>
+                    <div class="card-body p-3 markdown">
+                        * Die Vorteile einer maschinenlesbaren API-Spezifikation kennen
+                        * Die typischen Inhalte einer OpenAPI-Beschreiben erklären können
+                        * Webservices anhand ihrer OpenAPI-Beschreibung verstehen können
+                        * OpenAPI-Spezifikationen mit Apicurio Studio erstellen können
                     </div>
                 </div>
             </section>
@@ -109,32 +90,80 @@
             <section data-title="Praktische Bedeutung" data-chapter></section>
             <section data-title="Praktische Bedeutung" data-background-image="../trennfolie.jpg"></section>
 
-            <section data-title="Was ist eine Anwendung?">
-                <!-- https://de.wikipedia.org/wiki/Anwendungssoftware
-                https://en.wikipedia.org/wiki/Application_software -->
+            <section data-title="Was ist eine Anwendung?" class="dhbw-limited-width2">
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <blockquote class="blockquote markdown">
+                            Als **Anwendungssoftware** werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche,
+                            nicht systemtechnische Funktionalität zu unterstützen. Sie dienen der **Lösung von Benutzerproblemen**.
+                            Beispiele für Anwendungsgebiete sind: Bildbearbeitung, E-Mail-Programme, Webbrowser, …
+        
+                            In information technology, an **application (app)** is a computer program **designed to help people
+                            perform an activity**.
+        
+                            <figcaption class="blockquote-footer">
+                                <cite>Deutsche und englische Wikipedia zum Begriff „Anwendung”</cite>
+                            </figcaption>
+                        </blockquote>
+                    </div>
+                </div>
 
-                Zitate Wikipedia: Abgrenzung zu Systemsoftware und Werkzeugen, Besseres Bild / Bilder?
-
-                <img src="webanwendung.png" class="d-block w-100 img-thumbnail" />
+                <div class="card">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Schlussfolgerungen
+                    </div>
+                    <div class="card-body markdown">
+                        * Anwendungen besitzen eine Benutzeroberfläche
+                        * Apps sind kleine Anwendungen (App vs. Application)
+                        * Webanwendungen sind mit den Webtechnologien realisierte Anwendungen
+                    </div>
+                </div>
             </section>
 
-            <section data-title="Was ist ein Service?">
-                <!-- https://de.wikipedia.org/wiki/Dienst_(Informatik)
-                https://en.wikipedia.org/wiki/Service_(systems_architecture) -->
-
-                Zitate Wikipedia, Abgrenzung zu Servern (mögliche technische Implementierung), Abgrenzung zu Microservices (bieten oft einen Webservice und/oder Webapp)
-
-                <img src="webservice.png" class="d-block w-100 img-thumbnail" />
+            <section data-title="Was ist ein Service?" class="dhbw-limited-width2">
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <blockquote class="blockquote markdown">
+                            Der Begriff **Dienst** (auch Service oder Daemon) beschreibt in der Informatik eine **technische, autarke Einheit**,
+                            die **zusammenhängende Funktionalitäten** zu einem Themenkomplex bündelt und über eine **klar definierte Schnittstelle**
+                            zur Verfügung stellt. Typische Beispiele sind hier Webservices, die Funktionalitäten für Dritte über das Internet
+                            verfügbar machen, Netzwerkdienste oder Systemdienste.
+                
+                            <figcaption class="blockquote-footer">
+                                <cite>Wikipedia zum Begriff „Dienst (Service)”</cite>
+                            </figcaption>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <blockquote class="blockquote markdown">
+                            A service is a mechanism to enable access to one or more capabilities, where the access is provided using a prescribed
+                            interface, consistent with constraints and policies as specified by the service description.
+                
+                            <figcaption class="blockquote-footer">
+                                <cite>OASIS-Definition des Begriffs „Service“</cite>
+                            </figcaption>
+                        </blockquote>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header fw-bold dhbw-lightblue">
+                        Schlussfolgerungen
+                    </div>
+                    <div class="card-body markdown">
+                        * Services besitzen in der Regel keine Benutzeroberfläche sondern laufen im Hintergrund
+                        * Ein Server stellt Services über das Netzwerk bzw. das Internet zur Verfügung
+                        * Services können aber auch auf andere Weise, beispielsweise als Betriebssystemfunktion realisiert werden
+                        * Webservices nutzen die Webtechnologien, um Services über das Internet verfügbar zu machen
+                        * Microservices kapseln größere Anwendungsfunktionen und bieten hierfür meist eine Webservice-Schnittstelle
+                    </div>
+                </div>
             </section>
 
-            <!--
-            <section data-title="Abgrenzung von Webanwendungen und Webservices">
+            <section data-title="Abgrenzung aus technischer Sicht">
                 <div class="markdown mb-5">
-                    * Die Begriffe Web<u>anwendung</u> und Web<u>service</u> klingen zwar ähnlich,
-                      meinen aber unterschiedliche Dinge.
-
-                    * Insbesondere darf man bei Webservices nur bedingt an Dienstleistungen im Web denken.
-
                     * **Webanwendung:** Wird über HTTP aufgerufen und nutzt HTML/CSS/JavaScript zur
                       Erzeugung der Benutzeroberfläche.
 
@@ -157,7 +186,6 @@
                     </div>
                 </div>
             </section>
-            -->
 
             <section data-title="Webanwendungen im Detail" class="w-100">
                 <div class="dropdown mb-3">
@@ -263,21 +291,22 @@
 
             <section data-title="Ökonomische Bedeutung von Webservices">
                 <div class="markdown dhbw-limited-width m-auto mb-5">
-                    Ist eine Webservice dafür gemacht, von unterschiedlichen Anwendungen aufgerufen zu werden,
+                    Ist ein Webservice dafür gemacht, von unterschiedlichen Anwendungen aufgerufen zu werden,
                     spricht man heute auch von einer API. Gemeint ist damit ein **Application Programming Interface**,
                     das seine Funktionen verschiedenen Anwendungen zur Verfügung stellt. Ursprünglich kommt dieser
                     Begriff aus der Betriebssystementwicklung, wo er für die Systembibliotheken zur Nutzung der
-                    Betriebssystemfunktionen in eigenen Anwendungen steht:
+                    Betriebssystemfunktionen steht:
 
                      * **WIN32-API:** Interne API von Microsoft Windows zur Erstellung von Windows-Anwendungen
                      * **Java API:** Die mitgelieferte und sehr umfangreiche Klassenbibliothek der Programmiersprache Java
                      * **Android API:** Aus der Java API abgeleitete Schnittstellen zur Programmierung von Android Apps
 
                     In der objektorientierten Programmierung wird auch die öffentliche Schnittstelle einer Klasse
-                    gelegentlich als API bezeichnet. Im Rahmen des **API-driven Business** gehen heute immer Firmen
-                    dazu über, ihre Produkte und Dienstleistungen per REST API zur Verfügung zu stellen. Durch die
-                    Integration der APIs in fremde Webseiten, Anwendungen und Mobile Apps öffnen Sie auf diese Weise
-                    einen zusätzlichen Vertriebskanal für ihre Leistungen.
+                    gelegentlich als API bezeichnet.
+                    
+                    Im Rahmen des **API-driven Business** gehen heute immer Firmen dazu über, ihre Produkte und Dienstleistungen
+                    per **REST API** zur Verfügung zu stellen. Durch die Integration der APIs in fremde Webseiten, Anwendungen und
+                    Mobile Apps eröffnet sich auf diese Weise einen zusätzlicher Vertriebskanal.
 
                     <div class="d-flex align-items-stretch" style="gap: 1em; margin-bottom: 1em;">
                         <!-- https://www.creditsafe.com/de/de/risiko-und-kreditmanagement/systemanbindungen/api-dokumentation.html -->
@@ -320,7 +349,7 @@
             <section data-title="Technische Hintergründe" data-chapter></section>
             <section data-title="Technische Hintergründe" data-background-image="../trennfolie.jpg"></section>
 
-            <section data-title="Eigenschaften des HTTP-Übertragungsprotokolls" class="limited-widh">
+            <section data-title="Eine kurze Wiederholung zu HTTP" class="limited-widh">
                 <article>
                     <style>
                         #http-nachricht1 table {
@@ -401,7 +430,7 @@
                                         <td class="http-nachricht http-body" colspan="3">
                                             { <br />
                                             &nbsp;&nbsp;&nbsp;&nbsp;"course": "vertsys", <br />
-                                            &nbsp;&nbsp;&nbsp;&nbsp;"year": 2020, <br />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;"year": 2023, <br />
                                             &nbsp;&nbsp;&nbsp;&nbsp;"text": "Vielen Dank für diese tolle Vorlesung!" <br />
                                             }
                                         </td>
@@ -841,18 +870,17 @@
 
             <section data-title="Grundprinzipien einfacher SOAP-Webservices" class="dhbw-limited-width">
                 <div class="markdown mb-5">
-                    Angeleitet vom Konzept des **entfernten Methodenaufrufs** entwickelte sich
-                    Anfang der 2000er-Jahre **SOAP**, was ursprünglich für Simple Object Access
-                    Protocol stand, zu einem weit verbreiteten Standard. Der Webservice definiert
-                    hier einfach eine Reihe von Funktionen, die mit einer **HTTP-POST-Anfrage**
-                    entfernt aufgerufen werden können. Die aufgerufene URL ist für jede Funktion
-                    stets dieselbe, da der Name der Funktion sowie die für den Aufruf benötigten
-                    Parameter im HTTP Request Body als XML-Dokument übergeben werden. Analog dazu
-                    antwortet der Server mit einem ähnlich strukturierten XML-Dokument.
-
-                    Heute nimmt die Bedeutung von SOAP immer mehr ab, so dass SOAP in vielen
-                    Fällen durch REST verdrängt wurde. Die Grundidee eines Webservice-Aufrufs
-                    lässt sich daran aber immer noch gut erklären.
+                    Angeleitet vom Konzept des **entfernten Methodenaufrufs** entwickelte sich Anfang der
+                    2000er-Jahre **SOAP** zu einem weit verbreiteten Standard. Die Abkürzung stand dabei
+                    ursprünglich für **Simple Object Access Protocol*, wobei das Protokoll weder simpel
+                    noch objekt-orientiert ist. Denn anstelle von Objekten definiert ein Webservice hier
+                    eine Reihe von Funktionen, die mit einer **HTTP/POST-Anfrage** entfernt aufgerufen
+                    werden können. Anfrage und Antwort werden dabei im **XML-Format** kodiert und enthalten
+                    neben dem Namen der gerufenen Funktion auch alle Anfrageparameter und Rückgabewerte.
+                    
+                    Heute nimmt die Bedeutung von SOAP immer mehr ab, so dass SOAP in vielen Fällen durch
+                    REST verdrängt wurde. Die Grundidee eines Webservice-Aufrufs lässt sich daran aber immer
+                    noch gut erklären.
                 </div>
 
                 <lsx-tab-pages>
@@ -867,29 +895,28 @@
 
             <section data-title="Grundprinzipien moderner REST-Webservices" class="dhbw-limited-width">
                 <div class="markdown">
-                    Im Gegensatz zu SOAP orientiert sich REST vollständig an den Möglichkeiten von
-                    HTTP und überträgt diese konzeptionell vom einfachen Abruf einer Webseite zur
-                    Verwaltung beliebiger „Ressourcen”. Ressourcen können in diesem Zusammenhang
-                    nahezu alle Dinge sein, sofern ihren Inhalt in einer geeigneten Form zwischen
-                    Client und Server ausgetauscht werden kann. Oft handelt es sich deshalb einfach
-                    um die Einträge innerhalb einer Datenbank. Aber auch IoT-Anwendungsfälle, bei
-                    denen jede Ressource für ein dingliches Objekt der realen Welt steht, sind denkbar.
+                    Im Gegensatz zu SOAP orientiert sich REST vollständig an den Möglichkeiten von HTTP und überträgt
+                    diese konzeptionell vom Abruf einer Webseite auf die **Verwaltung beliebiger „Ressourcen”**, wobei
+                    Ressourcen in diesem Zusammenhang nahezu alle Dinge sein können, deren Inhalt in einer geeigneten
+                    Form zwischen Client und Server ausgetauscht werden kann. Oft handelt es sich deshalb um Einträge
+                    in einer Datenbank. Aber auch IoT-Anwendungsfälle, bei denen jede Ressource für ein dingliches Objekt
+                    der realen Welt steht, sind denkbar.
+                    
+                    Jede Ressource besitzt hierfür eine eindeutige URL, die mit den üblichen HTTP-Methoden (<tt>GET</tt>,
+                    <tt>PUT</tt>, <tt>POST</tt>, <tt>DELETE</tt>, …) angesprochen wird. Die Abkürzung REST steht dabei für
+                    **Representational State Transfer**, was wie folgt zu lesen ist:
 
-                    Die aufrufbaren Grundfunktionen entsprechen den unterschiedlichen HTTP-Verben,
-                    wodurch Ressourcen in REST angelegt, gelesen, überschrieben, verändert und
-                    gelöscht werden können. Die Abkürzung REST steht dabei für **Representational
-                    State Transfer**:
-
-                     * **Representational:** Oftmals unterstützen REST-Webservices mehrere Datenformate
-                       zur Codierung der Ressourcen. Standardformat ist meistens JSON, XML ist aber ebenfalls
-                       weit verbreitet.
-
-                     * **State Transfer:** Die Serverseite ist bei einem echten REST-Webservice komplett zustandslos
-                       und kann sich daher keine Informationen „temporär zwischenmerken”, ohne diese beispielsweise
-                       in einer Datenbank zu speichern. Bis auf wenige Ausnahmen beinhalten deshalb alle Anfragen und
-                       Antworten den kompletten Inhalt der angesprochenen Ressource.
-
-                    Innerhalb der URLs wird zwischen Ressourcen, Collections, Stores und Actions unterschieden.
+                     * **Representational:** Grundsätzlich ist REST nicht auf ein bestimmtes Datenformat festgelegt.
+                       Am häufigsten werden die Daten zwar im JSON-Format übertragen. Viele Server unterstützen darüber
+                       hinaus aber noch weitere Formate wie XML, zwischen denen der Client wählen kann.
+                     
+                     * **State Transfer:** Von der Nutzung einer Datenbank abgesehen ist die Serverseite eines REST-Webservices
+                       immer zustandslos. Auf Serverseite können daher keine Daten im Hauptspeicher temporär abgelegt werden,
+                       um diese bei einer Folgeanfrage weiterzubearbeiten. Temporäre Daten müssen entweder direkt in einer
+                       angeschlossenen Datenbank persistiert oder vom Client bei jeder Anfrage mitgesendet werden. Dies hat
+                       u.a. auch zur Folge, dass fast jede Anfrage bzw. Antwort den kompletten Inhalt einer Ressource beinhaltet.
+                    
+                    Bei den URLs wird zwischen Ressourcen, Collections, Stores und Actions unterschieden.
                 </div>
 
                 <lsx-tab-pages>
@@ -907,7 +934,7 @@
                                 "id": "47110815",
                                 "first_name": "Martina",
                                 "last_name": "Musterfrau",
-                                "registration_date": "2020-02-09"
+                                "registration_date": "2023-02-09"
                             }
                         </source-code>
                         <table class="table bg-light border" style="table-layout: fixed;">
@@ -981,9 +1008,9 @@
                         </p>
                         <source-code language="json">
                             [
-                                {"article": "9573387", "date_added": "2020-01-02"},
-                                {"article": "5975741", "date_added": "2020-01-14"},
-                                {"article": "1572246", "date_added": "2020-02-07"}
+                                {"article": "9573387", "date_added": "2023-01-02"},
+                                {"article": "5975741", "date_added": "2023-01-14"},
+                                {"article": "1572246", "date_added": "2023-02-07"}
                             ]
                         </source-code>
                         <table class="table bg-light border" style="table-layout: fixed;">
@@ -1469,18 +1496,24 @@
 
             <section data-title="Hypermedia-driven Anwendungen mit HATEOAS" class="limited-width">
                 <div class="markdown">
-                    Vollwertige REST-Webservices sollten immer **hypermedia driven** sein. Das heißt, sie
-                    sollten gemäß dem **HATEOAS-Prinzip** (Hypertext is the engine of the application state)
-                    mit jeder Antwort neben den Daten auch eine Liste mit Hyperlinks für alle zulässigen
-                    Folgeaktionen schicken. Als Beispiel zur Verdeutlichung diene eine einfache Onlinebanking
-                    API, bei der ein Konto folgende Zustände mit folgenden erlaubten Folgeaktionen haben kann:
+                    Entsprechend den Empfehlungen von Roy Fielding, dem Erfinder von REST, verhalten sich einige
+                    REST-Webservices **hypermedia driven**, indem Sie das **HATEOAS-Prinzip** (Hypertext is the
+                    engine of the application state) berücksichtigen. Dieses sieht vor, dass ein entfernter Client
+                    die Struktur eines Webservices durch Verlinkungen innerhalb der Antworten komplett dynamisch
+                    entdecken kann. Jede Antwort beinhaltet hierfür neben den eigentlichen Nutzdaten zusätzlich
+                    eine Liste mit Hyperlinks für alle zulässigen Folgeaktionen.
+
+                    Zur Verdeutlichung soll hier eine einfache Onlinebanking-Anwendung betrachtet werden. Über
+                    die Verlinkungen kann das Frontend erkennen, ob eine Konto beispielsweise ausreichend Deckung
+                    zum Tätigen von Überweisungen besitzt. Ohne Verlinkungen muss der Client „wissen“, wann welche
+                    Aktion zulässig ist.
                 </div>
 
                 <div class="d-flex justify-content-center" style="margin-bottom: 1em;">
                     <img src="hateoas-beispiel.svg" alt="Zustandsdiagramm für Bankkonten" class="img-fluid"/>
                 </div>
 
-                <lsx-tab-pages class="w-100">
+                <lsx-tab-pages class="w-100 mb-4">
                     <lsx-tab-page title="Ohne Hyperlinks">
                         <p>
                             Es werden zwar die richtigen Daten zu einem Konto geliefert. Das Backend
@@ -1582,6 +1615,13 @@
                         </lsx-accordion>
                     </lsx-tab-page>
                 </lsx-tab-pages>
+
+                <p>
+                    Trotz der augenscheinlichen Vorteile, hat sich das HATEOAS-Prinzip jedoch nicht als allgemeingültig
+                    herausgestellt. Eine überwiegende Vielzahl von Webservices und Clients implementiert es nicht
+                    oder nur unvollständig, da sich mit vollständig generisch implementierten Clientanwendungen nur
+                    schwer eine ansprechende Benutzerführung realisieren lässt.
+                </p>
             </section>
 
             <section data-title="Aufgabe: Hey, Mr. Postman!" class="limited-width" data-background-color="rgb(231, 221, 141)">
@@ -1966,7 +2006,7 @@
                     formale Beschreibung und entsprechende Werkzeuge aus. Meistens wurden sie einfach
                     nur in Prosatext auf einer Begleitwebseite beschrieben, sofern es sich um öffentliche
                     APIs handelt (vgl. z.B. die Wikipedia API). Inzwischen hat sich jedoch das
-                    **OpenAPI-Format** (vormals Swagger genannt) durchgesetzt.
+                    **OpenAPI-Format** (vormals Swagger genannt) als De-Facto-Standard durchgesetzt.
                 </div>
 
                 <div class="d-flex align-items-stretch" style="gap: 1em;">
@@ -2255,11 +2295,11 @@
                     API im OpenAPI-Format zu beschreiben. Hierfür bietet es sich an, die OpenAPI-Datei
                     aus dem Vorlageprojekt als Grundalge zu verwenden. Diese können Sie entwder im
                     <a href="https://editor.swagger.io/" target="_blank">Swagger Online-Editor</a>
-                    (wenn Sie sich sicher genug im Umgang mit YAML und OpenAPI fühlen) oder in der
-                    <a href="https://stoplight.io" target="_blank">Stoplight App</a> öffnen. Letztere
-                    erfordert eine Anmeldung mit Ihrer E-Mailadresse und ist für kommerzielle Projekte
-                    ggf. nicht kostenlos nutzbar. Sie bietet jedoch eine intuitive, grafische Oberfläche
-                    für alle OpenAPI-Elemente anstelle dem Nur-Codeeditor von Swagger.
+                    (wenn Sie sich sicher genug im Umgang mit YAML und OpenAPI fühlen) oder in
+                    <a href="https://studio.apicur.io" target="_blank">Apicurio Studio</a> öffnen. Letzteres
+                    erfordert eine Anmeldung z.B. mit einem GitHub-Benutzer, ist grundsätzlich aber Open Source
+                    und kostenlos nutzen. Es bietet eine intuitive, grafische Oberfläche für alle OpenAPI-Elemente
+                    anstelle dem Nur-Codeeditor von Swagger.
 
                     Weitere Fragen, die Sie sich beim Erstellen der Beschreibung überlegen müssen sind:
 
@@ -2271,7 +2311,7 @@
                     * Falls ja, in welcher Form sollen die Links zurückgeliefert werden?
                 </div>
 
-                <img src="stoplight.png" class="img-thumbnail w-100" />
+                <img src="apicurio-1.png" class="img-thumbnail w-100" />
             </section>
 
             <!-- ==================== -->
