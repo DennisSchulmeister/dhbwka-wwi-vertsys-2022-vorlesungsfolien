@@ -21,6 +21,7 @@ import "highlight.js/styles/atom-one-light.css";
 
 import * as AsciinemaPlayer from "asciinema-player";
 import "asciinema-player/dist/bundle/asciinema-player.css";
+window.AsciinemaPlayer = AsciinemaPlayer;
 
 import "./style.less";
 
@@ -33,10 +34,27 @@ window.addEventListener("load", () => {
             {
                 preprocessHtml(html) {
                     html.querySelectorAll("terminal-cast").forEach(element => {
-                        let url = element.getAttribute("url") || "";
+                        let url    = element.getAttribute("url")   || "";
+                        let id     = element.getAttribute("id")    || "";
+                        let class_ = element.getAttribute("class") || "";
+                        let style  = element.getAttribute("style") || "";
+
+                        let options = {
+                            fit:     "both",
+                            theme:   "asciinema",
+                            preload: true, 
+                            cols:    parseInt(element.getAttribute("cols")) || 200,
+                            rows:    parseInt(element.getAttribute("rows")) || 30,
+                            poster:  element.getAttribute("poster")         || "",
+                        }
+
                         let divElement = document.createElement("div");
                         divElement.style.height = "30em";
-                        AsciinemaPlayer.create(url, divElement, {fit: "both", theme: "solarized-dark"});
+                        divElement.setAttribute("id", id);
+                        divElement.setAttribute("class", class_);
+                        divElement.setAttribute("style", style);
+
+                        AsciinemaPlayer.create(url, divElement, options);
                         element.replaceWith(divElement);
                     });
                 }
